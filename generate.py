@@ -2,7 +2,7 @@
 
 import json, os, urllib2, jinja2, shutil, markdown2, sys, re
 from copy import copy
-from jinja2 import contextfunction
+from jinja2 import contextfunction, Markup
 from pygments import highlight
 import pygments.lexers as pyg_lexers
 from pygments.formatters import HtmlFormatter
@@ -28,18 +28,25 @@ BASIC_CONTEXT = {
 'title': 'Julia By Example',
 'author': 'Samuel Colvin',
 'description': 'Examples of Common tasks in Julia (Julia Lang)',
-'source_url': 'https://github.com/samuelcolvin/sentiment',
+'source_url': 'https://github.com/samuelcolvin/JuliaByExample',
 'julia_url': 'http://www.julialang.org',
 'root_url': 'index.html',
 }
 
+GIT_VIEW_BASE = 'https://github.com/samuelcolvin/JuliaByExample/blob/master'
+GIT_RAW_BASE = 'https://raw.github.com/samuelcolvin/JuliaByExample/master/'
+
 @contextfunction
 def code_file(context, file_name, **extra_context):
-    file_path = os.path.join(context['example_directory'], file_name)
+    ex_dir = context['example_directory']
+    file_path = os.path.join(PROJ_ROOT, ex_dir, file_name)
     file_text = open(file_path, 'r').read()
     lexer = pyg_lexers.get_lexer_for_filename(file_name)
-    formatter = HtmlFormatter(cssclass='code')#linenos=True, 
-    return highlight(file_text, lexer, formatter)
+    formatter = HtmlFormatter(cssclass='code')#linenos=True,
+    git_url = '%s/%s/%s' % (GIT_VIEW_BASE, ex_dir, file_name)
+    response = '<a class="git-link" href="%s" target="_blank">View on GitHub</a>\n%s\n' % \
+        (git_url, highlight(file_text, lexer, formatter))
+    return Markup(response)
 
 class SiteGenerator(object):
     def __init__(self, output = None):
@@ -70,19 +77,19 @@ class SiteGenerator(object):
         ex_env.globals['code_file'] = code_file
         ex_template = ex_env.get_template('description.md')
         
-        description = ex_template.render(example_directory = example_dir)
-        description = markdown2.markdown(description)
+        examples = ex_template.render(example_directory = info['source'])
+        examples = markdown2.markdown(examples)
         tagno = 0
-        while re.search('<[hH][123456]>', description):
+        while re.search('<[hH][123456]>', examples):
             tagno += 1
-            description = re.sub('<([hH])([123456])>', r'<\1\2 id="tag%d">' % tagno, description, count=1)
+            examples = re.sub('<([hH])([123456])>', r'<\1\2 id="tag%d">' % tagno, examples, count=1)
         tags = []
-        for g in re.finditer('<[hH][123456] id="(.*?)">(.*?)</[hH]', description):
+        for g in re.finditer('<[hH][123456] id="(.*?)">(.*?)</[hH]', examples):
             parts = g.groups()
             tags.append({'link': '#' + parts[0], 'name': parts[1]})
         
         new_context = copy(self.context)
-        new_context['examples'] = description
+        new_context['examples'] = examples
         new_context['page'] = '%s.html' % info['page']
         new_context['tags'] = tags
         page_text = self._template.render(**new_context)
