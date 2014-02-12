@@ -1,5 +1,7 @@
 #### quine.jl
 
+Description of quine.jl, wow this is interesting.
+
 {{ code_file('quine.jl') }} 
 
 #### bubblesort.jl

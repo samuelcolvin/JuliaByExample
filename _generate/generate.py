@@ -8,7 +8,7 @@ import pygments.lexers as pyg_lexers
 from pygments.formatters import HtmlFormatter
 
 THIS_PATH = os.path.dirname(os.path.realpath(__file__))
-PROJ_ROOT = THIS_PATH# os.path.realpath(os.path.join(THIS_PATH, os.pardir))
+PROJ_ROOT = os.path.realpath(os.path.join(THIS_PATH, os.pardir))
 STATIC_PATH = os.path.join(THIS_PATH, 'static')
 WWW_PATH = os.path.join(PROJ_ROOT, 'www')
 WWW_STATIC_PATH = os.path.join(WWW_PATH, 'static')
