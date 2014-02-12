@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+      <meta name="description" content="{{description}}">
+      <meta name="author" content="{{author}}">
+      <title>{{title}}</title>
+      <link rel="icon" type="image/png" href="favicon.png" />
+      <link href="static/external/css/bootstrap.min.css" rel="stylesheet">
+      <link href="static/juliabyexample.css" rel="stylesheet">
+  </head>
+  <body data-spy="scroll" data-target=".sidebar">
+  
+    <div class="container">
+        
+      <div class="navbar navbar-default" role="navigation">
+        <div>
+          <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="{{ root_url }}">{{title}}</a>
+          </div>
+          <div class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
+			    {% for item in example_pages %}
+              		<li class="{% if item.url == page %}active{% endif %}"><a href="{{ item.url }}">{{ item.title }}</a></li>
+			    {% endfor %}
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+              <li><a href="{{ julia_url }}">Julia Home</a></li>
+              <li><a href="">About</a></li>
+              <li><a href="{{ source_url }}">Source</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+        
+      {% block content %}{% endblock %}
+      
+      <script src="static/external/js/jquery-1.11.0.min.js"></script>
+      <script src="static/external/js/bootstrap.min.js"></script>
+  </body>
+</html>

@@ -1,0 +1,5 @@
+{
+  "https://raw2.github.com/twbs/bootstrap/v3.0.3/dist/css/bootstrap.min.css": "css/bootstrap.min.css",
+  "https://raw2.github.com/twbs/bootstrap/v3.0.3/dist/js/bootstrap.min.js": "js/bootstrap.min.js",
+  "http://code.jquery.com/jquery-1.11.0.min.js": "js/jquery-1.11.0.min.js"
+}

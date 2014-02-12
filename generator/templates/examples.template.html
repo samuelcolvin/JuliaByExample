@@ -1,0 +1,25 @@
+{% extends "base.template.html" %}
+{% block content %}
+<div class="row">
+    <div class="col-sm-9 content">
+    	{{ intro }}
+    	{{ examples }}
+    </div>
+    <div class="col-sm-3 hidden-xs">
+        <div class="sidebar" data-spy="affix" data-offset-top="150">
+            <ul class="nav sidenav">
+                <li>
+                  <a href="#download">Download</a>
+                </li>
+                <li>
+                  <a href="#community">Community</a>
+                </li>
+                <li>
+                  <a href="#disable-responsive">Disabling responsiveness</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

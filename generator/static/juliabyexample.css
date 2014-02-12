@@ -1,0 +1,78 @@
+/*.github-fork img{
+    position: absolute;
+    top: 0;
+    left: 0;
+    border: 0;
+    z-index: -10;
+}*/
+
+.navbar {
+    background-color: white;
+    border-radius: 15px 15px 0px 0px;
+    margin-right: -15px;
+    margin-left: -15px;
+}
+
+.navbar-collapse {
+    padding: 0px 20px;
+}
+
+.navbar-default .navbar-brand {
+    color: black;
+}
+
+.navbar-default .navbar-nav>.active>a {
+    background-color: white;
+    font-weight: 700;
+}
+
+.container{
+    background-color: #eee;
+    margin-top: 60px;
+    margin-bottom: 100px;
+    box-shadow: 0 0 30px #aaa;
+    border: 1px solid #ccc;
+    border-radius: 15px;
+}
+
+.content {
+    padding: 0px 0px 50px 20px;
+}
+
+.sidebar {
+    margin-top: 20px;
+}
+
+.sidebar.affix {
+    position: fixed;
+    top: 0px;
+}
+
+.sidebar a {
+    color: #666;
+    padding: 5px 15px !important;
+}
+
+.sidebar .active a {
+    font-weight: 700;
+    color: black;
+}
+
+@media (max-width: 760px){
+
+    .container {
+        margin-top: 0px;
+        box-shadow: none;
+        border: none;
+        border-radius: 0px;
+        margin-bottom: 0px;
+    }
+    
+    .navbar {
+        border-radius: 0px;
+    }
+    
+    .content {
+        padding: 0px 10px;
+    }
+}
