@@ -1,4 +1,5 @@
 www
+repo*
 *.py[cod]
 
 # C extensions

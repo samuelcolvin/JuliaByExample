@@ -1,6 +1,6 @@
 #!/usr/bin/python
 
-import json, os, urllib2, jinja2, shutil, markdown2, sys, re
+import json, os, urllib2, jinja2, shutil, markdown2, sys, re, git
 from copy import copy
 from jinja2 import contextfunction, Markup
 from pygments import highlight
@@ -8,21 +8,11 @@ import pygments.lexers as pyg_lexers
 from pygments.formatters import HtmlFormatter
 
 THIS_PATH = os.path.dirname(os.path.realpath(__file__))
-PROJ_ROOT = os.path.realpath(os.path.join(THIS_PATH, os.pardir))
+PROJ_ROOT = THIS_PATH# os.path.realpath(os.path.join(THIS_PATH, os.pardir))
 STATIC_PATH = os.path.join(THIS_PATH, 'static')
 WWW_PATH = os.path.join(PROJ_ROOT, 'www')
 WWW_STATIC_PATH = os.path.join(WWW_PATH, 'static')
 TEMPLATE_PATH = os.path.join(THIS_PATH, 'templates')
-PAGES = {
-  'Common Usage': {
-    'page': 'index',
-    'source': 'common_usage'
-  },
-  'Source Examples': {
-    'page': 'julia_source',
-    'source': 'julia_source_examples'
-  }
-}
 
 BASIC_CONTEXT = {
 'title': 'Julia By Example',
@@ -33,9 +23,6 @@ BASIC_CONTEXT = {
 'root_url': 'index.html',
 }
 
-GIT_VIEW_BASE = 'https://github.com/samuelcolvin/JuliaByExample/blob/master'
-GIT_RAW_BASE = 'https://raw.github.com/samuelcolvin/JuliaByExample/master/'
-
 @contextfunction
 def code_file(context, file_name, **extra_context):
     ex_dir = context['example_directory']
@@ -43,7 +30,7 @@ def code_file(context, file_name, **extra_context):
     file_text = open(file_path, 'r').read()
     lexer = pyg_lexers.get_lexer_for_filename(file_name)
     formatter = HtmlFormatter(cssclass='code')#linenos=True,
-    git_url = '%s/%s/%s' % (GIT_VIEW_BASE, ex_dir, file_name)
+    git_url = '%s/%s/%s' % (context['view_root'], context['example_repo_dir'], file_name)
     response = '<a class="git-link" href="%s" target="_blank">View on GitHub</a>\n%s\n' % \
         (git_url, highlight(file_text, lexer, formatter))
     return Markup(response)
@@ -54,30 +41,40 @@ class SiteGenerator(object):
         if output:
             self._output = output
         self.delete_www()
-        self.base_context()
-        for info in PAGES.values():
-            self.generate_page(info)
+        repos_json = os.path.join(PROJ_ROOT, 'repos.json')
+        repos = json.load(open(repos_json, 'r'))
+        self.get_repos(repos)
+        for repo in repos:
+            self.generate_page(repo)
         self.generate_statics()
         
-    def base_context(self):
+    def get_repos(self, repos):
         ex_pages = []
-        for title, info in PAGES.items():
-            ex_pages.append({'url':info['page'] + '.html', 'title': title})
+        self._output('UPDATING REPOS:')
+        for repo in repos:
+            repos_path = os.path.join(PROJ_ROOT, repo['directory'])
+            if os.path.exists(repos_path):
+                self._output(git.cmd.Git(repos_path).pull())
+            else:
+                git.Git().clone(repo['url'], repos_path)
+            ex_pages.append({'url':repo['page_name'] + '.html', 'title': repo['title']})
         self.context = BASIC_CONTEXT
         self.context['example_pages'] = ex_pages
         info_file = os.path.join(PROJ_ROOT, 'intro.md')
         intro = open(info_file, 'r').read()
         self.context['intro'] = markdown2.markdown(intro)
     
-    def generate_page(self, info):
+    def generate_page(self, repo):
         template = 'examples.template.html'
         self._template = self._env.get_template(template)
-        example_dir = os.path.join(PROJ_ROOT, info['source'])
-        ex_env = jinja2.Environment(loader= jinja2.FileSystemLoader(example_dir))
+        example_dir = os.path.join(repo['directory'], repo['example_sub_dir'])
+        ex_env = jinja2.Environment(loader= jinja2.FileSystemLoader(PROJ_ROOT))
         ex_env.globals['code_file'] = code_file
-        ex_template = ex_env.get_template('description.md')
+        ex_template = ex_env.get_template(repo['description'])
         
-        examples = ex_template.render(example_directory = info['source'])
+        examples = ex_template.render(example_directory = example_dir,
+                                      example_repo_dir =  repo['example_sub_dir'],
+                                      view_root = repo['view_root'])
         examples = markdown2.markdown(examples)
         tagno = 0
         while re.search('<[hH][123456]>', examples):
@@ -90,15 +87,15 @@ class SiteGenerator(object):
         
         new_context = copy(self.context)
         new_context['examples'] = examples
-        new_context['page'] = '%s.html' % info['page']
+        new_context['page'] = '%s.html' % repo['page_name']
         new_context['tags'] = tags
         page_text = self._template.render(**new_context)
-        page_path = os.path.join(WWW_PATH, '%s.html' % info['page'])
+        page_path = os.path.join(WWW_PATH, '%s.html' % repo['page_name'])
         open(page_path, 'w').write(page_text)
         fn2 = page_path
         if len(fn2) > 40:
             fn2 = '...%s' % fn2[-37:]
-        self._output('generated html file "%s" from page: %s, using template: %s' % (fn2, info['page'], template))
+        self._output('generated html file "%s" from page: %s, using template: %s' % (fn2, repo['page_name'], template))
     
     def generate_statics(self):
         if os.path.exists(STATIC_PATH):
