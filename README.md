@@ -23,3 +23,15 @@ The site can be build using `python _gen_site/generate.py`.
 Feel free to use all and any of the examples for whatever you wish, licensed under [GNU GENERAL PUBLIC LICENSE](https://github.com/samuelcolvin/JuliaByExample/blob/master/LICENSE)
 
 *&copy; Samuel Colvin 2014*
+
+TODO:
+
+* simple function example inc. some algebra
+* format numbers
+* read stdin
+* convert string to number
+* plot
+* read file: plain text, csv, json
+* 
+
+* build test script to test all examples
