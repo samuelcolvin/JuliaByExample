@@ -26,11 +26,12 @@ Feel free to use all and any of the examples for whatever you wish, licensed und
 
 TODO:
 
-* simple function example inc. some algebra
+* DONE hello world
+* DONE simple function example inc. some algebra
 * strings
 * dict, arrays and loops
-* read stdin, formatting numbers and writing to 
-* convert string to number
+* types
+* read stdin, formatting numbers and writing to file?
 * plot
 * read/write file: plain text, csv, json
 * include seperate file
@@ -38,5 +39,6 @@ TODO:
 * eval, evalfile, include import module
 * multithreading
 * tasks
+* try catch
 
 * build test script to test all examples

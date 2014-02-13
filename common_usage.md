@@ -12,3 +12,9 @@ The simplest possible script.
 The example below shows two simple functions, how to call them and print the results. Further examples of number formatting are shown below.
 
 {{ code_file('functions.jl') }} 
+
+### Strings
+
+Collection of different string examples (string indexing is the same as array indexing: see below).
+
+{{ code_file('strings.jl') }} 

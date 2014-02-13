@@ -20,9 +20,12 @@ end
 vol = sphere_vol(3)
 # @printf allows number formatting but does not automatically
 # append the \n to statements
-@printf "volume = %0.3f\n" vol
+@printf "volume = %0.3f\n" vol 
+#> volume = 113.097
 
 quad1, quad2 = quadratic(2, -2, -12)
 println("result 1: ", quad1)
+#> result 1: 3.0
 println("result 2: ", quad2)
+#> result 2: -2.0
 vol, quad1, quad2

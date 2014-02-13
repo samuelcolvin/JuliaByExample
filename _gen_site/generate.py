@@ -164,7 +164,8 @@ class SiteGenerator(object):
         down_success = self.download_libraries()
         if not down_success:
             raise Exception('Error downloading libraries')
-        self.generate_pyg_css()
+        # 'pygments.css' is now static
+#         self.generate_pyg_css()
         
     def delete_www(self):
         if os.path.exists(WWW_PATH):

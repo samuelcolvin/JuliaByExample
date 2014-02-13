@@ -10,6 +10,6 @@ end
 
 print_evalfile("hello_world.jl")
 
-vol, quad1, quad2 = print_evalfile("simple_function.jl")
+vol, quad1, quad2 = print_evalfile("functions.jl")
 @test (quad1, quad2) == (3, -2)
 @test vol > 113.097 && vol < 113.098
