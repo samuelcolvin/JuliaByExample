@@ -59,8 +59,9 @@ class SiteGenerator(object):
         self._output('UPDATING REPOS:')
         for repo in repos:
             repos_path = os.path.join(PROJ_ROOT, repo['directory'])
-            if repos_path == '.' and !PULL_SELF:
+            if repo['directory'] == '.' and not PULL_SELF:
                 continue
+            self._output('Updating %s' % repo['url'])
             if os.path.exists(repos_path):
                 self._output(git.cmd.Git(repos_path).pull())
             else:
