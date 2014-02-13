@@ -8,6 +8,7 @@ import pygments.lexers as pyg_lexers
 from pygments.formatters import HtmlFormatter
 from datetime import datetime as dtdt
 
+PULL_SELF = False
 THIS_PATH = os.path.dirname(os.path.realpath(__file__))
 PROJ_ROOT = os.path.realpath(os.path.join(THIS_PATH, os.pardir))
 STATIC_PATH = os.path.join(THIS_PATH, 'static')
@@ -58,6 +59,8 @@ class SiteGenerator(object):
         self._output('UPDATING REPOS:')
         for repo in repos:
             repos_path = os.path.join(PROJ_ROOT, repo['directory'])
+            if repos_path == '.' and !PULL_SELF:
+                continue
             if os.path.exists(repos_path):
                 self._output(git.cmd.Git(repos_path).pull())
             else:

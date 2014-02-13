@@ -1,5 +1,5 @@
 www
-repo*
+repo_*
 *.DS_Store
 *.py[cod]
 

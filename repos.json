@@ -1,0 +1,21 @@
+[
+  {
+    "title": "Common Usage",
+    "directory": ".",
+    "url": "https://github.com/samuelcolvin/JuliaByExample",
+    "view_root": "https://github.com/samuelcolvin/JuliaByExample/blob/master",
+    "example_sub_dir": "common_usage",
+    "page_name": "index",
+    "description": "common_usage.md",
+	"priority": "1.0"
+  },
+  {
+    "title": "Source Examples",
+    "directory": "repo_julia_source",
+    "url": "https://github.com/JuliaLang/julia.git",
+    "view_root": "https://github.com/JuliaLang/julia/blob/master",
+    "example_sub_dir": "examples",
+    "page_name": "julia_source",
+    "description": "source_examples.md"
+  }
+]
