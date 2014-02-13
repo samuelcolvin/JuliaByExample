@@ -1,0 +1,10 @@
+{
+  "root_url": "index.html",
+  "description": "Examples of Common tasks in Julia (Julia Lang)",
+  "keywords": "julia, julialang, examples, by example, common, tasks, common tasks, simple, helloworld, hello world, documentation, tutorial, training, performance, github, git, array, dict, function, input, printf, print, printf, io, read file, common usage",
+  "author": "Samuel Colvin",
+  "site_title": "Julia By Example",
+  "source_url": "https://github.com/samuelcolvin/JuliaByExample",
+  "julia_url": "http://www.julialang.org",
+  "about_url": "about.html"
+}

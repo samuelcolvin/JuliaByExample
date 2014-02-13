@@ -1,6 +1,7 @@
 #!/usr/bin/python
 
-import json, os, urllib2, jinja2, shutil, markdown2, sys, re, git
+import sys, os
+import json, urllib2, jinja2, shutil, markdown2, sys, re, git
 from copy import copy
 from jinja2 import contextfunction, Markup
 from pygments import highlight
@@ -17,15 +18,11 @@ WWW_STATIC_PATH = os.path.join(WWW_PATH, 'static')
 TEMPLATE_PATH = os.path.join(THIS_PATH, 'templates')
 ROOT_URL = 'http://www.scolvin.com/juliabyexample'
 
-BASIC_CONTEXT = {
-'title': 'Julia By Example',
-'author': 'Samuel Colvin',
-'description': 'Examples of Common tasks in Julia (Julia Lang)',
-'source_url': 'https://github.com/samuelcolvin/JuliaByExample',
-'julia_url': 'http://www.julialang.org',
-'root_url': 'index.html',
-'about_url': 'about.html',
-}
+BASIC_CONTEXT = {}
+try:
+    BASIC_CONTEXT = json.load(open(os.path.join(THIS_PATH, 'basic_context.json'), 'r'))
+except Exception, e:
+    print 'Error reading basic_context.json: %r' % e
 
 @contextfunction
 def code_file(context, file_name, **extra_context):
@@ -40,12 +37,13 @@ def code_file(context, file_name, **extra_context):
     return Markup(response)
 
 class SiteGenerator(object):
-    def __init__(self, output = None):
+    def __init__(self, update_repos=True, output = None):
+        self._update_repos = update_repos
         self._env = jinja2.Environment(loader= jinja2.FileSystemLoader(TEMPLATE_PATH))
         if output:
             self._output = output
         self.delete_www()
-        repos_json = os.path.join(PROJ_ROOT, 'repos.json')
+        repos_json = os.path.join(THIS_PATH, 'repos.json')
         repos = json.load(open(repos_json, 'r'))
         self.get_repos(repos)
         for repo in repos:
@@ -56,16 +54,18 @@ class SiteGenerator(object):
         
     def get_repos(self, repos):
         ex_pages = []
-        self._output('UPDATING REPOS:')
+        if self._update_repos:
+            self._output('UPDATING REPOS:')
+            for repo in repos:
+                repos_path = os.path.join(PROJ_ROOT, repo['directory'])
+                if repo['directory'] == '.' and not PULL_SELF:
+                    continue
+                self._output('Updating %s' % repo['url'])
+                if os.path.exists(repos_path):
+                    self._output(git.cmd.Git(repos_path).pull())
+                else:
+                    git.Git().clone(repo['url'], repos_path)
         for repo in repos:
-            repos_path = os.path.join(PROJ_ROOT, repo['directory'])
-            if repo['directory'] == '.' and not PULL_SELF:
-                continue
-            self._output('Updating %s' % repo['url'])
-            if os.path.exists(repos_path):
-                self._output(git.cmd.Git(repos_path).pull())
-            else:
-                git.Git().clone(repo['url'], repos_path)
             ex_pages.append({'url':repo['page_name'] + '.html', 'title': repo['title']})
         self.context = BASIC_CONTEXT
         self.context['example_pages'] = ex_pages
@@ -95,6 +95,10 @@ class SiteGenerator(object):
             tags.append({'link': '#' + parts[0], 'name': parts[1]})
         
         new_context = copy(self.context)
+        sub_title = ' | ' + repo['title']
+        if repo['page_name'] == 'index':
+            sub_title = ''
+        new_context['title'] = BASIC_CONTEXT['site_title'] + sub_title
         new_context['examples'] = examples
         new_context['page'] = '%s.html' % repo['page_name']
         new_context['tags'] = tags
@@ -111,6 +115,7 @@ class SiteGenerator(object):
         readme = open(readme_fname, 'r').read()
         new_context = copy(self.context)
         new_context['content'] = markdown2.markdown(readme)
+        new_context['title'] = '%s | About' % BASIC_CONTEXT['site_title']
         new_context['page'] = BASIC_CONTEXT['about_url']
         page_text = template.render(**new_context)
         page_path = os.path.join(WWW_PATH, BASIC_CONTEXT['about_url'])
@@ -199,5 +204,8 @@ def list_examples_by_size(examples_dir = 'julia_source_examples'):
     print ''. join(['\n\n#### %s\n\n{{ code_file(\'%s\') }} ' % (fn, fn) for _, fn in files if fn.endswith('.jl')])
 
 if __name__ == '__main__':
-    SiteGenerator()
+    update_repos = True
+    if 'nopull' in sys.argv:
+        update_repos = False
+    SiteGenerator(update_repos=update_repos)
     print 'Successfully generated site at %s' % WWW_PATH
