@@ -31,7 +31,7 @@ TODO:
 * strings
 * dict, arrays and loops
 * types
-* read stdin, formatting numbers and writing to file?
+* read stdin and writing to file?
 * plot
 * read/write file: plain text, csv, json
 * include seperate file
