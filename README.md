@@ -12,7 +12,7 @@ These examples are tested with the latest version of Julia 0.3 and the sources e
 There are some other useful resources, including:
 
 * [Julia - Learn X in Y minutes](http://learnxinyminutes.com/docs/julia/)
-* [Julia Documentation - latest 0.3 version](http://docs.julialang.org/en/latest/manual/), including:
+* [Julia Documentation - latest version (0.3)](http://docs.julialang.org/en/latest/manual/), including:
   * [Julia Manual](http://docs.julialang.org/en/latest/manual/)
   * [Documentation on the Julia Standard Library](http://docs.julialang.org/en/latest/stdlib/)
 
@@ -27,11 +27,16 @@ Feel free to use all and any of the examples for whatever you wish, licensed und
 TODO:
 
 * simple function example inc. some algebra
-* format numbers
-* read stdin
+* strings
+* dict, arrays and loops
+* read stdin, formatting numbers and writing to 
 * convert string to number
 * plot
-* read file: plain text, csv, json
-* 
+* read/write file: plain text, csv, json
+* include seperate file
+* complex numbers
+* eval, evalfile, include import module
+* multithreading
+* tasks
 
 * build test script to test all examples

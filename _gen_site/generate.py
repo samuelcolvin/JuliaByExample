@@ -1,7 +1,21 @@
 #!/usr/bin/python
 
+"""
+This script generates a simple website showing examples and an about page.
+
+The about page is generated from README.md and the examples are a concatenation
+of a description markdown file and the examples.
+
+The "julia sources examples" are taken verbatim from the julia source code:
+https://github.com/JuliaLang/julia hence the script has to clone or pull the entire
+julia source to extract the examples 
+
+In theory it would be cool if this was written in Julia too, however libraries like 
+urllib, pygments and jinja2 or their equivalents are not yet available in julia.
+"""
+
 import sys, os
-import json, urllib2, jinja2, shutil, markdown2, sys, re, git
+import json, urllib2, jinja2, shutil, markdown2, sys, re, git, codecs
 from copy import copy
 from jinja2 import contextfunction, Markup
 from pygments import highlight
@@ -27,8 +41,8 @@ except Exception, e:
 @contextfunction
 def code_file(context, file_name, **extra_context):
     ex_dir = context['example_directory']
-    file_path = os.path.join(PROJ_ROOT, ex_dir, file_name)
-    file_text = open(file_path, 'r').read()
+    file_path = os.path.realpath(os.path.join(PROJ_ROOT, ex_dir, file_name))
+    file_text = codecs.open(file_path, encoding='utf-8').read()# open(file_path, 'r').read()
     lexer = pyg_lexers.get_lexer_for_filename(file_name)
     formatter = HtmlFormatter(cssclass='code')#linenos=True,
     git_url = '%s/%s/%s' % (context['view_root'], context['example_repo_dir'], file_name)
@@ -105,7 +119,7 @@ class SiteGenerator(object):
         page_text = template.render(**new_context)
         file_name = '%s.html' % repo['page_name']
         page_path = os.path.join(WWW_PATH, file_name)
-        open(page_path, 'w').write(page_text)
+        open(page_path, 'w').write(page_text.encode('utf8'))
         self._output('generated %s' % file_name)
         
     def generate_about(self):
@@ -205,7 +219,7 @@ def list_examples_by_size(examples_dir = 'julia_source_examples'):
 
 if __name__ == '__main__':
     update_repos = True
-    if 'nopull' in sys.argv:
+    if 'nosync' in sys.argv:
         update_repos = False
     SiteGenerator(update_repos=update_repos)
     print 'Successfully generated site at %s' % WWW_PATH

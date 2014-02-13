@@ -67,6 +67,10 @@ pre {
     color: black;
 }
 
+.code .err {
+	border: none;
+}
+
 @media (max-width: 760px){
 
     .container {
