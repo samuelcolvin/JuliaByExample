@@ -17,4 +17,12 @@ The example below shows two simple functions, how to call them and print the res
 
 Collection of different string examples (string indexing is the same as array indexing: see below).
 
-{{ code_file('strings.jl') }} 
+{{ code_file('strings_basics.jl') }} 
+
+### String: Converting and formatting
+
+{{ code_file('formatting_converting_strings.jl') }} 
+
+### String Manipulations
+
+{{ code_file('string_manipulation.jl') }} 
