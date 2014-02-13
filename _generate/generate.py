@@ -6,6 +6,7 @@ from jinja2 import contextfunction, Markup
 from pygments import highlight
 import pygments.lexers as pyg_lexers
 from pygments.formatters import HtmlFormatter
+from datetime import datetime as dtdt
 
 THIS_PATH = os.path.dirname(os.path.realpath(__file__))
 PROJ_ROOT = os.path.realpath(os.path.join(THIS_PATH, os.pardir))
@@ -13,6 +14,7 @@ STATIC_PATH = os.path.join(THIS_PATH, 'static')
 WWW_PATH = os.path.join(PROJ_ROOT, 'www')
 WWW_STATIC_PATH = os.path.join(WWW_PATH, 'static')
 TEMPLATE_PATH = os.path.join(THIS_PATH, 'templates')
+ROOT_URL = 'http://www.scolvin.com/juliabyexample'
 
 BASIC_CONTEXT = {
 'title': 'Julia By Example',
@@ -21,6 +23,7 @@ BASIC_CONTEXT = {
 'source_url': 'https://github.com/samuelcolvin/JuliaByExample',
 'julia_url': 'http://www.julialang.org',
 'root_url': 'index.html',
+'about_url': 'about.html',
 }
 
 @contextfunction
@@ -31,7 +34,7 @@ def code_file(context, file_name, **extra_context):
     lexer = pyg_lexers.get_lexer_for_filename(file_name)
     formatter = HtmlFormatter(cssclass='code')#linenos=True,
     git_url = '%s/%s/%s' % (context['view_root'], context['example_repo_dir'], file_name)
-    response = '<a class="git-link" href="%s" target="_blank">View on GitHub</a>\n%s\n' % \
+    response = '<a class="git-link" href="%s" target="_blank"><img src="static/github.png" alt="Github"/></a>\n%s\n' % \
         (git_url, highlight(file_text, lexer, formatter))
     return Markup(response)
 
@@ -46,6 +49,8 @@ class SiteGenerator(object):
         self.get_repos(repos)
         for repo in repos:
             self.generate_page(repo)
+        self.generate_about()
+        self.generate_sitemap(repos)
         self.generate_statics()
         
     def get_repos(self, repos):
@@ -65,8 +70,8 @@ class SiteGenerator(object):
         self.context['intro'] = markdown2.markdown(intro)
     
     def generate_page(self, repo):
-        template = 'examples.template.html'
-        self._template = self._env.get_template(template)
+        template_name = 'examples.template.html'
+        template = self._env.get_template(template_name)
         example_dir = os.path.join(repo['directory'], repo['example_sub_dir'])
         ex_env = jinja2.Environment(loader= jinja2.FileSystemLoader(PROJ_ROOT))
         ex_env.globals['code_file'] = code_file
@@ -89,18 +94,50 @@ class SiteGenerator(object):
         new_context['examples'] = examples
         new_context['page'] = '%s.html' % repo['page_name']
         new_context['tags'] = tags
-        page_text = self._template.render(**new_context)
-        page_path = os.path.join(WWW_PATH, '%s.html' % repo['page_name'])
+        page_text = template.render(**new_context)
+        file_name = '%s.html' % repo['page_name']
+        page_path = os.path.join(WWW_PATH, file_name)
         open(page_path, 'w').write(page_text)
-        fn2 = page_path
-        if len(fn2) > 40:
-            fn2 = '...%s' % fn2[-37:]
-        self._output('generated html file "%s" from page: %s, using template: %s' % (fn2, repo['page_name'], template))
+        self._output('generated %s' % file_name)
+        
+    def generate_about(self):
+        template_name = 'about.template.html'
+        template = self._env.get_template(template_name)
+        readme_fname = os.path.join(PROJ_ROOT, 'README.md')
+        readme = open(readme_fname, 'r').read()
+        new_context = copy(self.context)
+        new_context['content'] = markdown2.markdown(readme)
+        new_context['page'] = BASIC_CONTEXT['about_url']
+        page_text = template.render(**new_context)
+        page_path = os.path.join(WWW_PATH, BASIC_CONTEXT['about_url'])
+        open(page_path, 'w').write(page_text)
+        self._output('generated about.html')
+        
+    def generate_sitemap(self, repos):
+        pages = []
+        for repo in repos:
+            url = ROOT_URL
+            if repo['page_name'] != 'index':
+                url += '/%s.html' % repo['page_name']
+            page= {'url': url}
+            if 'priority' in repo:
+                page['priority'] = repo['priority']
+            pages.append(page)
+        url = ROOT_URL + '/about.html'
+        pages.append({'url': url, 'priority': '0.8'})
+        template_name = 'sitemap.template.xml'
+        template = self._env.get_template(template_name)
+        context = {'todays_date': dtdt.now().strftime('%Y-%m-%d')}
+        context['pages'] = pages
+        page_text = template.render(**context)
+        page_path = os.path.join(WWW_PATH, 'sitemap.xml')
+        open(page_path, 'w').write(page_text)
+        self._output('generated sitemap.xml')
     
     def generate_statics(self):
         if os.path.exists(STATIC_PATH):
             shutil.copytree(STATIC_PATH, WWW_STATIC_PATH)
-            self._output('copied static files')
+            self._output('copied local static files')
         down_success = self.download_libraries()
         if not down_success:
             raise Exception('Error downloading libraries')
@@ -132,7 +169,7 @@ class SiteGenerator(object):
                 continue
             dest_dir = os.path.dirname(dest)
             if not os.path.exists(dest_dir):
-                self._output('     mkdir: %s' % dest_dir)
+                # self._output('mkdir: %s' % dest_dir)
                 os.makedirs(dest_dir)
             try:
                 response = urllib2.urlopen(url)

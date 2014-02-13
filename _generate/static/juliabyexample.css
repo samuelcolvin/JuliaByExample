@@ -6,8 +6,10 @@
 	margin-right: 8px;
 }
 
-.code {
-	margin-top: 30px;
+.git-link img {
+    width: 25px;
+    height: 25px;
+    margin-top: 6px;
 }
 
 .navbar {
@@ -24,8 +26,7 @@
 .navbar-default .navbar-brand {
     color: black;
 }
-
-.navbar-default .navbar-nav>.active>a {
+.navbar-default .navbar-nav>.active>a, .navbar-default .navbar-nav>.active>a:hover, .navbar-default .navbar-nav>.active>a:focus {
     background-color: white;
     font-weight: 700;
 }
