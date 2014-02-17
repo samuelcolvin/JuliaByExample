@@ -30,12 +30,15 @@ Feel free to use all and any of the examples for whatever you wish, licensed und
 
 TODO:
 
+* build test script to test all examples ✔
 * hello world ✔
 * simple function example inc. some algebra ✔
 * strings basics ✔
 * string formatting and conversion ✔
-* string manipulation ✔
-* dict, arrays and loops
+* string manipulation ✔ (add regex)
+* arrays ✔
+* dicts
+* loops
 * types
 * read stdin and writing to file?
 * plot
@@ -46,4 +49,3 @@ TODO:
 * multithreading
 * tasks
 * try catch
-* DONE build test script to test all examples

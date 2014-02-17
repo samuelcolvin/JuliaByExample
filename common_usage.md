@@ -26,3 +26,17 @@ Collection of different string examples (string indexing is the same as array in
 ### String Manipulations
 
 {{ code_file('string_manipulation.jl') }} 
+
+### Arrays
+
+{{ code_file('arrays.jl') }} 
+
+### Dictionaries
+
+{{ code_file('dicts.jl') }} 
+
+### Loops and Map
+
+[For loops](http://julia.readthedocs.org/en/latest/manual/control-flow/#repeated-evaluation-loops) can be defined in a number of ways. AFAIK in loop definitions "in" is interchanable with "=".
+
+{{ code_file('loops_map.jl') }} 

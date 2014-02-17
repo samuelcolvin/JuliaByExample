@@ -30,16 +30,16 @@ s1_lower = lowercase(s1)
 println(s1_caps, "\n", s1_lower)
 
 # sub strings can be indexed like arrays:
-# ([show](http://julia.readthedocs.org/en/latest/stdlib/base/#Base.show) is prints the raw value)
-show(s1[11]); println("")
+# ([show](http://julia.readthedocs.org/en/latest/stdlib/base/#Base.show) prints the raw value)
+show(s1[11]); println()
 #> 'b'
 
 # or sub strings created:
-show(s1[1:10]); println("")
+show(s1[1:10]); println()
 #> "The quick "
 
 # end is used for the end of the array or string
-show(s1[end-10:end]); println("")
+show(s1[end-10:end]); println()
 #> "dog α,β,γ"
 
 # julia allows string [Interpolation](http://julia.readthedocs.org/en/latest/manual/strings/#interpolation):
