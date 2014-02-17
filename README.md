@@ -30,9 +30,11 @@ Feel free to use all and any of the examples for whatever you wish, licensed und
 
 TODO:
 
-* DONE hello world
-* DONE simple function example inc. some algebra
-* DONE strings
+* hello world ✔
+* simple function example inc. some algebra ✔
+* strings basics ✔
+* string formatting and conversion ✔
+* string manipulation ✔
 * dict, arrays and loops
 * types
 * read stdin and writing to file?
@@ -44,6 +46,4 @@ TODO:
 * multithreading
 * tasks
 * try catch
-
-
-* build test script to test all examples
+* DONE build test script to test all examples
