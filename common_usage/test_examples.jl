@@ -1,15 +1,21 @@
 using Base.Test
+using PyCall
+@pyimport os
 
-function print_evalfile(fname)
-    println("")
-    println("EVALUATING ", fname, ':')
-    result = evalfile(fname)
-    println("_____________")
+println("finished loading PyCall")
+
+function print_evalfile(fpath)
+    path, fname = splitdir(fpath)
+    println("EVALUATING ", fname, ":\n*************")
+    result = evalfile(fpath)
+    println("*************\n")
     return result
 end
 
-print_evalfile("hello_world.jl")
+path, this_fname = splitdir(@__FILE__)
 
-vol, quad1, quad2 = print_evalfile("functions.jl")
-@test (quad1, quad2) == (3, -2)
-@test vol > 113.097 && vol < 113.098
+for fname in os.listdir(path)
+    if endswith(fname, ".jl") && fname != this_fname
+        print_evalfile("$path/$fname")
+    end
+end
