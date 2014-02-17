@@ -1,4 +1,4 @@
-# strings can be converted to floats or ints thus:
+# strings can be converted using [float](http://julia.readthedocs.org/en/latest/stdlib/base/#Base.float) and [int](http://julia.readthedocs.org/en/latest/stdlib/base/#Base.int):
 e_str1 = "2.718"
 e = float(e_str1)
 println(5e)
@@ -7,17 +7,17 @@ num_15 = int("15")
 println(3num_15)
 #> 45
 
-# numbers can be converted to strings and formatted using printf 
+# numbers can be converted to strings and formatted using [printf](http://julia.readthedocs.org/en/latest/stdlib/base/#Base.@printf)
 @printf "e = %0.2f\n" e
 #> 2.718
-# or to create another string sprintf
+# or to create another string [sprintf](http://julia.readthedocs.org/en/latest/stdlib/base/#Base.@sprintf)
 e_str2 = @sprintf("%0.3f", e)
 
 # to show the 2 strings are the same
 println("e_str1 == e_str2: $(e_str1 == e_str2)")
 #> e_str1 == e_str2: true
 
-# available number format characters are f, e, g, c, s, p, d:
+# available number format characters are [f, e, g, c, s, p, d](https://github.com/JuliaLang/julia/blob/master/base/printf.jl#L15):
 @printf "fix trailing precision: %0.3f\n" pi
 #> fix trailing precision: 3.142
 @printf "scientific form: %0.6e\n" 1000pi

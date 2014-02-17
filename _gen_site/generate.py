@@ -38,6 +38,12 @@ try:
 except Exception, e:
     print 'Error reading basic_context.json: %r' % e
 
+def _repl_links(match):
+    com = match.groups()[0]
+    com = re.sub('\[(.*?)\]\((.*?)\)', r'<a href="\2" target="_blank">\1</a>', com)
+    com = re.sub('\*\*(.*?)\*\*', r'<strong>\1</strong>', com)
+    return '<span class="c">%s</span>' % com
+
 @contextfunction
 def code_file(context, file_name, **extra_context):
     ex_dir = context['example_directory']
@@ -46,8 +52,10 @@ def code_file(context, file_name, **extra_context):
     lexer = pyg_lexers.get_lexer_for_filename(file_name)
     formatter = HtmlFormatter(cssclass='code')#linenos=True,
     git_url = '%s/%s/%s' % (context['view_root'], context['example_repo_dir'], file_name)
+    code = highlight(file_text, lexer, formatter)
+    code = re.sub('<span class="c">(.*?)</span>', _repl_links, code)
     response = '<a class="git-link" href="%s" target="_blank"><img src="static/github.png" alt="Github"/></a>\n%s\n' % \
-        (git_url, highlight(file_text, lexer, formatter))
+        (git_url, code)
     return Markup(response)
 
 class SiteGenerator(object):
@@ -86,11 +94,17 @@ class SiteGenerator(object):
         info_file = os.path.join(PROJ_ROOT, 'intro.md')
         intro = open(info_file, 'r').read()
         self.context['intro'] = markdown2.markdown(intro)
+        
+    def _repl_tags(self, match):
+        self._tagno += 1
+        g = match.groups()
+        return '<%s%s id="tag%d">' % (g[0], g[1], self._tagno) 
     
     def generate_page(self, repo):
+        example_dir = os.path.join(repo['directory'], repo['example_sub_dir'])
+        self.test_for_missing_files(repo, example_dir)
         template_name = 'examples.template.html'
         template = self._env.get_template(template_name)
-        example_dir = os.path.join(repo['directory'], repo['example_sub_dir'])
         ex_env = jinja2.Environment(loader= jinja2.FileSystemLoader(PROJ_ROOT))
         ex_env.globals['code_file'] = code_file
         ex_template = ex_env.get_template(repo['description'])
@@ -99,10 +113,8 @@ class SiteGenerator(object):
                                       example_repo_dir =  repo['example_sub_dir'],
                                       view_root = repo['view_root'])
         examples = markdown2.markdown(examples)
-        tagno = 0
-        while re.search('<[hH][123456]>', examples):
-            tagno += 1
-            examples = re.sub('<([hH])([123456])>', r'<\1\2 id="tag%d">' % tagno, examples, count=1)
+        self._tagno = 0
+        examples = re.sub('<([hH])([123456])>', self._repl_tags, examples)
         tags = []
         for g in re.finditer('<[hH][123456] id="(.*?)">(.*?)</[hH]', examples):
             parts = g.groups()
@@ -121,6 +133,19 @@ class SiteGenerator(object):
         page_path = os.path.join(WWW_PATH, file_name)
         open(page_path, 'w').write(page_text.encode('utf8'))
         self._output('generated %s' % file_name)
+    
+    def test_for_missing_files(self, repo, example_dir):
+        desc_text = open(os.path.join(PROJ_ROOT, repo['description']), 'r').read()
+        quoted_files = set(re.findall("{{ *code_file\( *'(.*?)' *\) *}}", desc_text))
+        actual_files = set([fn for fn in os.listdir(example_dir) if fn.endswith('.jl') and not fn == 'test_examples.jl'])
+        non_existent = quoted_files.difference(actual_files)
+        if len(non_existent) > 0:
+            self._output('*** QUOTED FILES ARE MISSING ***:')
+            self._output('    ' + ', '.join(non_existent))
+        unquoted = actual_files.difference(quoted_files)
+        if len(unquoted) > 0:
+            self._output('*** JULIA FILES EXIST WHICH ARE UNQUOTED ***:')
+            self._output('    ' + ', '.join(unquoted))
         
     def generate_about(self):
         template_name = 'about.template.html'
@@ -133,7 +158,7 @@ class SiteGenerator(object):
         new_context['page'] = BASIC_CONTEXT['about_url']
         page_text = template.render(**new_context)
         page_path = os.path.join(WWW_PATH, BASIC_CONTEXT['about_url'])
-        open(page_path, 'w').write(page_text)
+        open(page_path, 'w').write(page_text.encode('utf8'))
         self._output('generated about.html')
         
     def generate_sitemap(self, repos):
@@ -154,7 +179,7 @@ class SiteGenerator(object):
         context['pages'] = pages
         page_text = template.render(**context)
         page_path = os.path.join(WWW_PATH, 'sitemap.xml')
-        open(page_path, 'w').write(page_text)
+        open(page_path, 'w').write(page_text.encode('utf8'))
         self._output('generated sitemap.xml')
     
     def generate_statics(self):
@@ -176,7 +201,7 @@ class SiteGenerator(object):
     def generate_pyg_css(self):
         pyg_css = HtmlFormatter().get_style_defs('.code')
         file_path = os.path.join(WWW_STATIC_PATH, 'pygments.css')
-        open(file_path, 'w').write(pyg_css)
+        open(file_path, 'w').write(pyg_css.encode('utf8'))
 
     def download_libraries(self):
         libs_json_path = os.path.join(THIS_PATH, 'libraries.json')
@@ -202,7 +227,7 @@ class SiteGenerator(object):
                 self._output('\nURL: %s\nProblem occured during download: %r' % (url, e))
                 self._output('*** ABORTING ***')
                 return False
-            open(dest, 'w').write(content)
+            open(dest, 'w').write(content.encode('utf8'))
             downloaded += 1
             #self._output('Successfully downloaded %s\n' % os.path.basename(path))
         

@@ -3,8 +3,8 @@
 s1 = "The quick brown fox jumps over the lazy dog α,β,γ"
 println(s1)
 
-# println adds a new line to the end of output
-# print can be used if you dont want that:
+# [println](http://julia.readthedocs.org/en/latest/stdlib/base/#Base.println) adds a new line to the end of output
+# [print](http://julia.readthedocs.org/en/latest/stdlib/base/#Base.print) can be used if you dont want that:
 print("this")
 print(" and")
 print(" that.\n")
@@ -30,7 +30,7 @@ s1_lower = lowercase(s1)
 println(s1_caps, "\n", s1_lower)
 
 # sub strings can be indexed like arrays:
-# (show is prints the raw value)
+# ([show](http://julia.readthedocs.org/en/latest/stdlib/base/#Base.show) is prints the raw value)
 show(s1[11]); println("")
 #> 'b'
 
@@ -42,7 +42,7 @@ show(s1[1:10]); println("")
 show(s1[end-10:end]); println("")
 #> "dog α,β,γ"
 
-# julia allows string Interpolation:
+# julia allows string [Interpolation](http://julia.readthedocs.org/en/latest/manual/strings/#interpolation):
 a = "wolcome"
 b = "julia"
 println("$a to $b.")

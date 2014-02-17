@@ -50,11 +50,16 @@ pre {
 
 .sidebar {
     margin-top: 20px;
+    width: 17%;
 }
 
 .sidebar.affix {
     position: fixed;
     top: 0px;
+}
+
+.sidebar.affix a:hover, .sidebar.affix a:focus {
+	background: none !important;
 }
 
 .sidebar a {
