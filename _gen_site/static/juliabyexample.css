@@ -31,7 +31,7 @@
     font-weight: 700;
 }
 
-.container{
+.container {
     background-color: #eee;
     margin-top: 60px;
     margin-bottom: 100px;
@@ -50,12 +50,12 @@ pre {
 
 .sidebar {
     margin-top: 20px;
-    width: 17%;
 }
 
 .sidebar.affix {
     position: fixed;
     top: 0px;
+    width: 17%;
 }
 
 .sidebar.affix a:hover, .sidebar.affix a:focus {

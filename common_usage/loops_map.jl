@@ -1,7 +1,8 @@
 for i in 1:5
-    println(i)
+    print(i, ", ")
 end
-#> 1, 2, 3, 4, 5 (newlines replaced with commas)
+#> 1, 2, 3, 4, 5, 
+# In loop definitions "in" is equivilent to "=" (as far as I know, the two are interchangable in this context)
 for i = 1:5
     print(i, ", ")
 end
@@ -31,7 +32,7 @@ println()
 #> 2, 4, 6, 8, 
 
 # if the arry is being manipulated during evaluation a while loop shoud be used
-# [pop)(http://docs.julialang.org/en/latest/stdlib/base/#Base.pop!) removes the last element from an array
+# [pop](http://docs.julialang.org/en/latest/stdlib/base/#Base.pop!) removes the last element from an array
 while !isempty(a1)
     print(pop!(a1), ", ")
 end
