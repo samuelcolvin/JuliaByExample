@@ -39,4 +39,9 @@ Collection of different string examples (string indexing is the same as array in
 
 [For loops](http://julia.readthedocs.org/en/latest/manual/control-flow/#repeated-evaluation-loops) can be defined in a number of ways.
 
-{{ code_file('loops_map.jl') }} 
+{{ code_file('loops_map.jl') }}
+
+### Error Handling
+
+
+{{ code_file('error_handling.jl') }}

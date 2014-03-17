@@ -49,3 +49,10 @@ TODO:
 * multithreading
 * tasks
 * try catch
+
+To add somewhere:
+
+* in loops: enumerate
+* type constructors
+* elseif, switch?
+* key word arguments xx
