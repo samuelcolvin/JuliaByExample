@@ -84,7 +84,8 @@ class SiteGenerator(object):
         for repo in repos:
             self.generate_page(repo)
         self.generate_about()
-        self.generate_htaccess()
+        if apache_mode:
+            self.generate_htaccess()
         self.generate_sitemap(repos)
         self.generate_statics()
         
@@ -102,10 +103,7 @@ class SiteGenerator(object):
                 else:
                     git.Git().clone(repo['url'], repos_path)
         for repo in repos:
-            url = self._url_base % repo['page_name']
-            if url == 'index':
-                url = BASIC_CONTEXT['root_url']
-            ex_pages.append({'url': url, 'title': repo['title']})
+            ex_pages.append({'url': self._get_url(repo['page_name']), 'title': repo['title']})
         self.context = BASIC_CONTEXT
         self.context['example_pages'] = ex_pages
         info_file = os.path.join(PROJ_ROOT, 'intro.md')
@@ -143,13 +141,20 @@ class SiteGenerator(object):
             sub_title = ''
         new_context['title'] = BASIC_CONTEXT['site_title'] + sub_title
         new_context['examples'] = examples
-        new_context['page'] = self._url_base % repo['page_name']
+        new_context['page'] = self._get_url(repo['page_name'])
         new_context['tags'] = tags
         page_text = template.render(**new_context)
         file_name = '%s.html' % repo['page_name']
         page_path = os.path.join(WWW_PATH, file_name)
         open(page_path, 'w').write(page_text.encode('utf8'))
         self._output('generated %s' % file_name)
+        
+    def _get_url(self, page_name):
+        url = self._url_base % page_name
+        if url == 'index':
+            url = BASIC_CONTEXT['root_url']
+        return url
+        
     
     def test_for_missing_files(self, repo, example_dir):
         desc_text = open(os.path.join(PROJ_ROOT, repo['description']), 'r').read()
