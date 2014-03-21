@@ -37,8 +37,8 @@ TODO:
 * string formatting and conversion ✔
 * string manipulation ✔ (add regex)
 * arrays ✔
-* dicts
-* loops
+* dicts ✔
+* loops ✔
 * types
 * read stdin and writing to file?
 * plot

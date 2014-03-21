@@ -33,6 +33,8 @@ Collection of different string examples (string indexing is the same as array in
 
 ### Dictionaries
 
+Julia uses [Dicts](http://docs.julialang.org/en/latest/stdlib/base/#associative-collections) as associative collections. Usage is very like python except for the rather odd `=>` definition syntax.
+
 {{ code_file('dicts.jl') }} 
 
 ### Loops and Map

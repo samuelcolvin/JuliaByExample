@@ -38,22 +38,30 @@ try:
 except Exception, e:
     print 'Error reading basic_context.json: %r' % e
 
-def _repl_links(match):
-    com = match.groups()[0]
-    com = re.sub('\[(.*?)\]\((.*?)\)', r'<a href="\2" target="_blank">\1</a>', com)
-    com = re.sub('\*\*(.*?)\*\*', r'<strong>\1</strong>', com)
-    return '<span class="c">%s</span>' % com
+def _smart_comments(match):
+    """
+    replace markdown style links with html "<a href..."
+    convert **strong** to html
+    """
+    comment = match.groups()[0]
+    comment = re.sub('\[(.*?)\]\((.*?)\)', r'<a href="\2" target="_blank">\1</a>', comment)
+    comment = re.sub('\*\*(.*?)\*\*', r'<strong>\1</strong>', comment)
+    return '<span class="c">%s</span>' % comment
 
 @contextfunction
 def code_file(context, file_name, **extra_context):
     ex_dir = context['example_directory']
     file_path = os.path.realpath(os.path.join(PROJ_ROOT, ex_dir, file_name))
-    file_text = codecs.open(file_path, encoding='utf-8').read()# open(file_path, 'r').read()
+    file_text = codecs.open(file_path, encoding='utf-8').read()
+    # remove hidden sections
+    regex = re.compile('\n*# *<hide>.*# *</hide>', flags=re.M|re.S)
+    code = re.sub(regex, '', file_text)
+    code = code.strip(' \r\n')
     lexer = pyg_lexers.get_lexer_for_filename(file_name)
     formatter = HtmlFormatter(cssclass='code')#linenos=True,
     git_url = '%s/%s/%s' % (context['view_root'], context['example_repo_dir'], file_name)
-    code = highlight(file_text, lexer, formatter)
-    code = re.sub('<span class="c">(.*?)</span>', _repl_links, code)
+    code = highlight(code, lexer, formatter)
+    code = re.sub('<span class="c">(.*?)</span>', _smart_comments, code)
     response = '<a class="git-link" href="%s" target="_blank"><img src="static/github.png" alt="Github"/></a>\n%s\n' % \
         (git_url, code)
     return Markup(response)
@@ -88,7 +96,10 @@ class SiteGenerator(object):
                 else:
                     git.Git().clone(repo['url'], repos_path)
         for repo in repos:
-            ex_pages.append({'url':repo['page_name'] + '.html', 'title': repo['title']})
+            url = repo['page_name']
+            if url == 'index':
+                url = BASIC_CONTEXT['root_url']
+            ex_pages.append({'url': url, 'title': repo['title']})
         self.context = BASIC_CONTEXT
         self.context['example_pages'] = ex_pages
         info_file = os.path.join(PROJ_ROOT, 'intro.md')
@@ -160,6 +171,19 @@ class SiteGenerator(object):
         page_path = os.path.join(WWW_PATH, BASIC_CONTEXT['about_url'])
         open(page_path, 'w').write(page_text.encode('utf8'))
         self._output('generated about.html')
+        
+    def generate_htaccess(self):
+        htaccess_content = """
+RewriteEngine on
+
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME}.html -f
+RewriteRule ^(.+)$ $1.html [L,QSA]
+"""
+        page_path = os.path.join(WWW_PATH, '.htaccess')
+        open(page_path, 'w').write(htaccess_content)
+        self._output('generated .htaccess file')
         
     def generate_sitemap(self, repos):
         pages = []

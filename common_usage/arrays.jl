@@ -22,16 +22,21 @@ print_sum(a3) #> 0-element Array{Int64,1}: []
 # ranges are different from arrays:
 a4 = 1:20
 print_sum(a4) #> 20-element Range1{Int64}: 1:20
+
 # however they can be used to create arrays thus:
 a4 = [1:20]
 print_sum(a4) #> 20-element Array{Int64,1}: [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20]
 
+# arrays can also be generated from comprehensions:
+a5 = [2^i for i = 1:10]
+print_sum(a5) #> 10-element Array{Int64,1}: [2,4,8,16,32,64,128,256,512,1024]
+
 # arrays can be any type, so arrays of arrays can be created:
-a5 = (Array{Int64, 1})[]
-print_sum(a5) #> 1-element Array{Array{Int64,1},1}: []
+a6 = (Array{Int64, 1})[]
+print_sum(a6) #> 1-element Array{Array{Int64,1},1}: []
 # (note this is a "jagged array" eg. an array of arrays, not a [multidimensional array](http://julia.readthedocs.org/en/latest/manual/arrays/), these are not covered here)
 
-# Julia provided a number of ["Dequeue"](http://docs.julialang.org/en/latest/stdlib/base/#dequeues) functions, however the most common for appending to the end of arrays is [**push!**](http://docs.julialang.org/en/latest/stdlib/base/#Base.push!)
+# Julia provided a number of ["Dequeue"](http://docs.julialang.org/en/latest/stdlib/base/#dequeues) functions, the most common for appending to the end of arrays is [**push!**](http://docs.julialang.org/en/latest/stdlib/base/#Base.push!)
 # ! at the end of a function name indicates that the first argument is updated.
 
 push!(a1, 4)
@@ -43,6 +48,6 @@ print_sum(a1) #> 4-element Array{Int64,1}: [1,2,3,4]
 push!(a3, 1)
 print_sum(a3) #> 1-element Array{Int64,1}: [1]
 
-push!(a5, [1,2,3])
-print_sum(a5) #> 1-element Array{Array{Int64,1},1}: [[1,2,3]]
+push!(a6, [1,2,3])
+print_sum(a6) #> 1-element Array{Array{Int64,1},1}: [[1,2,3]]
 
