@@ -1,9 +1,9 @@
 {
-  "https://raw2.github.com/twbs/bootstrap/v3.0.3/dist/css/bootstrap.min.css": "css/bootstrap.min.css",
-  "https://raw2.github.com/twbs/bootstrap/v3.0.3/dist/js/bootstrap.min.js": "js/bootstrap.min.js",
-  "https://github.com/twbs/bootstrap/raw/master/dist/fonts/glyphicons-halflings-regular.ttf": "fonts/glyphicons-halflings-regular.ttf",
-  "https://github.com/twbs/bootstrap/raw/master/dist/fonts/glyphicons-halflings-regular.woff": "fonts/glyphicons-halflings-regular.woff",
-  "https://github.com/twbs/bootstrap/raw/master/dist/fonts/glyphicons-halflings-regular.svg": "fonts/glyphicons-halflings-regular.svg",
-  "https://github.com/twbs/bootstrap/raw/master/dist/fonts/glyphicons-halflings-regular.eot": "fonts/glyphicons-halflings-regular.eot",
+  "https://raw2.github.com/twbs/bootstrap/v3.1.1/dist/css/bootstrap.min.css": "css/bootstrap.min.css",
+  "https://raw2.github.com/twbs/bootstrap/v3.1.1/dist/js/bootstrap.min.js": "js/bootstrap.min.js",
+  "https://raw2.github.com/twbs/bootstrap/v3.1.1/dist/fonts/glyphicons-halflings-regular.ttf": "fonts/glyphicons-halflings-regular.ttf",
+  "https://raw2.github.com/twbs/bootstrap/v3.1.1/dist/fonts/glyphicons-halflings-regular.woff": "fonts/glyphicons-halflings-regular.woff",
+  "https://raw2.github.com/twbs/bootstrap/v3.1.1/dist/fonts/glyphicons-halflings-regular.svg": "fonts/glyphicons-halflings-regular.svg",
+  "https://raw2.github.com/twbs/bootstrap/v3.1.1/dist/fonts/glyphicons-halflings-regular.eot": "fonts/glyphicons-halflings-regular.svg",
   "http://code.jquery.com/jquery-1.11.0.min.js": "js/jquery-1.11.0.min.js"
 }

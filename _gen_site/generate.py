@@ -62,7 +62,9 @@ def code_file(context, file_name, **extra_context):
             os.makedirs(path)
         shutil.copyfile(file_path, os.path.join(path, file_name))
         url = '/'.join(s.strip('/') for s in [DOWNLOADS_DIR, ex_dir, file_name])
-        download_link = '<a class="download-link" href="%s"><span class="glyphicon glyphicon-cloud-download"></span></a>' % url
+        url = url.replace('/./', '/')
+        download_link = """<a class="download-link" href="%s" title="download %s" data-toggle="tooltip" data-placement="bottom">
+        <span class="glyphicon glyphicon-cloud-download"></span></a>""" % (url, file_name)
     # remove hidden sections
     regex = re.compile('\n*# *<hide>.*# *</hide>', flags=re.M|re.S)
     code = re.sub(regex, '', file_text)
@@ -72,7 +74,8 @@ def code_file(context, file_name, **extra_context):
     git_url = '%s/%s/%s' % (context['view_root'], context['example_repo_dir'], file_name)
     code = highlight(code, lexer, formatter)
     code = re.sub('<span class="c">(.*?)</span>', _smart_comments, code)
-    response = """<a class="git-link" href="%s" target="_blank"><img src="static/github.png" alt="Github"/></a>%s\n%s\n""" % \
+    response = """<a class="git-link" href="%s" data-toggle="tooltip" data-placement="bottom"
+    target="_blank" title="go to github"><img src="static/github.png" alt="Github"/></a>%s\n%s\n""" % \
         (git_url, download_link, code)
     return Markup(response)
 
@@ -217,18 +220,18 @@ RewriteRule ^(.+)$ $1.html [L,QSA]
 """
         page_path = os.path.join(WWW_PATH, '.htaccess')
         open(page_path, 'w').write(htaccess_content)
-        self._output('generated WWW_PATH/.htaccess file')
+        self._output('generated %s file' % page_path)
         if not os.path.exists(WWW_DOWNLOAD_PATH):
             return
         htaccess_content2 = """
-# mod_headers has to be switched on: sudoa2enmod headers; sudo service apache2 restart
+# mod_headers has to be switched on: sudo a2enmod headers; sudo service apache2 restart
 <FilesMatch "\.jl$">
   Header set Content-Disposition attachment
 </FilesMatch>
 """
         page_path = os.path.join(WWW_DOWNLOAD_PATH, '.htaccess')
         open(page_path, 'w').write(htaccess_content2)
-        self._output('generated WWW_DOWNLOAD_PATH/.htaccess file')
+        self._output('generated %s file' % page_path)
         
     def generate_sitemap(self, repos):
         pages = []
