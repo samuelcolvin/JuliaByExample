@@ -79,6 +79,7 @@ class SiteGenerator(object):
         for repo in repos:
             self.generate_page(repo)
         self.generate_about()
+        self.generate_htaccess()
         self.generate_sitemap(repos)
         self.generate_statics()
         
