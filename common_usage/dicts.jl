@@ -24,12 +24,6 @@ a2[0]="zero"
 a3 = {i => @sprintf("%d", i) for i = 1:10}
 print_sum(a3)#> Dict{Any,Any}: {5=>"5",4=>"4",6=>"6",7=>"7",2=>"2",10=>"10",9=>"9",8=>"8",3=>"3",1=>"1"}
 
-# loops may be achived using the (keys)[http://docs.julialang.org/en/latest/stdlib/base/#Base.keys] argument:
-for k in keys(a1)
-    print(k, ": ", a1[k], ", ")
-end
-println() #> 2: two, 3: three, 1: one, 
-
 # as you would expact Julia comes with all the normal helper functions
 # for dicts, eg. (haskey)[http://docs.julialang.org/en/latest/stdlib/base/#Base.haskey]
 println(haskey(a1,1)) #> true

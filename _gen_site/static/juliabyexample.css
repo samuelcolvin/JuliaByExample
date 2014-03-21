@@ -1,9 +1,14 @@
-.git-link {
+.git-link, .download-link {
 	float: right;
 	color: black;
 	font-size: 90%;
 	text-decoration: underline;
 	margin-right: 8px;
+}
+
+.download-link {
+	font-size: 170%;
+	padding: 4px;
 }
 
 .git-link img {

@@ -29,6 +29,8 @@ PROJ_ROOT = os.path.realpath(os.path.join(THIS_PATH, os.pardir))
 STATIC_PATH = os.path.join(THIS_PATH, 'static')
 WWW_PATH = os.path.join(PROJ_ROOT, 'www')
 WWW_STATIC_PATH = os.path.join(WWW_PATH, 'static')
+DOWNLOADS_DIR = 'download'
+WWW_DOWNLOAD_PATH = os.path.join(WWW_PATH, DOWNLOADS_DIR)
 TEMPLATE_PATH = os.path.join(THIS_PATH, 'templates')
 ROOT_URL = 'http://www.scolvin.com/juliabyexample'
 
@@ -53,6 +55,14 @@ def code_file(context, file_name, **extra_context):
     ex_dir = context['example_directory']
     file_path = os.path.realpath(os.path.join(PROJ_ROOT, ex_dir, file_name))
     file_text = codecs.open(file_path, encoding='utf-8').read()
+    download_link = ''
+    if APACHE_MODE:
+        path = os.path.join(WWW_DOWNLOAD_PATH, ex_dir)
+        if not os.path.exists(path):
+            os.makedirs(path)
+        shutil.copyfile(file_path, os.path.join(path, file_name))
+        url = '/'.join(s.strip('/') for s in [DOWNLOADS_DIR, ex_dir, file_name])
+        download_link = '<a class="download-link" href="%s"><span class="glyphicon glyphicon-cloud-download"></span></a>' % url
     # remove hidden sections
     regex = re.compile('\n*# *<hide>.*# *</hide>', flags=re.M|re.S)
     code = re.sub(regex, '', file_text)
@@ -62,16 +72,21 @@ def code_file(context, file_name, **extra_context):
     git_url = '%s/%s/%s' % (context['view_root'], context['example_repo_dir'], file_name)
     code = highlight(code, lexer, formatter)
     code = re.sub('<span class="c">(.*?)</span>', _smart_comments, code)
-    response = '<a class="git-link" href="%s" target="_blank"><img src="static/github.png" alt="Github"/></a>\n%s\n' % \
-        (git_url, code)
+    response = """<a class="git-link" href="%s" target="_blank"><img src="static/github.png" alt="Github"/></a>%s\n%s\n""" % \
+        (git_url, download_link, code)
     return Markup(response)
 
 class SiteGenerator(object):
     def __init__(self, apache_mode=False, update_repos=True, output = None):
+        global APACHE_MODE
+        APACHE_MODE = apache_mode
         self._url_base = '%s.html'
         if apache_mode:
             self._url_base = '%s'
             print 'Building in Apache mode'
+        else:
+            BASIC_CONTEXT['root_url'] = 'index.html'
+        BASIC_CONTEXT['apache_mode'] = apache_mode
         BASIC_CONTEXT['about_url'] = self._url_base % BASIC_CONTEXT['about_url']
         self._update_repos = update_repos
         self._env = jinja2.Environment(loader= jinja2.FileSystemLoader(TEMPLATE_PATH))
@@ -265,7 +280,9 @@ RewriteRule ^(.+)$ $1.html [L,QSA]
                 self._output('\nURL: %s\nProblem occured during download: %r' % (url, e))
                 self._output('*** ABORTING ***')
                 return False
-            open(dest, 'w').write(content.encode('utf8'))
+            try: content = content.encode('utf8')
+            except: pass
+            open(dest, 'w').write(content)
             downloaded += 1
             #self._output('Successfully downloaded %s\n' % os.path.basename(path))
         

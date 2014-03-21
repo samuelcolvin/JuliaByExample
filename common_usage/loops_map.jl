@@ -38,3 +38,11 @@ while !isempty(a1)
 end
 println()
 #> 4, 3, 2, 1,
+
+d1 = {1=>"one", 2=>"two", 3=>"three"}
+# dicts may be looped through using the [keys](http://docs.julialang.org/en/latest/stdlib/base/#Base.keys) argument:
+# [collect](http://docs.julialang.org/en/latest/stdlib/base/#Base.collect) is used to convert the iterator from keys into an array
+for k in sort(collect(keys(d1)))
+    print(k, ": ", d1[k], ", ")
+end
+println() #> 1: one, 2: two, 3: three,
