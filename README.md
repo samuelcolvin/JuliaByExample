@@ -48,11 +48,12 @@ TODO:
 * eval, evalfile, include import module
 * multithreading
 * tasks
-* try catch
+* try catch ✔
 
 To add somewhere:
 
 * in loops: enumerate
 * type constructors
 * elseif, switch?
-* key word arguments xx
+* key word arguments
+

@@ -30,3 +30,10 @@ println(haskey(a1,1)) #> true
 
 # which is equivielnt to
 println(1 in keys(a1)) #> true
+# where [keys](http://docs.julialang.org/en/latest/stdlib/base/#Base.keys) creates an iterator over the keys of the dictionary
+
+# similar to keys, (values)[http://docs.julialang.org/en/latest/stdlib/base/#Base.values] get iterators over the dict's values:
+print_sum(values(a1)) #> ValueIterator{Dict{Any,Any}}: ValueIterator{Dict{Any,Any}}({2=>"two",3=>"three",1=>"one"})
+
+# use [collect](http://docs.julialang.org/en/latest/stdlib/base/#Base.collect) to get an array:
+print_sum(collect(values(a1)))#> 3-element Array{Any,1}: {"two","three","one"}

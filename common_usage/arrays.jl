@@ -27,7 +27,7 @@ print_sum(a4) #> 20-element Range1{Int64}: 1:20
 a4 = [1:20]
 print_sum(a4) #> 20-element Array{Int64,1}: [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20]
 
-# arrays can also be generated from comprehensions:
+# arrays can also be generated from [comprehensions](http://julia.readthedocs.org/en/latest/manual/arrays/#comprehensions):
 a5 = [2^i for i = 1:10]
 print_sum(a5) #> 10-element Array{Int64,1}: [2,4,8,16,32,64,128,256,512,1024]
 
