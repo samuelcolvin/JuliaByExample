@@ -67,7 +67,12 @@ def code_file(context, file_name, **extra_context):
     return Markup(response)
 
 class SiteGenerator(object):
-    def __init__(self, update_repos=True, output = None):
+    def __init__(self, apache_mode=False, update_repos=True, output = None):
+        self._url_base = '%s.html'
+        if apache_mode:
+            self._url_base = '%s'
+            print 'Building in Apache mode'
+        BASIC_CONTEXT['about_url'] = self._url_base % BASIC_CONTEXT['about_url']
         self._update_repos = update_repos
         self._env = jinja2.Environment(loader= jinja2.FileSystemLoader(TEMPLATE_PATH))
         if output:
@@ -97,7 +102,7 @@ class SiteGenerator(object):
                 else:
                     git.Git().clone(repo['url'], repos_path)
         for repo in repos:
-            url = repo['page_name']
+            url = self._url_base % repo['page_name']
             if url == 'index':
                 url = BASIC_CONTEXT['root_url']
             ex_pages.append({'url': url, 'title': repo['title']})
@@ -138,7 +143,7 @@ class SiteGenerator(object):
             sub_title = ''
         new_context['title'] = BASIC_CONTEXT['site_title'] + sub_title
         new_context['examples'] = examples
-        new_context['page'] = '%s.html' % repo['page_name']
+        new_context['page'] = self._url_base % repo['page_name']
         new_context['tags'] = tags
         page_text = template.render(**new_context)
         file_name = '%s.html' % repo['page_name']
@@ -169,7 +174,10 @@ class SiteGenerator(object):
         new_context['title'] = '%s | About' % BASIC_CONTEXT['site_title']
         new_context['page'] = BASIC_CONTEXT['about_url']
         page_text = template.render(**new_context)
-        page_path = os.path.join(WWW_PATH, BASIC_CONTEXT['about_url'])
+        about_url = BASIC_CONTEXT['about_url']
+        if not about_url.endswith('.html'):
+            about_url += '.html'
+        page_path = os.path.join(WWW_PATH, about_url)
         open(page_path, 'w').write(page_text.encode('utf8'))
         self._output('generated about.html')
         
@@ -269,8 +277,7 @@ def list_examples_by_size(examples_dir = 'julia_source_examples'):
     print ''. join(['\n\n#### %s\n\n{{ code_file(\'%s\') }} ' % (fn, fn) for _, fn in files if fn.endswith('.jl')])
 
 if __name__ == '__main__':
-    update_repos = True
-    if 'nosync' in sys.argv:
-        update_repos = False
-    SiteGenerator(update_repos=update_repos)
+    update_repos = not 'nosync' in sys.argv
+    apache_mode =  'apache' in sys.argv
+    SiteGenerator(apache_mode = apache_mode, update_repos = update_repos)
     print 'Successfully generated site at %s' % WWW_PATH
