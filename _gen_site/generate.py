@@ -202,6 +202,11 @@ class SiteGenerator(object):
         self._output('generated about.html')
         
     def generate_htaccess(self):
+        """
+        generate htaccess files to control how apache shows the site"
+        first file creates clean urls.
+        second file forces download of .jl files in download directory
+        """
         htaccess_content = """
 RewriteEngine on
 
@@ -212,7 +217,18 @@ RewriteRule ^(.+)$ $1.html [L,QSA]
 """
         page_path = os.path.join(WWW_PATH, '.htaccess')
         open(page_path, 'w').write(htaccess_content)
-        self._output('generated .htaccess file')
+        self._output('generated WWW_PATH/.htaccess file')
+        if not os.path.exists(WWW_DOWNLOAD_PATH):
+            return
+        htaccess_content2 = """
+# mod_headers has to be switched on: sudoa2enmod headers; sudo service apache2 restart
+<FilesMatch "\.jl$">
+  Header set Content-Disposition attachment
+</FilesMatch>
+"""
+        page_path = os.path.join(WWW_DOWNLOAD_PATH, '.htaccess')
+        open(page_path, 'w').write(htaccess_content2)
+        self._output('generated WWW_DOWNLOAD_PATH/.htaccess file')
         
     def generate_sitemap(self, repos):
         pages = []
