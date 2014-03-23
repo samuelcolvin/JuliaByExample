@@ -12,6 +12,8 @@ In Julia, `$x` in a string literal interpolates the value of the variable into t
 
 #### enum.jl
 
+Some description [here](https://groups.google.com/forum/#!msg/julia-users/f-nKrMh09K4/Ko8EeOEpCEkJ).
+
 {{ code_file('enum.jl') }} 
 
 #### modint.jl
@@ -23,6 +25,8 @@ In Julia, `$x` in a string literal interpolates the value of the variable into t
 {{ code_file('queue.jl') }} 
 
 #### queens.jl
+
+Example of the [8 Queens Puzzle](http://en.wikipedia.org/wiki/Eight_queens_puzzle).
 
 {{ code_file('queens.jl') }} 
 
