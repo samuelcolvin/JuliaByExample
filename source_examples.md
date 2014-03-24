@@ -1,6 +1,6 @@
 #### quine.jl
 
-[http://rosettacode.org/wiki/Quine](http://rosettacode.org/wiki/Quine)
+This script prints a string identical to it's own source code, see [here](http://rosettacode.org/wiki/Quine).
 
 [github.com/karbarcca/Rosetta-Julia/blob/master/src/Quine.jl](https://github.com/karbarcca/Rosetta-Julia/blob/master/src/Quine.jl): In Julia, `$x` in a string literal interpolates the value of the variable into the string. `$(expression)` evaluates the expression and interpolates the result into the string. Normally, the string value `"hi\tworld"` would be inserted without quotation marks and with a literal tab
 
