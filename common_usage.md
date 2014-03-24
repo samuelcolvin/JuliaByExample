@@ -1,7 +1,7 @@
 Below are a series of examples of common operations in Julia. They assume you already have Julia installed and working
 (the examples are currently tested with Julia v0.3 - latest).
  
-#### Hello World
+### Hello World
  
 The simplest possible script.
  

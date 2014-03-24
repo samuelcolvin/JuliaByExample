@@ -9,6 +9,17 @@
 	text-decoration: underline;
 }
 
+.hlink {
+	font-size: 12pt;
+	margin-left: 5px;
+	display: none;
+}
+
+h1:hover .hlink, h2:hover .hlink, h3:hover .hlink, h4:hover .hlink, h5:hover .hlink, h6:hover .hlink {
+	display: inline-block;
+	text-decoration: none;
+}
+
 .download-link {
 	font-size: 170%;
 	padding: 4px;
@@ -64,7 +75,7 @@ pre {
 }
 
 .sidebar {
-    margin-top: 20px;
+    margin-top: 5px;
 }
 
 .sidebar.affix {
@@ -79,7 +90,7 @@ pre {
 
 .sidebar a {
     color: #666;
-    padding: 5px 15px !important;
+    padding: 4px 15px !important;
 }
 
 .sidebar .active a {

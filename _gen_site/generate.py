@@ -15,7 +15,7 @@ urllib, pygments and jinja2 or their equivalents are not yet available in julia.
 """
 
 import sys, os
-import json, urllib2, jinja2, shutil, markdown2, sys, re, git, codecs
+import json, urllib2, jinja2, shutil, markdown2, sys, re, git, codecs, urllib
 from copy import copy
 from jinja2 import contextfunction, Markup
 from pygments import highlight
@@ -129,9 +129,11 @@ class SiteGenerator(object):
         self.context['intro'] = markdown2.markdown(intro)
         
     def _repl_tags(self, match):
-        self._tagno += 1
-        g = match.groups()
-        return '<%s%s id="tag%d">' % (g[0], g[1], self._tagno) 
+        hno, title = match.groups()
+        tag_ref = title.replace(' ', '-').replace('.', '_').replace(':', '')
+        self._tags.append({'link': '#' + tag_ref, 'name': title})
+        return '<h%s id="%s">%s<a href="#%s" class="hlink glyphicon glyphicon-link"></a></h%s>'\
+             % (hno, tag_ref, title, tag_ref, hno) 
     
     def generate_page(self, repo):
         example_dir = os.path.join(repo['directory'], repo['example_sub_dir'])
@@ -146,12 +148,8 @@ class SiteGenerator(object):
                                       example_repo_dir =  repo['example_sub_dir'],
                                       view_root = repo['view_root'])
         examples = markdown2.markdown(examples)
-        self._tagno = 0
-        examples = re.sub('<([hH])([123456])>', self._repl_tags, examples)
-        tags = []
-        for g in re.finditer('<[hH][123456] id="(.*?)">(.*?)</[hH]', examples):
-            parts = g.groups()
-            tags.append({'link': '#' + parts[0], 'name': parts[1]})
+        self._tags = []
+        examples = re.sub('<h([1-6])>(.*?)</h[1-6]>', self._repl_tags, examples, 0, re.I)
         
         new_context = copy(self.context)
         sub_title = ' | ' + repo['title']
@@ -160,7 +158,7 @@ class SiteGenerator(object):
         new_context['title'] = BASIC_CONTEXT['site_title'] + sub_title
         new_context['examples'] = examples
         new_context['page'] = self._get_url(repo['page_name'])
-        new_context['tags'] = tags
+        new_context['tags'] = self._tags
         page_text = template.render(**new_context)
         file_name = '%s.html' % repo['page_name']
         page_path = os.path.join(WWW_PATH, file_name)
@@ -172,7 +170,6 @@ class SiteGenerator(object):
         if url == 'index':
             url = BASIC_CONTEXT['root_url']
         return url
-        
     
     def test_for_missing_files(self, repo, example_dir):
         desc_text = open(os.path.join(PROJ_ROOT, repo['description']), 'r').read()
