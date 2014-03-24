@@ -5,6 +5,8 @@ README is also used as the source for the about page.
 Julia By Example
 ==============
 
+Hosted at [www.scolvin.com/juliabyexample](http://www.scolvin.com/juliabyexample/).
+
 Unofficial collection of Julia (Julia Lang) Examples, created by [Samuel Colvin](http://www.scolvin.com).
 
 [Julia](http://www.julialang.org) is a high-level, high-performance dynamic programming language for technical computing. 
