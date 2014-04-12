@@ -32,15 +32,15 @@ Feel free to use all and any of the examples for whatever you wish, licensed und
 
 TODO:
 
-* build test script to test all examples ✔
-* hello world ✔
-* simple function example inc. some algebra ✔
-* strings basics ✔
-* string formatting and conversion ✔
-* string manipulation ✔ (add regex)
-* arrays ✔
-* dicts ✔
-* loops ✔
+* build test script to test all examples â
+* hello world â
+* simple function example inc. some algebra â
+* strings basics â
+* string formatting and conversion â
+* string manipulation â (add regex)
+* arrays â
+* dicts â
+* loops â
 * types
 * read stdin and writing to file?
 * plot
@@ -50,7 +50,7 @@ TODO:
 * eval, evalfile, include import module
 * multithreading
 * tasks
-* try catch ✔
+* try catch â
 
 To add somewhere:
 

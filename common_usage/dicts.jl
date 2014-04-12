@@ -1,6 +1,5 @@
 # <hide>
 function print_sum(a)
-    # summary generates a summary of an object
     print(summary(a), ": ")
     show(a)
     println()
