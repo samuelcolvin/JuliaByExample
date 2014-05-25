@@ -43,6 +43,12 @@ Julia uses [Dicts](http://docs.julialang.org/en/latest/stdlib/base/#associative-
 
 {{ code_file('loops_map.jl') }}
 
+### Plotting
+
+Plotting in Julia is only possible with additional Packages such as [PyPlot](https://github.com/stevengj/PyPlot.jl), [Winston](https://github.com/nolta/Winston.jl) and [Gadfly](https://github.com/dcjones/Gadfly.jl].
+
+{{ code_file('plotting.jl') }}
+
 ### Error Handling
 
 
