@@ -1,6 +1,5 @@
 # PyPlot: needs Python and matplotlib installed
-# (matplotlib.pyplot docs)[http://matplotlib.org/api/pyplot_api.html]
-
+# [matplotlib.pyplot docs](http://matplotlib.org/api/pyplot_api.html)
 import PyPlot
 # plot 5 random numbers in [0,1], PyPlot.plot creates a new figure
 PyPlot.plot(rand(5))
@@ -42,28 +41,4 @@ PyPlot.ylim([-3, 3])
 # change the ticks used on the y-axis
 PyPlot.yticks([-3, 0, 3])
 # save the current figure
-PyPlot.savefig("pyplot.pdf")
-
-
-# Winston: Matlab-like plotting
-# all dependencies are installed automatically by Pkg.add("Winston")
-
-import Winston
-
-# plot some data
-pl = Winston.plot(randn(5))
-# display the plot (not done automatically!)
-display(pl)
-# save the current figure
-Winston.savefig("winston.pdf")
-
-
-# Gadfly: ggplot2-like plotting
-# all dependencies are installed automatically by Pkg.add("Gadfly")
-
-import Gadfly
-
-# plot some data
-pl = Gadfly.plot(x=[1:10], y=rand(10))
-# and save it to a file
-Gadfly.draw(Gadfly.PDF("gadfly.pdf", 300, 100), pl)
+PyPlot.savefig("pyplot.png")

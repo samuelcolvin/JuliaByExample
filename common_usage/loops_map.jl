@@ -1,9 +1,6 @@
 # <hide>
-function print_sum(a)
-    # summary generates a summary of an object
-    print(summary(a), ": ")
-    show(a)
-    println()
+function printsum(a)
+    println(summary(a), ": ", repr(a))
 end
 # </hide>
 for i in 1:5
@@ -61,4 +58,4 @@ println() #> 1: one, 2: two, 3: three,
 
 # [map]() works as you might expect performing the given function on each member of an array or iter very like comprehensions
 a4 = map((x) -> x^2, [1, 2, 3, 7])
-print_sum(a4) #> 4-element Array{Int64,1}: [1,4,9,49]
+printsum(a4) #> 4-element Array{Int64,1}: [1,4,9,49]

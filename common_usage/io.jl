@@ -1,8 +1,6 @@
 # <hide>
-function print_sum(a)
-    print(summary(a), ": ")
-    show(a)
-    println()
+function printsum(a)
+    println(summary(a), ": ", repr(a))
 end
 # </hide>
 
@@ -19,7 +17,7 @@ end
 #> 17
 
 file_stream = open(fname,"r")
-print_sum(readlines(file_stream))
+printsum(readlines(file_stream))
 #> 4-element Array{Any,1}: {"this is a simple file containing\n","text and numbers:\n","43.3\n","17\n"}
 
 file_stream = open(fname,"r")

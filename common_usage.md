@@ -43,13 +43,46 @@ Julia uses [Dicts](http://docs.julialang.org/en/latest/stdlib/base/#associative-
 
 {{ code_file('loops_map.jl') }}
 
+### Types
+
+Types are a key way of structuring data within Julia
+
+{{ code_file('types.jl')}}
+
 ### Plotting
 
-Plotting in Julia is only possible with additional Packages such as [PyPlot](https://github.com/stevengj/PyPlot.jl), [Winston](https://github.com/nolta/Winston.jl) and [Gadfly](https://github.com/dcjones/Gadfly.jl].
+Plotting in Julia is only possible with additional Packages. Examples of different packages are given below.
 
-{{ code_file('plotting.jl') }}
+#### PyPlot
+
+[PyPlot Package Page](https://github.com/stevengj/PyPlot.jl).
+
+PyPlot needs Python and matplotlib installed [matplotlib.pyplot docs](http://matplotlib.org/api/pyplot_api.html).
+
+{{ code_file('pyplot.jl') }}
+
+{{ source_image('pyplot.png') }}
+
+#### Winston
+
+[Winston Package Page](https://github.com/nolta/Winston.jl)
+
+Matlab-like plotting. Installed via `Pkg.add("Winston")`
+
+{{ code_file('winston.jl') }}
+
+{{ source_image('winston.svg') }}
+
+#### Gadfly
+
+[Gadfly Package Page](https://github.com/dcjones/Gadfly.jl)
+
+ggplot2-like plotting. Installed via `Pkg.add("Gadfly")`
+
+{{ code_file('gadfly.jl') }}
+
+{{ source_image('gadfly.png') }}
 
 ### Error Handling
-
 
 {{ code_file('error_handling.jl') }}

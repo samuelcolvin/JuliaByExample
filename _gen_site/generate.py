@@ -75,9 +75,21 @@ def code_file(context, file_name, **extra_context):
     code = highlight(code, lexer, formatter)
     code = re.sub('<span class="c">(.*?)</span>', _smart_comments, code)
     response = """<a class="git-link" href="%s" data-toggle="tooltip" data-placement="bottom"
-    target="_blank" title="go to github"><img src="static/github.png" alt="Github"/></a>%s\n%s\n""" % \
+    target="_blank" title="go to github"><img src="static/github.png" alt="Github Link"/></a>%s\n%s\n""" % \
         (git_url, download_link, code)
     return Markup(response)
+
+@contextfunction
+def source_image(context, file_name, **extra_context):
+    ex_dir = context['example_directory']
+    file_path = os.path.realpath(os.path.join(PROJ_ROOT, ex_dir, file_name))
+    path = os.path.join(WWW_DOWNLOAD_PATH, ex_dir)
+    if not os.path.exists(path):
+        os.makedirs(path)
+    shutil.copyfile(file_path, os.path.join(path, file_name))
+    url = '/'.join(s.strip('/') for s in [DOWNLOADS_DIR, ex_dir, file_name])
+    url = url.replace('/./', '/')
+    return '<img class="source-image" src="%s" alt="%s"/>' % (url, file_name)
 
 class SiteGenerator(object):
     def __init__(self, apache_mode=False, update_repos=True, output = None):
@@ -115,7 +127,7 @@ class SiteGenerator(object):
                 repos_path = os.path.join(PROJ_ROOT, repo['directory'])
                 if repo['directory'] == '.' and not PULL_SELF:
                     continue
-                self._output('Updating %s' % repo['url'])
+                self._output('Updating %s >> %s' % (repo['url'], repos_path))
                 if os.path.exists(repos_path):
                     self._output(git.cmd.Git(repos_path).pull())
                 else:
@@ -142,6 +154,7 @@ class SiteGenerator(object):
         template = self._env.get_template(template_name)
         ex_env = jinja2.Environment(loader= jinja2.FileSystemLoader(PROJ_ROOT))
         ex_env.globals['code_file'] = code_file
+        ex_env.globals['source_image'] = source_image
         ex_template = ex_env.get_template(repo['description'])
         
         examples = ex_template.render(example_directory = example_dir,
@@ -308,14 +321,17 @@ RewriteRule ^(.+)$ $1.html [L,QSA]
     def _output(self, msg):
         print msg
 
-def list_examples_by_size(examples_dir = 'julia_source_examples'):
+def list_examples_by_size(examples_dir = 'repo_julia_source/examples'):
     path = os.path.join(PROJ_ROOT, examples_dir)
     files = [(os.path.getsize(os.path.join(path, fn)), fn) for fn in os.listdir(path)]
     files.sort()
     print ''. join(['\n\n#### %s\n\n{{ code_file(\'%s\') }} ' % (fn, fn) for _, fn in files if fn.endswith('.jl')])
 
 if __name__ == '__main__':
-    update_repos = not 'nosync' in sys.argv
-    apache_mode =  'apache' in sys.argv
-    SiteGenerator(apache_mode = apache_mode, update_repos = update_repos)
-    print 'Successfully generated site at %s' % WWW_PATH
+    if 'j_example_list' in sys.argv:
+        list_examples_by_size()
+    else:
+        update_repos = not 'nosync' in sys.argv
+        apache_mode =  'apache' in sys.argv
+        SiteGenerator(apache_mode = apache_mode, update_repos = update_repos)
+        print 'Successfully generated site at %s' % WWW_PATH

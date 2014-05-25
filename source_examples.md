@@ -6,6 +6,8 @@ This script prints a string identical to it's own source code, see [here](http:/
 
 The `repr` function returns a string value that contains quotation marks and in which the literal tab is replaced by the characters `\t`. When the result of the `repr` function is interpolated, the result is what you would type into your code to create that string literal.
 
+#### quine.jl
+
 {{ code_file('quine.jl') }} 
 
 #### bubblesort.jl
@@ -21,10 +23,6 @@ Some description [here](https://groups.google.com/forum/#!msg/julia-users/f-nKrM
 #### modint.jl
 
 {{ code_file('modint.jl') }} 
-
-#### queue.jl
-
-{{ code_file('queue.jl') }} 
 
 #### queens.jl
 
@@ -48,21 +46,9 @@ Example of the [8 Queens Puzzle](http://en.wikipedia.org/wiki/Eight_queens_puzzl
 
 {{ code_file('lru_test.jl') }} 
 
-#### ndrange.jl
-
-{{ code_file('ndrange.jl') }} 
-
 #### staged.jl
 
 {{ code_file('staged.jl') }} 
-
-#### list.jl
-
-{{ code_file('list.jl') }} 
-
-#### tree.jl
-
-{{ code_file('tree.jl') }} 
 
 #### plife.jl
 
@@ -87,7 +73,3 @@ Example of the [8 Queens Puzzle](http://en.wikipedia.org/wiki/Eight_queens_puzzl
 #### hpl.jl
 
 {{ code_file('hpl.jl') }} 
-
-#### colorimetry.jl
-
-{{ code_file('colorimetry.jl') }} 

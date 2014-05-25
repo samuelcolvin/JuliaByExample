@@ -98,6 +98,13 @@ pre {
     color: black;
 }
 
+.source-image {
+    width: 100%;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background-color: white;
+}
+
 @media (max-width: 760px){
 
     .container {
