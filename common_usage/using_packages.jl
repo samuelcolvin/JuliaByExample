@@ -8,7 +8,7 @@ Pkg.available()
 Pkg.add("Calculus")
 
 # to list all installed packages
-a=Pkg.installed()
+Pkg.installed()
 
 # to update all packages to their newest version
 Pkg.update()
@@ -38,8 +38,3 @@ import Gadfly
 
 Winston.plot(rand(4))
 Gadfly.plot(x=[1:10], y=rand(10))
-
-# To run a file in the REPL `include` should be used. This will evaluate all
-# valid expressions in that file and return the last one evaluated. The following
-# command may or may not produce an infinite loop, so be careful.
-include("using_packages.jl")
