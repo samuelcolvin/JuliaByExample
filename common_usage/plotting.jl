@@ -1,10 +1,10 @@
 # PyPlot: needs Python and matplotlib installed
-# further documentation at http://matplotlib.org/api/pyplot_api.html
+# (matplotlib.pyplot docs)[http://matplotlib.org/api/pyplot_api.html]
 
 import PyPlot
 # plot 5 random numbers in [0,1], PyPlot.plot creates a new figure
 PyPlot.plot(rand(5))
-# labeling the axis, creating a title:
+# labeling the axes, creating a title:
 PyPlot.xlabel("x-axis")
 PyPlot.ylabel("y-axis")
 PyPlot.title("Random")
@@ -42,7 +42,7 @@ PyPlot.ylim([-3, 3])
 # change the ticks used on the y-axis
 PyPlot.yticks([-3, 0, 3])
 # save the current figure
-PyPlot.savefig("path/to/save/to/test.pdf")
+PyPlot.savefig("pyplot.pdf")
 
 
 # Winston: Matlab-like plotting
@@ -55,7 +55,7 @@ pl = Winston.plot(randn(5))
 # display the plot (not done automatically!)
 display(pl)
 # save the current figure
-Winston.savefig("path/to/save/to.pdf")
+Winston.savefig("winston.pdf")
 
 
 # Gadfly: ggplot2-like plotting
@@ -66,4 +66,4 @@ import Gadfly
 # plot some data
 pl = Gadfly.plot(x=[1:10], y=rand(10))
 # and save it to a file
-Gadfly.draw(Gadfly.PDF("path/to/save/to/plot.pdf", 300, 100), pl)
+Gadfly.draw(Gadfly.PDF("gadfly.pdf", 300, 100), pl)
