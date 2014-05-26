@@ -49,3 +49,16 @@ printsum(a3) #> 1-element Array{Int64,1}: [1]
 push!(a6, [1,2,3])
 printsum(a6) #> 1-element Array{Array{Int64,1},1}: [[1,2,3]]
 
+# using repeat() to create arrays
+# you must use the keywords "inner" and "outer"
+# all arguments must be arrays (not ranges)
+a7 = repeat(a1,inner=[2],outer=[1])
+a8 = repeat([4:-1:1],inner=[1],outer=[2])
+
+
+
+
+
+
+
+
