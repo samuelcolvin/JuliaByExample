@@ -7,6 +7,14 @@ The simplest possible script.
  
 {{ code_file('hello_world.jl') }} 
 
+To run this script from the REPL, type `include("hello_world.jl")`. That will evaluate all valid expressions in that file and return the last output.
+
+### Packages and including of files
+
+[Packages](http://docs.julialang.org/en/latest/packages/packagelist/) extend the functionality of Julia's standard library. 
+
+{{ code_file('using_packages.jl') }} 
+
 ### Simple Functions
 
 The example below shows two simple functions, how to call them and print the results. Further examples of number formatting are shown below.
