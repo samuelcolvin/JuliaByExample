@@ -45,9 +45,15 @@ Julia uses [Dicts](http://docs.julialang.org/en/latest/stdlib/base/#associative-
 
 ### Types
 
-Types are a key way of structuring data within Julia
+Types are a key way of structuring data within Julia.
 
 {{ code_file('types.jl')}}
+
+### Input & Output
+
+The basic syntax for reading and writing files in Julia is quite similar to python.
+
+{{ code_file('io.jl')}}
 
 ### Plotting
 

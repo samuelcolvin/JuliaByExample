@@ -1,31 +1,45 @@
-# <hide>
-function printsum(a)
-    println(summary(a), ": ", repr(a))
-end
-# </hide>
-
 fname = "simple.dat"
-# try enumerate
+# using [do](http://julia.readthedocs.org/en/latest/manual/functions/#block-syntax-for-function-arguments) means the file is closed automatically
+# in the same way "with" does in python
 open(fname,"r") do f
-  for line in eachline(f)
-        print(line)
-  end
+	for line in eachline(f)
+	    print(line)
+	end
 end
 #> this is a simple file containing
 #> text and numbers:
 #> 43.3
 #> 17
 
-file_stream = open(fname,"r")
-printsum(readlines(file_stream))
+f = open(fname,"r")
+showall(readlines(f))
 #> 4-element Array{Any,1}: {"this is a simple file containing\n","text and numbers:\n","43.3\n","17\n"}
+close(f)
 
-file_stream = open(fname,"r")
-file_string = readall(file_stream)
-println(summary(file_string))
+f = open(fname,"r")
+fstring = readall(f)
+close(f)
+println(summary(fstring))
 #> ASCIIString
-print(file_string)
+print(fstring)
 #> this is a simple file containing
 #> text and numbers:
 #> 43.3
 #> 17
+
+outfile = "outfile.dat"
+# writing to files is very similar:
+f = open(outfile, "w")
+# both print and println can be used as usual but with f as their first arugment
+println(f, "some content")
+print(f, "more content")
+print(f, " more on the same line")
+close(f)
+
+# we can then check the content of the file written
+# "do" above just creates anonymous function and passes it to open
+# we can use the same logic to pass read all and thereby succinctly
+# open, read and close a file in one line
+outfile_content = open(readall, outfile, "r")
+println(repr(outfile_content))
+#> "some content\nmore conten more on teh same line"
