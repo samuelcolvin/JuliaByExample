@@ -13,7 +13,7 @@ end
 
 f = open(fname,"r")
 showall(readlines(f))
-#> 4-element Array{Any,1}: {"this is a simple file containing\n","text and numbers:\n","43.3\n","17\n"}
+#> Union(ASCIIString,UTF8String)["this is a simple file containing\n","text and numbers:\n","43.3\n","17\n"]
 close(f)
 
 f = open(fname,"r")
@@ -42,4 +42,4 @@ close(f)
 # open, read and close a file in one line
 outfile_content = open(readall, outfile, "r")
 println(repr(outfile_content))
-#> "some content\nmore conten more on teh same line"
+#> "some content\nmore content more on the same line"

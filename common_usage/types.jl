@@ -15,7 +15,7 @@ end
 
 p = Person("Julia", false, 4, 0)
 printsum(p)
-#> Person: Person("Julia",false,4,0)
+#> Person: Person("Julia",false,4.0,0)
 
 people = Person[]
 push!(people, Person("Steve", true, 42, 0))
