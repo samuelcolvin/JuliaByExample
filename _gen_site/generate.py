@@ -142,7 +142,12 @@ class SiteGenerator(object):
         
     def _repl_tags(self, match):
         hno, title = match.groups()
-        tag_ref = title.replace(' ', '-').replace('.', '_').replace(':', '')
+        replacements = [(' ', '-'), ('.', '_'), (':', ''), ('&amp;', '')]
+        tag_ref = title
+        for f, t in replacements:
+            tag_ref = tag_ref.replace(f, t)
+        for c in ['\-', ':', '\.']:
+            tag_ref = re.sub(r'%s%s+' % (c, c), c[-1], tag_ref)
         self._tags.append({'link': '#' + tag_ref, 'name': title})
         return '<h%s id="%s">%s<a href="#%s" class="hlink glyphicon glyphicon-link"></a></h%s>'\
              % (hno, tag_ref, title, tag_ref, hno) 

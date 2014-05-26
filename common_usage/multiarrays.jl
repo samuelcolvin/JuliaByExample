@@ -1,7 +1,3 @@
-# multidmensional arrays
-
-# Julia has very good multidimensional array capabilities. Check out [the manual](http://julia.readthedocs.org/en/latest/manual/arrays/).
-
 # repeat can be useful to expand a grid
 # as in R's expand.grid() function:
 

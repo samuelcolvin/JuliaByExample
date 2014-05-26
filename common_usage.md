@@ -33,6 +33,12 @@ Collection of different string examples (string indexing is the same as array in
 
 {{ code_file('arrays.jl') }} 
 
+### Multidimensional Arrays
+
+Julia has very good multidimensional array capabilities. Check out [the manual](http://julia.readthedocs.org/en/latest/manual/arrays/).
+
+{{ code_file('multiarrays.jl') }} 
+
 ### Dictionaries
 
 Julia uses [Dicts](http://docs.julialang.org/en/latest/stdlib/base/#associative-collections) as associative collections. Usage is very like python except for the rather odd `=>` definition syntax.
@@ -57,7 +63,7 @@ The basic syntax for reading and writing files in Julia is quite similar to pyth
 
 {{ code_file('io.jl')}}
 
-### Packages and including of files
+### Packages and Including of Files
 
 [Packages](http://docs.julialang.org/en/latest/packages/packagelist/) extend the functionality of Julia's standard library. 
 
