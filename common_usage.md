@@ -5,15 +5,9 @@ Below are a series of examples of common operations in Julia. They assume you al
  
 The simplest possible script.
  
-{{ code_file('hello_world.jl') }} 
+{{ code_file('hello_world.jl') }}
 
-To run this script from the REPL, type `include("hello_world.jl")`. That will evaluate all valid expressions in that file and return the last output.
-
-### Packages and including of files
-
-[Packages](http://docs.julialang.org/en/latest/packages/packagelist/) extend the functionality of Julia's standard library. 
-
-{{ code_file('using_packages.jl') }} 
+With Julia [installed and added to your path](http://julialang.org/downloads/) this script can be run by `julia hello_world.jl`, it can also be run from REPL by typing `include("hello_world.jl")`, that will evaluate all valid expressions in that file and return the last output.
 
 ### Simple Functions
 
@@ -62,6 +56,12 @@ Types are a key way of structuring data within Julia.
 The basic syntax for reading and writing files in Julia is quite similar to python.
 
 {{ code_file('io.jl')}}
+
+### Packages and including of files
+
+[Packages](http://docs.julialang.org/en/latest/packages/packagelist/) extend the functionality of Julia's standard library. 
+
+{{ code_file('using_packages.jl') }} 
 
 ### Plotting
 
