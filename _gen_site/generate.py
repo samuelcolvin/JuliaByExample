@@ -187,7 +187,8 @@ class SiteGenerator(object):
     def test_for_missing_files(self, repo, example_dir):
         desc_text = open(os.path.join(PROJ_ROOT, repo['description']), 'r').read()
         quoted_files = set(re.findall("{{ *code_file\( *'(.*?)' *\) *}}", desc_text))
-        actual_files = set([fn for fn in os.listdir(example_dir) if fn.endswith('.jl') and not fn == 'test_examples.jl'])
+        actual_files = set([fn for fn in os.listdir(example_dir) if 
+            fn.endswith('.jl') and fn not in ['addcomments.jl', 'test_examples.jl']])
         non_existent = quoted_files.difference(actual_files)
         if len(non_existent) > 0:
             self._output('*** QUOTED FILES ARE MISSING ***:')

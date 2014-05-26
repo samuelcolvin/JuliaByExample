@@ -34,7 +34,12 @@ type Family
 	# for the other two values
 	Family(name::String) = new(name, String[], false)
 	# constructor that takes two arguements and infers the thir
-	Family(name::String, members::Array{String, 1}) = new(name, members, length(members) > 5)
+	Family(name::String, members) = new(name, members, length(members) > 3)
 end
 
-# TODO: describle type hierachy
+fam1 = Family("blogs")
+println(fam1)
+#> Family("blogs",String[],false)
+fam2 = Family("jones", ["anna", "bob", "charlie", "dick"])
+println(fam2)
+#> Family("jones",String["anna","bob","charlie","dick"],true)
