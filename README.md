@@ -26,7 +26,7 @@ I am not an expert in Julia and this is a work in progress: there are almost cer
 
 The site can be build using `python _gen_site/generate.py`.
 
-Feel free to use all and any of the examples for whatever you wish, licensed under [GNU GENERAL PUBLIC LICENSE](https://github.com/samuelcolvin/JuliaByExample/blob/master/LICENSE)
+Feel free to use all and any of the examples for whatever you wish, licensed under the [MIT](https://github.com/samuelcolvin/JuliaByExample/blob/master/LICENSE)
 
 *&copy; Samuel Colvin 2014*
 
