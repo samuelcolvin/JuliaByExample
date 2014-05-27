@@ -6,8 +6,6 @@ This script prints a string identical to it's own source code, see [here](http:/
 
 The `repr` function returns a string value that contains quotation marks and in which the literal tab is replaced by the characters `\t`. When the result of the `repr` function is interpolated, the result is what you would type into your code to create that string literal.
 
-#### quine.jl
-
 {{ code_file('quine.jl') }} 
 
 #### bubblesort.jl
