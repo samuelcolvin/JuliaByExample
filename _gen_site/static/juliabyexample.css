@@ -105,6 +105,10 @@ pre {
     background-color: white;
 }
 
+.code .c {
+    font-style: normal;
+}
+
 @media (max-width: 760px){
 
     .container {
