@@ -83,7 +83,7 @@ printsum(m4)
 #> [4 5 6
 #>  5 6 7]
 
-# (for more examples of try, catch see [Error Handling](/#Error-Handling))
+# (for more examples of try, catch see Error Handling above)
 try
 	# this will cause an error, you have to assign the correct type
 	m4[:,:,1] = rand(2,3)

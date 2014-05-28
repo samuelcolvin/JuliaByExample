@@ -33,6 +33,10 @@ Collection of different string examples (string indexing is the same as array in
 
 {{ code_file('arrays.jl') }} 
 
+### Error Handling
+
+{{ code_file('error_handling.jl') }}
+
 ### Multidimensional Arrays
 
 Julia has very good multidimensional array capabilities. Check out [the manual](http://julia.readthedocs.org/en/latest/manual/arrays/).
@@ -60,6 +64,8 @@ Types are a key way of structuring data within Julia.
 ### Input & Output
 
 The basic syntax for reading and writing files in Julia is quite similar to python.
+
+The `simple.dat` file used in this example is available [from github](https://github.com/samuelcolvin/JuliaByExample/blob/master/common_usage/simple.dat).
 
 {{ code_file('io.jl')}}
 
@@ -103,6 +109,10 @@ ggplot2-like plotting. Installed via `Pkg.add("Gadfly")`
 
 {{ source_image('gadfly.png') }}
 
-### Error Handling
+### DataFrames
 
-{{ code_file('error_handling.jl') }}
+The [DataFrames.jl package](https://github.com/JuliaStats/DataFrames.jl) provides tool for working with tabular data.
+
+The `iris.csv` file used in this example is available [from github](https://github.com/samuelcolvin/JuliaByExample/blob/master/common_usage/iris.csv).
+
+{{ code_file('dataframes.jl') }}

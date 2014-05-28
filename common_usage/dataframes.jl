@@ -1,5 +1,6 @@
-# The DataFrames.jl package provides tool for working with tabular data
 using DataFrames
+
+# TODO: needs more links to docs.
 
 # A DataFrame is an in-memory database
 df = DataFrame(A = [1, 2], B = [e, pi], C = ["xx", "xy"])
