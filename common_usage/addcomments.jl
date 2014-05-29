@@ -18,25 +18,26 @@ function getoutput(code::String)
 	# together with where to put it back.
 	# variables from eval contaminate the function
 	# so we use the hack __var to avoid variable mixup
-	__pos = 1
+	pos = 1
 	const STDOUT_OLD = STDOUT
-	__output = (Int, String)[]
+	output = (Int, String)[]
+	ns = Module()
 	begin
 		while true
-			statement, newpos = parse(code, __pos, raise=false)
-			statement.head == :error ? break: (__pos = newpos)
-			__io, _ = redirect_stdout()
-			print("x")
-			eval(statement)
+			statement, newpos = parse(code, pos, raise=false)
+			statement.head == :error ? break: (pos = newpos)
+			stdout, stdin = redirect_stdout()
+			eval(ns, statement)
 			redirect_stdout(STDOUT_OLD)
-			result = readavailable(__io)
-			close(__io)
-			if length(result) > 1
-				push!(__output, (__pos, result[2:end]))
+			close(stdin)
+			result = readall(stdout)
+			close(stdout)
+			if length(result) > 0
+				push!(output, (pos, result))
 			end
 		end
 	end
-	return __output
+	return output
 end
 
 function insert_output(code::String, output::Array{(Int64,String), 1})
@@ -63,18 +64,18 @@ function insert_output(code::String, output::Array{(Int64,String), 1})
 	return code
 end
 
-function convertfile(__fname::String)
-	if !(endswith(__fname, ".jl") || endswith(__fname, ".JL"))
-		println("## ERROR: the file \"$__fname\" does not appear to be a julia file (eg. doesn't end with .jl)")
+function convertfile(fname::String)
+	if !(endswith(fname, ".jl") || endswith(fname, ".JL"))
+		println("## ERROR: the file \"$fname\" does not appear to be a julia file (eg. doesn't end with .jl)")
 		return
 	end
-	const __code = removeold(open(readall, __fname, "r"))
-	output = getoutput(__code)
-	newcode = insert_output(__code, output)
-	open(__fname, "w") do f
+	const code = removeold(open(readall, fname, "r"))
+	output = getoutput(code)
+	newcode = insert_output(code, output)
+	open(fname, "w") do f
 		write(f, newcode)
 	end
-	println("--------------\nOutput comments added to \"$__fname\"\n--------------")
+	println("--------------\nOutput comments added to \"$fname\"\n--------------")
 end
 
 function parseargs()
