@@ -26,7 +26,8 @@ var lunrcode = function (config) {
 var index = lunrcode(function () {
 	this.field('name', {boost: 50});
 	this.field('help', {boost: 10});
-	this.field('methods');
+	this.field('methods', {boost: 2});
+	this.field('module');
 	this.ref('id');
 })
 var indexed = false;
@@ -39,6 +40,7 @@ function do_index(){
 			    name: item.name,
 			    help: item.help,
 			    methods: item.methods,
+			    module: mod.modname
 			  })
 	 	})
 	});

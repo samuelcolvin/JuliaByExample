@@ -206,9 +206,9 @@ function create_page()
 				mesc = map(escapeHTML, item["methods"])
 				mstr = join(mesc, "</p>\n<p>")
 				item["methods"] = "<p>$mstr</p>"
-				item["id"] = i
-				i += 1
 			end
+			item["id"] = i
+			i += 1
 		end
 	end
 	context = ["modules"=>info]
