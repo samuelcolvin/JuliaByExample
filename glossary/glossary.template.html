@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="keywords" content="Julia, Julia lang, Glossary, search, list, function, code">
+      <meta name="description" content="Julia Glossary">
+      <meta name="author" content="Samuel Colvin">
+      <title>Julia Glossary</title>
+      <link rel="icon" type="image/png" href="static/favicon.ico" />
+      <link href="static/external/css/bootstrap.min.css" rel="stylesheet">
+      <link href="gstyle.css" rel="stylesheet">
+  </head>
+  <body>
+
+      <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+          <div class="search">
+            <form id="search" class="navbar-form navbar-right" role="form">
+              <span class="spinner">
+                Indexing Glossary...
+              </span>
+              <div class="form-group">
+                <input id="search-query" type="text" placeholder="Search" class="form-control">
+              </div>
+              <a id="clear-btn" class="btn btn-default">Clear</a>
+              <button type="submit" class="btn btn-primary">Search</button>
+            </form>
+          </div>
+      </div>
+      <div class="page">
+        <div id="results-area">
+          <div id="results-summary"></div>
+          <div id="results"></div>
+        </div>
+        <div id="all">
+          {{#modules}}
+            {{#items}}
+            <div class="col-md-4" id="item-{{ id }}">
+              <div class="item-outer">
+                <div class="item">
+                  <div class="title">
+                    <span class="modname">{{ modname }}:&nbsp;</span>
+                    <span class="name">{{ name }}</span>
+                    <span class="summary">{{ summary }}</span>
+                  </div>
+                  <div class="help">
+                    <label>Help:</label>
+                    {{ help }}
+                  </div>
+                  {{#methods}}
+                    <div class="methods">
+                      <label>Methods:</label>
+                      {{{ methods }}}
+                    </div>
+                  {{/methods}}
+                </div>
+              </div>
+            </div>
+            {{/items}}
+          {{/modules}}
+        </div>
+      </div>
+
+    
+    <script src="static/external/js/jquery-1.11.0.min.js"></script>
+    <script src="static/external/js/bootstrap.min.js"></script>
+    <script src="gdisplay.js"></script>
+    <script src="gmodules.js"></script>
+    <script src="lunr.js"></script>
+    <script src="gsearch.js"></script>
+  </body>
+</html>
