@@ -56,6 +56,7 @@ function empty(){
 }
 
 function search(){
+	$(document).scrollTop(0);
 	results = index.search(query);
 	$('#results-summary').text(results.length + ' results found');
 	empty();
