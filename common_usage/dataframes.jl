@@ -1,33 +1,39 @@
 using DataFrames
-
+showln(x) = (show(x); println())
 # TODO: needs more links to docs.
 
 # A DataFrame is an in-memory database
 df = DataFrame(A = [1, 2], B = [e, pi], C = ["xx", "xy"])
+showln(df)
+#> 2x3 DataFrame
+#> |-------|---|---------|------|
+#> | Row # | A | B       | C    |
+#> | 1     | 1 | 2.71828 | "xx" |
+#> | 2     | 2 | 3.14159 | "xy" |
 
 # The columns of a DataFrame can be indexed using numbers or names
-show(df[1])
+showln(df[1])
 #> [1,2]
-show(df[:A])
+showln(df[:A])
 #> [1,2]
 
-show(df[2])
+showln(df[2])
 #> [2.718281828459045,3.141592653589793]
-show(df[:B])
+showln(df[:B])
 #> [2.718281828459045,3.141592653589793]
 
-show(df[3])
+showln(df[3])
 #> ASCIIString["xx","xy"]
-show(df[:C])
+showln(df[:C])
 #> ASCIIString["xx","xy"]
 
 # The rows of a DataFrame can be indexed only by using numbers
-show(df[1, :])
+showln(df[1, :])
 #> 1x3 DataFrame
 #> |-------|---|---------|------|
 #> | Row # | A | B       | C    |
 #> | 1     | 1 | 2.71828 | "xx" |
-show(df[1:2, :])
+showln(df[1:2, :])
 #> 2x3 DataFrame
 #> |-------|---|---------|------|
 #> | Row # | A | B       | C    |
@@ -38,13 +44,13 @@ show(df[1:2, :])
 iris = readtable("iris.csv")
 
 # Check the names and element types of the columns of our new DataFrame
-show(names(iris))
+showln(names(iris))
 #> [:SepalLength,:SepalWidth,:PetalLength,:PetalWidth,:Species]
-show(eltypes(iris))
+showln(eltypes(iris))
 #> Type[Float64,Float64,Float64,Float64,UTF8String]
 
 # Subset the DataFrame to only include rows for one species
-show(iris[iris[:Species] .== "setosa", :])
+showln(iris[iris[:Species] .== "setosa", :])
 #> 50x5 DataFrame
 #> |-------|-------------|------------|-------------|------------|----------|
 #> | Row # | SepalLength | SepalWidth | PetalLength | PetalWidth | Species  |
@@ -70,7 +76,7 @@ show(iris[iris[:Species] .== "setosa", :])
 #> | 50    | 5.0         | 3.3        | 1.4         | 0.2        | "setosa" |
 
 # Count the number of rows for each species
-show(by(iris, :Species, df -> size(df, 1)))
+showln(by(iris, :Species, df -> size(df, 1)))
 #> 3x2 DataFrame
 #> |-------|--------------|----|
 #> | Row # | Species      | x1 |
@@ -88,7 +94,7 @@ tabulated = by(
     [:Species, :SepalLength, :SepalWidth],
     df -> size(df, 1)
 )
-show(tabulated)
+showln(tabulated)
 #> 17x4 DataFrame
 #> |-------|--------------|-------------|------------|----|
 #> | Row # | Species      | SepalLength | SepalWidth | x1 |
