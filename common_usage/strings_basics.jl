@@ -24,7 +24,7 @@ println("int('α') == ", int('α'))
 println(int('1') == 1)
 #> false
 
-# strings can be convered to upper case or lower case:
+# strings can be converted to upper case or lower case:
 s1_caps = uppercase(s1)
 s1_lower = lowercase(s1)
 println(s1_caps, "\n", s1_lower)
@@ -34,7 +34,7 @@ println(s1_caps, "\n", s1_lower)
 show(s1[11]); println()
 #> 'b'
 
-# or sub strings created:
+# or sub strings can be created:
 show(s1[1:10]); println()
 #> "The quick "
 
@@ -52,7 +52,7 @@ println("$a to $b.")
 println("1 + 2 = $(1 + 2)")
 #> 1 + 2 = 3
 
-# strings can also be concatinated using the string function
+# strings can also be concatenated using the string function
 s2 = string("this", " and", " that")
 println(s2)
 #> this and that

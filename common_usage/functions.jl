@@ -11,7 +11,7 @@ quadratic(a, sqr_term, b) = (-b + sqr_term) / 2a
 
 # calculates x for 0 = a*x^2+b*x+c, [arguments types](TODO: links) can be defined in function definitions
 function quadratic2(a::Float64, b::Float64, c::Float64)
-    # unlike other languages 2a is equivilent to 2*a
+    # unlike other languages 2a is equivalent to 2*a
     # a^2 is used instead of a**2 or pow(a,2)
     sqr_term = sqrt(b^2-4a*c)
     r1 = quadratic(a, sqr_term, b)

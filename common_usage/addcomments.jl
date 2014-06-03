@@ -66,7 +66,7 @@ end
 
 function convertfile(fname::String)
 	if !(endswith(fname, ".jl") || endswith(fname, ".JL"))
-		println("## ERROR: the file \"$fname\" does not appear to be a julia file (eg. doesn't end with .jl)")
+		println("## ERROR: the file \"$fname\" does not appear to be a julia file (i.e., it doesn't end with .jl)")
 		return
 	end
 	const code = removeold(open(readall, fname, "r"))
