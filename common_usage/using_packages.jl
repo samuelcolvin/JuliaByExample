@@ -1,10 +1,10 @@
-# You might not want to run this file completly, as the Pkg-commands can take a
+# You might not want to run this file completely, as the Pkg-commands can take a
 # long time to complete.
 
 # list all available packages:
 Pkg.available()
 
-# install one package (e.g. [Calculus](https://github.com/johnmyleswhite/Calculus.jl)) and all it's dependencies:
+# install one package (e.g. [Calculus](https://github.com/johnmyleswhite/Calculus.jl)) and all its dependencies:
 Pkg.add("Calculus")
 
 # to list all installed packages
@@ -24,7 +24,7 @@ import Calculus
 # will enable you to specify which package the function is called from
 Calculus.derivative(x -> cos(x), 1.0)
 
-# Using `import` is especially useful if there are conflicts in function/tpye-names
+# Using `import` is especially useful if there are conflicts in function/type-names
 # between packages.
 # Example:
 # Winston as well as Gadfly provide a plot() function (see below).

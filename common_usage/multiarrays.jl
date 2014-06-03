@@ -39,7 +39,7 @@ println("size: ", size(m3))
 
 m4 = [i+j+k for i=1:2, j=1:3, k=1:2]	# creates a 2x3x2 array of Int64
 m5 = ["Hi Im # $(i+2*(j-1 + 3*(k-1)))" for i=1:2, j=1:3, k=1:2]	# expressions are very flexible
-# you can force the type by of the array by just 
+# you can specify the type of the array by just 
 # placing it in front of the expression
 m5 = ASCIIString["Hi Im element # $(i+2*(j-1 + 3*(k-1)))" for i=1:2, j=1:3, k=1:2]
 printsum(m5)
@@ -57,7 +57,7 @@ sum(m4,3)		# takes the sum over the third dimension
 sum(m4,(1,3))	# sum over first and third dim
 
 maximum(m4,2)	# find the max elt along dim 2
-findmax(m4,3)	# find the max elt and it's index along dim 2 (available only in very recent Julia versions)
+findmax(m4,3)	# find the max elt and its index along dim 2 (available only in very recent Julia versions)
 
 # Broadcasting
 # when you combine arrays of different sizes in an operation,

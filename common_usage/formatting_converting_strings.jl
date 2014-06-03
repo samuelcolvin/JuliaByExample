@@ -13,13 +13,13 @@ println(3num_15)
 # or to create another string [sprintf](http://julia.readthedocs.org/en/latest/stdlib/base/#Base.@sprintf)
 e_str2 = @sprintf("%0.3f", e)
 
-# to show the 2 strings are the same
+# to show that the 2 strings are the same
 println("e_str1 == e_str2: $(e_str1 == e_str2)")
 #> e_str1 == e_str2: true
 
 # available number format characters are [f, e, g, c, s, p, d](https://github.com/JuliaLang/julia/blob/master/base/printf.jl#L15):
-# (pi is a predefined constant, however since it's type of 
-# "MathConst" it has to be converted to a float to formated)
+# (pi is a predefined constant; however, since its type is 
+# "MathConst" it has to be converted to a float to be formatted)
 @printf "fix trailing precision: %0.3f\n" float(pi)
 #> fix trailing precision: 3.142
 @printf "scientific form: %0.6e\n" 1000pi
@@ -34,4 +34,4 @@ println("e_str1 == e_str2: $(e_str1 == e_str2)")
 @printf "a pointer: %p\n" 1e10
 #> a pointer: 0x00000002540be400
 @printf "print a integer: %d\n" 1e10
-#> print a integer: 10000000000
+#> print an integer: 10000000000

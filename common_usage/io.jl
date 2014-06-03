@@ -37,7 +37,7 @@ print(f, " more on the same line")
 close(f)
 
 # we can then check the content of the file written
-# "do" above just creates anonymous function and passes it to open
+# "do" above just creates an anonymous function and passes it to open
 # we can use the same logic to pass readall and thereby succinctly
 # open, read and close a file in one line
 outfile_content = open(readall, outfile, "r")
