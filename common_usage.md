@@ -79,6 +79,16 @@ The `simple.dat` file used in this example is available [from github](https://gi
 
 Plotting in Julia is only possible with additional Packages. Examples of different packages are given below.
 
+### TextPlots
+
+[TextPlots Packge Page](https://github.com/sunetos/TextPlots.jl).
+
+TextPlots is an extemely simple plotting library which generates terminal plots using Braille characters.
+
+It is well documented and requires no other packages or external libraries; making it the simplest plotting option for Julia.
+
+{{ code_file('textplots.jl') }}
+
 #### PyPlot
 
 [PyPlot Package Page](https://github.com/stevengj/PyPlot.jl).
