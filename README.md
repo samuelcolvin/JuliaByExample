@@ -32,7 +32,6 @@ Feel free to use all and any of the examples for whatever you wish, licensed und
 
 TODO:
 
-* add regex to string manipulation
 * types
 * read stdin and writing to file?
 * plot
