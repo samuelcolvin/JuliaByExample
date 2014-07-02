@@ -32,10 +32,10 @@ Feel free to use all and any of the examples for whatever you wish, licensed und
 
 TODO:
 
-* include seperate file
-* complex numbers
-* eval, evalfile, include import module
 * multithreading
 * tasks
 * elseif, inline elseif (bool ? istrue : isfalse), inline if (bool && iftrue)
 * key word arguments, perameterization
+* include seperate file
+* complex numbers
+* eval, eval, macros, metaprogramming
