@@ -44,9 +44,9 @@ showln(df[1:2, :])
 iris = readtable("iris.csv")
 
 # Check the names and element types of the columns of our new DataFrame
-showln(names(iris))
+showln(colnames(iris))
 #> [:SepalLength,:SepalWidth,:PetalLength,:PetalWidth,:Species]
-showln(eltypes(iris))
+showln(coltypes(iris))
 #> Type[Float64,Float64,Float64,Float64,UTF8String]
 
 # Subset the DataFrame to only include rows for one species
