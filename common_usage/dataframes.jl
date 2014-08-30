@@ -40,8 +40,22 @@ showln(df[1:2, :])
 #> | 1     | 1 | 2.71828 | "xx" |
 #> | 2     | 2 | 3.14159 | "xy" |
 
+# importing data into DataFrames
+# ------------------------------
+
 # DataFrames can be loaded from CSV files using readtable()
 iris = readtable("iris.csv")
+
+# the iris dataset (and plenty of others) is also available from
+using RDatasets
+iris = dataset("datasets","iris")
+
+# you can directly import your own R .rda dataframe with
+# mydf = DataFrame(read_rda("path/to/your/df.rda")["name_of_df"]), e.g.
+diamonds = DataFrame(read_rda(joinpath(Pkg.dir("RDatasets"),"data","ggplot2","diamonds.rda"))["diamonds"])
+
+# showing DataFrames
+# ------------------
 
 # Check the names and element types of the columns of our new DataFrame
 showln(names(iris))
@@ -88,6 +102,7 @@ showln(by(iris, :Species, df -> size(df, 1)))
 iris[:SepalLength] = iround(iris[:SepalLength])
 iris[:SepalWidth] = iround(iris[:SepalWidth])
 
+
 # Tabulate data according to discretized columns to see "clusters"
 tabulated = by(
     iris,
@@ -115,3 +130,54 @@ showln(tabulated)
 #> | 15    | "virginica"  | 7           | 4          | 1  |
 #> | 16    | "virginica"  | 8           | 3          | 4  |
 #> | 17    | "virginica"  | 8           | 4          | 2  |
+
+# you can setup a grouped dataframe like this
+gdf = groupby(iris,[:Species, :SepalLength, :SepalWidth])
+
+# and then iterate over it
+for idf in gdf
+	println(size(idf,1))
+end
+
+# Adding/Removing columns
+# -----------------------
+
+# insert!(df::DataFrame,index::Int64,item::AbstractArray{T,1},name::Symbol)
+# insert random numbers at col 5:
+insert!(iris, 5, rand(nrow(iris)), :randCol)
+
+# remove it
+delete!(iris, :randCol)
+
+# Same for rows
+# push!(df::DataFrame,iterable)
+# push an iterable as last row onto a dataframe:
+push!(iris, [4, 2.01, -1.5, 100.1, "alienSpecies"])
+
+# show last few rows
+tail(iris)
+
+# delete row with "alienSpecies"
+deleterows!(iris, findin(iris[:Species], ["alienSpecies"]))
+tail(iris)
+
+
+# Using DataFramesMeta.jl
+# -----------------------
+
+using DataFramesMeta
+
+# subset with DataFramesMeta
+# @ix gets rows/colums
+@ix(iris, :SepalWidth .> 4.0, [:SepalWidth, :Species])
+
+# @where gets rows
+ @where(iris, (:PetalWidth .> 1) & (:SepalWidth .< 3.0))
+
+# create a new column with SepalWidth in 5 categories
+# very similar to R cut() and R transform()
+iris = transform( iris, widthBin = cut(iris[:SepalWidth],5))
+
+# DataFramesMeta also has a convenient macro syntax,
+# no need to re-specify the dataframe in the epxression!
+iris = @transform( iris, widthBin = cut(:SepalWidth,5))
