@@ -1,7 +1,7 @@
 
 # [function](http://docs.julialang.org:8000/en/latest/manual/functions/#functions) to calculate the volume of a sphere
 function sphere_vol(r)
-    # julia allows [Unicode names](http://docs.julialang.org:8000/en/latest/manual/variables/#variables) (in UTF-8 encoding)
+    # julia allows [Unicode names](http://docs.julialang.org/en/latest/manual/unicode-input/) (in UTF-8 encoding)
     # so either "pi" or the symbol π can be used
     return 4/3*pi*r^3
 end
