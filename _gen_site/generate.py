@@ -14,16 +14,21 @@ In theory it would be cool if this was written in Julia too, however libraries l
 urllib, pygments and jinja2 or their equivalents are not yet available in julia.
 """
 
-import sys, os
-import json, urllib2, jinja2, shutil, markdown2, sys, re, git, codecs, urllib
-from copy import copy
-from jinja2 import contextfunction, Markup
+import os
+import sys
+import json
+import urllib2
+import shutil
+import markdown2
+import re
+import codecs
+import GrabLib
+
+from jinja2 import contextfunction, Markup, FileSystemLoader, Environment
 from pygments import highlight
 import pygments.lexers as pyg_lexers
 from pygments.formatters import HtmlFormatter
-from datetime import datetime as dtdt
 
-PULL_SELF = False
 THIS_PATH = os.path.dirname(os.path.realpath(__file__))
 PROJ_ROOT = os.path.realpath(os.path.join(THIS_PATH, os.pardir))
 STATIC_PATH = os.path.join(THIS_PATH, 'static')
@@ -34,11 +39,6 @@ WWW_DOWNLOAD_PATH = os.path.join(WWW_PATH, DOWNLOADS_DIR)
 TEMPLATE_PATH = os.path.join(THIS_PATH, 'templates')
 ROOT_URL = 'http://www.scolvin.com/juliabyexample'
 
-BASIC_CONTEXT = {}
-try:
-    BASIC_CONTEXT = json.load(open(os.path.join(THIS_PATH, 'basic_context.json'), 'r'))
-except Exception, e:
-    print 'Error reading basic_context.json: %r' % e
 
 def _smart_comments(match):
     """
@@ -50,34 +50,36 @@ def _smart_comments(match):
     comment = re.sub('\*\*(.*?)\*\*', r'<strong>\1</strong>', comment)
     return '<span class="c">%s</span>' % comment
 
+
 @contextfunction
 def code_file(context, file_name, **extra_context):
     ex_dir = context['example_directory']
     file_path = os.path.realpath(os.path.join(PROJ_ROOT, ex_dir, file_name))
     file_text = codecs.open(file_path, encoding='utf-8').read()
     download_link = ''
-    if APACHE_MODE:
+    if True:
         path = os.path.join(WWW_DOWNLOAD_PATH, ex_dir)
         if not os.path.exists(path):
             os.makedirs(path)
-        shutil.copyfile(file_path, os.path.join(path, file_name))
+        # shutil.copyfile(file_path, os.path.join(path, file_name))
         url = '/'.join(s.strip('/') for s in [DOWNLOADS_DIR, ex_dir, file_name])
         url = url.replace('/./', '/')
         download_link = """<a class="download-link" href="%s" title="download %s" data-toggle="tooltip" data-placement="bottom">
         <span class="glyphicon glyphicon-cloud-download"></span></a>""" % (url, file_name)
     # remove hidden sections
-    regex = re.compile('\n*# *<hide>.*# *</hide>', flags=re.M|re.S)
+    regex = re.compile('\n*# *<hide>.*# *</hide>', flags=re.M | re.S)
     code = re.sub(regex, '', file_text)
     code = code.strip(' \r\n')
     lexer = pyg_lexers.get_lexer_for_filename(file_name)
-    formatter = HtmlFormatter(cssclass='code')#linenos=True,
+    formatter = HtmlFormatter(cssclass='code')  # linenos=True,
     git_url = '%s/%s/%s' % (context['view_root'], context['example_repo_dir'], file_name)
     code = highlight(code, lexer, formatter)
     code = re.sub('<span class="c">(.*?)</span>', _smart_comments, code)
     response = """<a class="git-link" href="%s" data-toggle="tooltip" data-placement="bottom"
     target="_blank" title="go to github"><img src="static/github.png" alt="Github Link"/></a>%s\n%s\n""" % \
-        (git_url, download_link, code)
+               (git_url, download_link, code)
     return Markup(response)
+
 
 @contextfunction
 def source_image(context, file_name, **extra_context):
@@ -86,60 +88,24 @@ def source_image(context, file_name, **extra_context):
     path = os.path.join(WWW_DOWNLOAD_PATH, ex_dir)
     if not os.path.exists(path):
         os.makedirs(path)
-    shutil.copyfile(file_path, os.path.join(path, file_name))
+    # shutil.copyfile(file_path, os.path.join(path, file_name))
     url = '/'.join(s.strip('/') for s in [DOWNLOADS_DIR, ex_dir, file_name])
     url = url.replace('/./', '/')
     return '<img class="source-image" src="%s" alt="%s"/>' % (url, file_name)
 
+
 class SiteGenerator(object):
-    def __init__(self, apache_mode=False, update_repos=True, output = None):
-        global APACHE_MODE
-        APACHE_MODE = apache_mode
-        self._url_base = '%s.html'
-        if apache_mode:
-            self._url_base = '%s'
-            print 'Building in Apache mode'
-        else:
-            BASIC_CONTEXT['root_url'] = 'index.html'
-        BASIC_CONTEXT['apache_mode'] = apache_mode
-        BASIC_CONTEXT['about_url'] = self._url_base % BASIC_CONTEXT['about_url']
-        self._update_repos = update_repos
-        self._env = jinja2.Environment(loader= jinja2.FileSystemLoader(TEMPLATE_PATH))
+    ctx = {}
+    tags = []
+
+    def __init__(self, output=None):
         if output:
             self._output = output
+        self._env = Environment(loader=FileSystemLoader(TEMPLATE_PATH))
         self.delete_www()
-        repos_json = os.path.join(THIS_PATH, 'repos.json')
-        repos = json.load(open(repos_json, 'r'))
-        self.get_repos(repos)
-        for repo in repos:
-            self.generate_page(repo)
-        self.generate_about()
-        if apache_mode:
-            self.generate_htaccess()
-        self.generate_sitemap(repos)
+        self.generate_page()
         self.generate_statics()
-        
-    def get_repos(self, repos):
-        ex_pages = []
-        if self._update_repos:
-            self._output('UPDATING REPOS:')
-            for repo in repos:
-                repos_path = os.path.join(PROJ_ROOT, repo['directory'])
-                if repo['directory'] == '.' and not PULL_SELF:
-                    continue
-                self._output('Updating %s >> %s' % (repo['url'], repos_path))
-                if os.path.exists(repos_path):
-                    self._output(git.cmd.Git(repos_path).pull())
-                else:
-                    git.Git().clone(repo['url'], repos_path)
-        for repo in repos:
-            ex_pages.append({'url': self._get_url(repo['page_name']), 'title': repo['title']})
-        self.context = BASIC_CONTEXT
-        self.context['example_pages'] = ex_pages
-        info_file = os.path.join(PROJ_ROOT, 'intro.md')
-        intro = open(info_file, 'r').read()
-        self.context['intro'] = markdown2.markdown(intro)
-        
+
     def _repl_tags(self, match):
         hno, title = match.groups()
         replacements = [(' ', '-'), ('.', '_'), (':', ''), ('&amp;', '')]
@@ -148,52 +114,38 @@ class SiteGenerator(object):
             tag_ref = tag_ref.replace(f, t)
         for c in ['\-', ':', '\.']:
             tag_ref = re.sub(r'%s%s+' % (c, c), c[-1], tag_ref)
-        self._tags.append({'link': '#' + tag_ref, 'name': title})
-        return '<h%s id="%s">%s<a href="#%s" class="hlink glyphicon glyphicon-link"></a></h%s>'\
-             % (hno, tag_ref, title, tag_ref, hno) 
-    
-    def generate_page(self, repo):
-        example_dir = os.path.join(repo['directory'], repo['example_sub_dir'])
-        self.test_for_missing_files(repo, example_dir)
-        template_name = 'examples.template.html'
-        template = self._env.get_template(template_name)
-        ex_env = jinja2.Environment(loader= jinja2.FileSystemLoader(PROJ_ROOT))
-        ex_env.globals['code_file'] = code_file
-        ex_env.globals['source_image'] = source_image
-        ex_template = ex_env.get_template(repo['description'])
-        
-        examples = ex_template.render(example_directory = example_dir,
-                                      example_repo_dir =  repo['example_sub_dir'],
-                                      view_root = repo['view_root'])
+        self.tags.append({'link': '#' + tag_ref, 'name': title})
+        return '<h%s id="%s">%s<a href="#%s" class="hlink glyphicon glyphicon-link"></a></h%s>' \
+               % (hno, tag_ref, title, tag_ref, hno)
+
+    def generate_page(self):
+        example_dir = os.path.join(PROJ_ROOT, 'common_usage')
+        self.test_for_missing_files(example_dir)
+        template = self._env.get_template('template.jinja')
+        ex_env = Environment(loader=FileSystemLoader(PROJ_ROOT))
+        ex_env.globals.update(
+            code_file=code_file,
+            source_image=source_image
+        )
+        ex_template = ex_env.get_template('common_usage.md')
+
+        examples = ex_template.render(example_directory=example_dir,
+                                      example_repo_dir='common_usage',
+                                      view_root='https://github.com/samuelcolvin/JuliaByExample/blob/master')
         examples = markdown2.markdown(examples)
-        self._tags = []
         examples = re.sub('<h([1-6])>(.*?)</h[1-6]>', self._repl_tags, examples, 0, re.I)
-        
-        new_context = copy(self.context)
-        sub_title = ' | ' + repo['title']
-        if repo['page_name'] == 'index':
-            sub_title = ''
-        new_context['title'] = BASIC_CONTEXT['site_title'] + sub_title
-        new_context['examples'] = examples
-        new_context['page'] = self._get_url(repo['page_name'])
-        new_context['tags'] = self._tags
-        page_text = template.render(**new_context)
-        file_name = '%s.html' % repo['page_name']
+
+        page_text = template.render(examples=examples, tags=self.tags, **self.ctx)
+        file_name = 'index.html'
         page_path = os.path.join(WWW_PATH, file_name)
         open(page_path, 'w').write(page_text.encode('utf8'))
         self._output('generated %s' % file_name)
-        
-    def _get_url(self, page_name):
-        url = self._url_base % page_name
-        if url == 'index':
-            url = BASIC_CONTEXT['root_url']
-        return url
-    
-    def test_for_missing_files(self, repo, example_dir):
-        desc_text = open(os.path.join(PROJ_ROOT, repo['description']), 'r').read()
+
+    def test_for_missing_files(self, example_dir):
+        desc_text = open(os.path.join(PROJ_ROOT, 'common_usage.md')).read()
         quoted_files = set(re.findall("{{ *code_file\( *'(.*?)' *\) *}}", desc_text))
-        actual_files = set([fn for fn in os.listdir(example_dir) if 
-            fn.endswith('.jl') and fn not in ['addcomments.jl', 'test_examples.jl']])
+        actual_files = set([fn for fn in os.listdir(example_dir) if
+                            fn.endswith('.jl') and fn not in ['addcomments.jl', 'test_examples.jl']])
         non_existent = quoted_files.difference(actual_files)
         if len(non_existent) > 0:
             self._output('*** QUOTED FILES ARE MISSING ***:')
@@ -202,90 +154,19 @@ class SiteGenerator(object):
         if len(unquoted) > 0:
             self._output('*** JULIA FILES EXIST WHICH ARE UNQUOTED ***:')
             self._output('    ' + ', '.join(unquoted))
-        
-    def generate_about(self):
-        template_name = 'about.template.html'
-        template = self._env.get_template(template_name)
-        readme_fname = os.path.join(PROJ_ROOT, 'README.md')
-        readme = open(readme_fname, 'r').read()
-        new_context = copy(self.context)
-        new_context['content'] = markdown2.markdown(readme)
-        new_context['title'] = '%s | About' % BASIC_CONTEXT['site_title']
-        new_context['page'] = BASIC_CONTEXT['about_url']
-        page_text = template.render(**new_context)
-        about_url = BASIC_CONTEXT['about_url']
-        if not about_url.endswith('.html'):
-            about_url += '.html'
-        page_path = os.path.join(WWW_PATH, about_url)
-        open(page_path, 'w').write(page_text.encode('utf8'))
-        self._output('generated about.html')
-        
-    def generate_htaccess(self):
-        """
-        generate htaccess files to control how apache shows the site"
-        first file creates clean urls.
-        second file forces download of .jl files in download directory
-        """
-        htaccess_content = """
-RewriteEngine on
 
-RewriteCond %{REQUEST_FILENAME} !-f
-RewriteCond %{REQUEST_FILENAME} !-d
-RewriteCond %{REQUEST_FILENAME}.html -f
-RewriteRule ^(.+)$ $1.html [L,QSA]
-"""
-        page_path = os.path.join(WWW_PATH, '.htaccess')
-        open(page_path, 'w').write(htaccess_content)
-        self._output('generated %s file' % page_path)
-        if not os.path.exists(WWW_DOWNLOAD_PATH):
-            return
-        htaccess_content2 = """
-# mod_headers has to be switched on: sudo a2enmod headers; sudo service apache2 restart
-<FilesMatch "\.jl$">
-  Header set Content-Disposition attachment
-</FilesMatch>
-"""
-        page_path = os.path.join(WWW_DOWNLOAD_PATH, '.htaccess')
-        open(page_path, 'w').write(htaccess_content2)
-        self._output('generated %s file' % page_path)
-        
-    def generate_sitemap(self, repos):
-        pages = []
-        for repo in repos:
-            url = ROOT_URL
-            if repo['page_name'] != 'index':
-                url += '/%s.html' % repo['page_name']
-            page= {'url': url}
-            if 'priority' in repo:
-                page['priority'] = repo['priority']
-            pages.append(page)
-        url = ROOT_URL + '/about.html'
-        pages.append({'url': url, 'priority': '0.8'})
-        template_name = 'sitemap.template.xml'
-        template = self._env.get_template(template_name)
-        context = {'todays_date': dtdt.now().strftime('%Y-%m-%d')}
-        context['pages'] = pages
-        page_text = template.render(**context)
-        page_path = os.path.join(WWW_PATH, 'sitemap.xml')
-        open(page_path, 'w').write(page_text.encode('utf8'))
-        self._output('generated sitemap.xml')
-    
     def generate_statics(self):
         if os.path.exists(STATIC_PATH):
             shutil.copytree(STATIC_PATH, WWW_STATIC_PATH)
             self._output('copied local static files')
         down_success = self.download_libraries()
-        if not down_success:
-            raise Exception('Error downloading libraries')
-        # 'pygments.css' is now static
-#         self.generate_pyg_css()
-        
+
     def delete_www(self):
         if os.path.exists(WWW_PATH):
             shutil.rmtree(WWW_PATH)
             self._output('deleting existing site: %s' % WWW_PATH)
         os.makedirs(WWW_PATH)
-        
+
     def generate_pyg_css(self):
         pyg_css = HtmlFormatter().get_style_defs('.code')
         file_path = os.path.join(WWW_STATIC_PATH, 'pygments.css')
@@ -293,51 +174,22 @@ RewriteRule ^(.+)$ $1.html [L,QSA]
 
     def download_libraries(self):
         libs_json_path = os.path.join(THIS_PATH, 'libraries.json')
-        url_files = json.load(open(libs_json_path, 'r'))
-        downloaded = 0
-        ignored = 0
-        for url, path in url_files.items():
-            #self._output('DOWNLOADING: %s\n             --> %s...' % (url, path))
-            dest = os.path.join(WWW_STATIC_PATH, 'external', path)
-            if os.path.exists(dest):
-                #self._output('file already exists at ./%s' % path)
-                #self._output('*** IGNORING THIS DOWNLOAD ***\n')
-                ignored += 1
-                continue
-            dest_dir = os.path.dirname(dest)
-            if not os.path.exists(dest_dir):
-                # self._output('mkdir: %s' % dest_dir)
-                os.makedirs(dest_dir)
-            try:
-                response = urllib2.urlopen(url)
-                content = response.read()
-            except Exception, e:
-                self._output('\nURL: %s\nProblem occured during download: %r' % (url, e))
-                self._output('*** ABORTING ***')
-                return False
-            try: content = content.encode('utf8')
-            except: pass
-            open(dest, 'w').write(content)
-            downloaded += 1
-            #self._output('Successfully downloaded %s\n' % os.path.basename(path))
-        
-        self._output('library download finish: %d files downloaded, %d existing and ignored' % (downloaded, ignored))
-        return True
+        GrabLib.process_file(libs_json_path)
 
     def _output(self, msg):
         print msg
 
-def list_examples_by_size(examples_dir = 'repo_julia_source/examples'):
+
+def list_examples_by_size(examples_dir='repo_julia_source/examples'):
     path = os.path.join(PROJ_ROOT, examples_dir)
     files = [(os.path.getsize(os.path.join(path, fn)), fn) for fn in os.listdir(path)]
     files.sort()
-    print ''. join(['\n\n#### %s\n\n{{ code_file(\'%s\') }} ' % (fn, fn) for _, fn in files if fn.endswith('.jl')])
+    print ''.join(['\n\n#### %s\n\n{{ code_file(\'%s\') }} ' % (fn, fn) for _, fn in files if fn.endswith('.jl')])
+
 
 if __name__ == '__main__':
     if 'j_example_list' in sys.argv:
         list_examples_by_size()
     else:
-        update_repos = not 'nosync' in sys.argv
-        apache_mode =  'apache' in sys.argv
-        SiteGenerator(apache_mode = apache_mode, update_repos = update_repos)
+        SiteGenerator()
         print 'Successfully generated site at %s' % WWW_PATH

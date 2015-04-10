@@ -1,4 +1,4 @@
 jinja2
-GitPython
 Pygments
 markdown2
+GrabLib

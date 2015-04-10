@@ -1,9 +1,21 @@
 {
-  "https://raw2.github.com/twbs/bootstrap/v3.1.1/dist/css/bootstrap.min.css": "css/bootstrap.min.css",
-  "https://raw2.github.com/twbs/bootstrap/v3.1.1/dist/js/bootstrap.min.js": "js/bootstrap.min.js",
-  "https://raw2.github.com/twbs/bootstrap/v3.1.1/dist/fonts/glyphicons-halflings-regular.ttf": "fonts/glyphicons-halflings-regular.ttf",
-  "https://raw2.github.com/twbs/bootstrap/v3.1.1/dist/fonts/glyphicons-halflings-regular.woff": "fonts/glyphicons-halflings-regular.woff",
-  "https://raw2.github.com/twbs/bootstrap/v3.1.1/dist/fonts/glyphicons-halflings-regular.svg": "fonts/glyphicons-halflings-regular.svg",
-  "https://raw2.github.com/twbs/bootstrap/v3.1.1/dist/fonts/glyphicons-halflings-regular.eot": "fonts/glyphicons-halflings-regular.svg",
-  "http://code.jquery.com/jquery-1.11.0.min.js": "js/jquery-1.11.0.min.js"
+  "libs_root": "../www/static/external",
+  "sites":
+  {
+    "github": "https://raw.githubusercontent.com",
+    "jquery": "http://code.jquery.com",
+    "bootstrap": "{{ github }}/twbs/bootstrap/v3.2.0/dist"
+  },
+  "libs": {
+    "{{ bootstrap }}/css/bootstrap.min.css": "css/{{ filename }}",
+    "{{ bootstrap }}/css/bootstrap.css.map": "css/{{ filename }}",
+    "{{ bootstrap }}/css/bootstrap-theme.min.css": "css/{{ filename }}",
+    "{{ bootstrap }}/js/bootstrap.min.js": "js/{{ filename }}",
+    "{{ bootstrap }}/fonts/glyphicons-halflings-regular.eot": "fonts/{{ filename }}",
+    "{{ bootstrap }}/fonts/glyphicons-halflings-regular.svg": "fonts/{{ filename }}",
+    "{{ bootstrap }}/fonts/glyphicons-halflings-regular.ttf": "fonts/{{ filename }}",
+    "{{ bootstrap }}/fonts/glyphicons-halflings-regular.woff": "fonts/{{ filename }}",
+    "{{ jquery }}/jquery-1.11.0.min.js": "js/{{ filename }}",
+    "{{ jquery }}/jquery-1.11.0.min.map": "js/{{ filename }}"
+  }
 }

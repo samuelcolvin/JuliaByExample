@@ -3,9 +3,9 @@
   <head>
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
-	  <meta name="keywords" content="{{ keywords }}">
-      <meta name="description" content="{{ description }}">
-      <meta name="author" content="{{ author }}">
+      <meta name="keywords" content="julia, julialang, examples, by example, common, tasks, common tasks, simple, helloworld, hello world, documentation, tutorial">
+      <meta name="description" content="Examples of Common tasks in Julia (Julia Lang)">
+      <meta name="author" content="Samuel Colvin">
       <title>{{title}}</title>
       <link rel="icon" type="image/png" href="static/favicon.ico" />
       <link href="static/external/css/bootstrap.min.css" rel="stylesheet">
@@ -33,31 +33,44 @@
               <span class="icon-bar"></span>
               <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="{{ root_url }}">{{site_title}}</a>
+            <a class="navbar-brand" href="">Julia By Example</a>
           </div>
           <div class="navbar-collapse collapse">
-            <ul class="nav navbar-nav">
-			    {% for item in example_pages %}
-              		<li class="{% if item.url == page %}active{% endif %}"><a href="{{ item.url }}">{{ item.title }}</a></li>
-			    {% endfor %}
-            </ul>
             <ul class="nav navbar-nav navbar-right">
-              <li><a href="{{ julia_url }}">Julia Home</a></li>
-              <li class="{% if about_url == page %}active{% endif %}"><a href="{{ about_url }}">About</a></li>
-              <li><a href="{{ source_url }}">Source</a></li>
+              <li>
+                <a class="git-link" href="https://github.com/samuelcolvin/JuliaByExample" data-toggle="tooltip" data-placement="bottom" target="_blank" title="go to github">
+                  <img src="static/github.png" alt="Github Link"/>
+                </a>
+              </li>
             </ul>
           </div>
         </div>
       </div>
         
-      {% block content %}{% endblock %}
+
+      <div class="row">
+        <div class="col-sm-9 content">
+          {{ intro }}
+          {{ examples }}
+        </div>
+        <div class="col-sm-3 hidden-xs">
+          <div class="sidebar" data-spy="affix" data-offset-top="150">
+            <ul class="nav sidenav">
+              {% for tag in tags %}
+                <li> <a href="{{ tag.link }}">{{ tag.name }}</a> </li>
+              {% endfor %}
+            </ul>
+          </div>
+        </div>
+        </div>
+      </div>
       
       <script src="static/external/js/jquery-1.11.0.min.js"></script>
       <script src="static/external/js/bootstrap.min.js"></script>
       <script type="text/javascript">
-	    $(function () {
-	        $('a').tooltip();
-	    });
-	  </script>
+      $(function () {
+          $('a').tooltip();
+      });
+    </script>
   </body>
 </html>

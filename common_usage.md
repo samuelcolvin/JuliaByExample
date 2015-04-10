@@ -1,3 +1,6 @@
+Julia is a high-level, high-performance dynamic programming language for technical computing. 
+This site is a non official series of examples of Julia.
+
 Below are a series of examples of common operations in Julia. They assume you already have Julia installed and working
 (the examples are currently tested with Julia v0.3 - latest).
  
@@ -7,11 +10,14 @@ The simplest possible script.
  
 {{ code_file('hello_world.jl') }}
 
-With Julia [installed and added to your path](http://julialang.org/downloads/) this script can be run by `julia hello_world.jl`, it can also be run from REPL by typing `include("hello_world.jl")`, that will evaluate all valid expressions in that file and return the last output.
+With Julia [installed and added to your path](http://julialang.org/downloads/) 
+this script can be run by `julia hello_world.jl`, it can also be run from REPL by typing 
+`include("hello_world.jl")`, that will evaluate all valid expressions in that file and return the last output.
 
 ### Simple Functions
 
-The example below shows two simple functions, how to call them and print the results. Further examples of number formatting are shown below.
+The example below shows two simple functions, how to call them and print the results. 
+Further examples of number formatting are shown below.
 
 {{ code_file('functions.jl') }} 
 
@@ -28,7 +34,7 @@ Collection of different string examples (string indexing is the same as array in
 ### String Manipulations
 
 {{ code_file('string_manipulation.jl') }} 
-
+d
 ### Arrays
 
 {{ code_file('arrays.jl') }} 
@@ -39,19 +45,22 @@ Collection of different string examples (string indexing is the same as array in
 
 ### Multidimensional Arrays
 
-Julia has very good multidimensional array capabilities. Check out [the manual](http://julia.readthedocs.org/en/latest/manual/arrays/).
+Julia has very good multidimensional array capabilities. 
+Check out [the manual](http://julia.readthedocs.org/en/latest/manual/arrays/).
 
 {{ code_file('multiarrays.jl') }} 
 
 ### Dictionaries
 
-Julia uses [Dicts](http://docs.julialang.org/en/latest/stdlib/base/#associative-collections) as associative collections. Usage is very like python except for the rather odd `=>` definition syntax.
+Julia uses [Dicts](http://docs.julialang.org/en/latest/stdlib/base/#associative-collections) as 
+associative collections. Usage is very like python except for the rather odd `=>` definition syntax.
 
 {{ code_file('dicts.jl') }} 
 
 ### Loops and Map
 
-[For loops](http://julia.readthedocs.org/en/latest/manual/control-flow/#repeated-evaluation-loops) can be defined in a number of ways.
+[For loops](http://julia.readthedocs.org/en/latest/manual/control-flow/#repeated-evaluation-loops) can 
+be defined in a number of ways.
 
 {{ code_file('loops_map.jl') }}
 
@@ -65,13 +74,15 @@ Types are a key way of structuring data within Julia.
 
 The basic syntax for reading and writing files in Julia is quite similar to python.
 
-The `simple.dat` file used in this example is available [from github](https://github.com/samuelcolvin/JuliaByExample/blob/master/common_usage/simple.dat).
+The `simple.dat` file used in this example is available 
+[from github](https://github.com/samuelcolvin/JuliaByExample/blob/master/common_usage/simple.dat).
 
 {{ code_file('io.jl')}}
 
 ### Packages and Including of Files
 
-[Packages](http://docs.julialang.org/en/latest/packages/packagelist/) extend the functionality of Julia's standard library. 
+[Packages](http://docs.julialang.org/en/latest/packages/packagelist/) 
+extend the functionality of Julia's standard library. 
 
 {{ code_file('using_packages.jl') }} 
 
@@ -85,7 +96,8 @@ Plotting in Julia is only possible with additional Packages. Examples of differe
 
 TextPlots is an extemely simple plotting library which generates terminal plots using Braille characters.
 
-It is well documented and requires no other packages or external libraries; making it the simplest plotting option for Julia.
+It is well documented and requires no other packages or external libraries; 
+making it the simplest plotting option for Julia.
 
 {{ code_file('textplots.jl') }}
 
@@ -123,6 +135,7 @@ ggplot2-like plotting. Installed via `Pkg.add("Gadfly")`
 
 The [DataFrames.jl package](https://github.com/JuliaStats/DataFrames.jl) provides tool for working with tabular data.
 
-The `iris.csv` file used in this example is available [from github](https://github.com/samuelcolvin/JuliaByExample/blob/master/common_usage/iris.csv).
+The `iris.csv` file used in this example is available 
+[from github](https://github.com/samuelcolvin/JuliaByExample/blob/master/common_usage/iris.csv).
 
 {{ code_file('dataframes.jl') }}
