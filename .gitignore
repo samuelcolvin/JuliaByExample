@@ -2,9 +2,8 @@ www
 repo_*
 *.DS_Store
 *.py[cod]
-build
 pip-log.txt
 .coverage
 env
 .idea
-common_usage/outfile.dat
+src/outfile.dat

@@ -16,8 +16,6 @@ urllib, pygments and jinja2 or their equivalents are not yet available in julia.
 
 import os
 import sys
-import json
-import urllib2
 import shutil
 import markdown2
 import re
@@ -119,7 +117,7 @@ class SiteGenerator(object):
                % (hno, tag_ref, title, tag_ref, hno)
 
     def generate_page(self):
-        example_dir = os.path.join(PROJ_ROOT, 'common_usage')
+        example_dir = os.path.join(PROJ_ROOT, 'src')
         self.test_for_missing_files(example_dir)
         template = self._env.get_template('template.jinja')
         ex_env = Environment(loader=FileSystemLoader(PROJ_ROOT))
@@ -127,10 +125,10 @@ class SiteGenerator(object):
             code_file=code_file,
             source_image=source_image
         )
-        ex_template = ex_env.get_template('common_usage.md')
+        ex_template = ex_env.get_template('main_page.md')
 
         examples = ex_template.render(example_directory=example_dir,
-                                      example_repo_dir='common_usage',
+                                      example_repo_dir='src',
                                       view_root='https://github.com/samuelcolvin/JuliaByExample/blob/master')
         examples = markdown2.markdown(examples)
         examples = re.sub('<h([1-6])>(.*?)</h[1-6]>', self._repl_tags, examples, 0, re.I)
@@ -142,7 +140,7 @@ class SiteGenerator(object):
         self._output('generated %s' % file_name)
 
     def test_for_missing_files(self, example_dir):
-        desc_text = open(os.path.join(PROJ_ROOT, 'common_usage.md')).read()
+        desc_text = open(os.path.join(PROJ_ROOT, 'main_page.md')).read()
         quoted_files = set(re.findall("{{ *code_file\( *'(.*?)' *\) *}}", desc_text))
         actual_files = set([fn for fn in os.listdir(example_dir) if
                             fn.endswith('.jl') and fn not in ['addcomments.jl', 'test_examples.jl']])
@@ -180,7 +178,7 @@ class SiteGenerator(object):
         print msg
 
 
-def list_examples_by_size(examples_dir='repo_julia_source/examples'):
+def list_examples_by_size(examples_dir='src'):
     path = os.path.join(PROJ_ROOT, examples_dir)
     files = [(os.path.getsize(os.path.join(path, fn)), fn) for fn in os.listdir(path)]
     files.sort()
