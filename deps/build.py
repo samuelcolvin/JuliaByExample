@@ -20,7 +20,7 @@ import shutil
 import markdown2
 import re
 import codecs
-import GrabLib
+import grablib
 
 from jinja2 import contextfunction, Markup, FileSystemLoader, Environment
 from pygments import highlight
@@ -167,8 +167,10 @@ class SiteGenerator(object):
         open(file_path, 'w').write(pyg_css.encode('utf8'))
 
     def download_libraries(self):
-        libs_json_path = os.path.join(THIS_PATH, 'grablib.json')
-        GrabLib.process_file(libs_json_path)
+        grablib_path = os.path.join(THIS_PATH, 'grablib.json')
+        # libs_root has to be set manually so build works with different working directories
+        libs_root = os.path.join(PROJ_ROOT, 'www/static/external')
+        grablib.grab(grablib_path, libs_root=libs_root)
 
     def _output(self, msg):
         print msg
