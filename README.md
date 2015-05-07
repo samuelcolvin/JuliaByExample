@@ -17,8 +17,5 @@ declaring functions, plotting etc. etc.
 
 I am not an expert in Julia and this is a work in progress: there are almost certainly mistakes and obvious omissions 
 from the examples. If you spot a problem create an issue, if you have a fix for a problem or want to add to the 
-examples **Submit a pull request**.
-
-Feel free to use all and any of the examples for whatever you wish, licensed under the 
-[MIT](https://github.com/samuelcolvin/JuliaByExample/blob/master/LICENSE) license.
+examples please submit a pull request.
 
