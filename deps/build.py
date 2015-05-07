@@ -32,8 +32,6 @@ PROJ_ROOT = os.path.realpath(os.path.join(THIS_PATH, os.pardir))
 STATIC_PATH = os.path.join(THIS_PATH, 'static')
 WWW_PATH = os.path.join(PROJ_ROOT, 'www')
 WWW_STATIC_PATH = os.path.join(WWW_PATH, 'static')
-DOWNLOADS_DIR = 'download'
-WWW_DOWNLOAD_PATH = os.path.join(WWW_PATH, DOWNLOADS_DIR)
 TEMPLATE_PATH = os.path.join(THIS_PATH, 'templates')
 ROOT_URL = 'http://www.scolvin.com/juliabyexample'
 
@@ -52,18 +50,17 @@ def _smart_comments(match):
 @contextfunction
 def code_file(context, file_name, **extra_context):
     ex_dir = context['example_directory']
-    file_path = os.path.realpath(os.path.join(PROJ_ROOT, ex_dir, file_name))
+    file_path = os.path.join(PROJ_ROOT, ex_dir, file_name)
     file_text = codecs.open(file_path, encoding='utf-8').read()
-    download_link = ''
-    if True:
-        path = os.path.join(WWW_DOWNLOAD_PATH, ex_dir)
-        if not os.path.exists(path):
-            os.makedirs(path)
-        # shutil.copyfile(file_path, os.path.join(path, file_name))
-        url = '/'.join(s.strip('/') for s in [DOWNLOADS_DIR, ex_dir, file_name])
-        url = url.replace('/./', '/')
-        download_link = """<a class="download-link" href="%s" title="download %s" data-toggle="tooltip" data-placement="bottom">
-        <span class="glyphicon glyphicon-cloud-download"></span></a>""" % (url, file_name)
+    new_path = os.path.join(WWW_PATH, ex_dir)
+    if not os.path.exists(new_path):
+        os.makedirs(new_path)
+    shutil.copyfile(file_path, os.path.join(new_path, file_name))
+    url = '/'.join(s.strip('/') for s in [ex_dir, ex_dir, file_name])
+    url = url.replace('/./', '/')
+    download_link = ('<a class="download-link" href="%s" title="download %s" data-toggle="tooltip" '
+                     'data-placement="bottom">'
+                     '<span class="glyphicon glyphicon-cloud-download"></span></a>') % (url, file_name)
     # remove hidden sections
     regex = re.compile('\n*# *<hide>.*# *</hide>', flags=re.M | re.S)
     code = re.sub(regex, '', file_text)
@@ -83,11 +80,11 @@ def code_file(context, file_name, **extra_context):
 def source_image(context, file_name, **extra_context):
     ex_dir = context['example_directory']
     file_path = os.path.realpath(os.path.join(PROJ_ROOT, ex_dir, file_name))
-    path = os.path.join(WWW_DOWNLOAD_PATH, ex_dir)
+    path = os.path.join(WWW_PATH, ex_dir)
     if not os.path.exists(path):
         os.makedirs(path)
-    # shutil.copyfile(file_path, os.path.join(path, file_name))
-    url = '/'.join(s.strip('/') for s in [DOWNLOADS_DIR, ex_dir, file_name])
+    shutil.copyfile(file_path, os.path.join(path, file_name))
+    url = '/'.join(s.strip('/') for s in [ex_dir, ex_dir, file_name])
     url = url.replace('/./', '/')
     return '<img class="source-image" src="%s" alt="%s"/>' % (url, file_name)
 
@@ -117,8 +114,8 @@ class SiteGenerator(object):
                % (hno, tag_ref, title, tag_ref, hno)
 
     def generate_page(self):
-        example_dir = os.path.join(PROJ_ROOT, 'src')
-        self.test_for_missing_files(example_dir)
+        example_dir = 'src'
+        self.test_for_missing_files(os.path.join(PROJ_ROOT, example_dir))
         template = self._env.get_template('template.jinja')
         ex_env = Environment(loader=FileSystemLoader(PROJ_ROOT))
         ex_env.globals.update(
@@ -171,7 +168,7 @@ class SiteGenerator(object):
         open(file_path, 'w').write(pyg_css.encode('utf8'))
 
     def download_libraries(self):
-        libs_json_path = os.path.join(THIS_PATH, 'libraries.json')
+        libs_json_path = os.path.join(THIS_PATH, 'grablib.json')
         GrabLib.process_file(libs_json_path)
 
     def _output(self, msg):
