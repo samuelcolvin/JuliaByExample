@@ -1,10 +1,10 @@
 language: julia
-os:
-    - osx
-    - linux
 julia:
     - release
     - nightly
+matrix:
+  allow_failures:
+    - julia: nightly
 notifications:
     email: false
 script:
