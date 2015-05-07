@@ -88,7 +88,15 @@ extend the functionality of Julia's standard library.
 
 ### Plotting
 
-Plotting in Julia is only possible with additional Packages. Examples of different packages are given below.
+Plotting in Julia is only possible with additional Packages. 
+Examples of some of the main packages are given below.
+
+<!--
+TODO:
+add comment about py plot
+
+PyPlot needs Python and matplotlib installed [matplotlib.pyplot docs](http://matplotlib.org/api/pyplot_api.html).
+-->
 
 ### TextPlots
 
@@ -100,16 +108,6 @@ It is well documented and requires no other packages or external libraries;
 making it the simplest plotting option for Julia.
 
 {{ code_file('textplots.jl') }}
-
-#### PyPlot
-
-[PyPlot Package Page](https://github.com/stevengj/PyPlot.jl).
-
-PyPlot needs Python and matplotlib installed [matplotlib.pyplot docs](http://matplotlib.org/api/pyplot_api.html).
-
-{{ code_file('pyplot.jl') }}
-
-{{ source_image('pyplot.png') }}
 
 #### Winston
 

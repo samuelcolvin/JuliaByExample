@@ -1,8 +1,4 @@
 using Base.Test
-using PyCall
-@pyimport os
-
-println("finished loading PyCall")
 
 function print_evalfile(fpath)
     path, fname = splitdir(fpath)
@@ -13,8 +9,10 @@ function print_evalfile(fpath)
 end
 
 path, this_fname = splitdir(@__FILE__)
+path = joinpath(path, "../src")
+cd(path)
 
-for fname in os.listdir(path)
+for fname in readdir(".")
     if endswith(fname, ".jl") && fname != this_fname
         print_evalfile("$path/$fname")
     end
