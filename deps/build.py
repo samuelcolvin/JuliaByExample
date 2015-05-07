@@ -46,15 +46,20 @@ def _smart_comments(match):
     return '<span class="c">%s</span>' % comment
 
 
-@contextfunction
-def code_file(context, file_name, **extra_context):
+def src_file_copy(context, file_name):
     ex_dir = context['example_directory']
     file_path = os.path.join(PROJ_ROOT, ex_dir, file_name)
-    file_text = codecs.open(file_path, encoding='utf-8').read()
     new_path = os.path.join(WWW_PATH, ex_dir)
     if not os.path.exists(new_path):
         os.makedirs(new_path)
     shutil.copyfile(file_path, os.path.join(new_path, file_name))
+    return ex_dir, file_path
+
+
+@contextfunction
+def code_file(context, file_name, **kwargs):
+    ex_dir, file_path = src_file_copy(context, file_name)
+    file_text = codecs.open(file_path, encoding='utf-8').read()
     url = '/'.join(s.strip('/') for s in [ex_dir, file_name])
     url = url.replace('/./', '/')
     download_link = ('<a class="download-link" href="%s" title="download %s" data-toggle="tooltip" '
@@ -76,16 +81,19 @@ def code_file(context, file_name, **extra_context):
 
 
 @contextfunction
-def source_image(context, file_name, **extra_context):
-    ex_dir = context['example_directory']
-    file_path = os.path.realpath(os.path.join(PROJ_ROOT, ex_dir, file_name))
-    path = os.path.join(WWW_PATH, ex_dir)
-    if not os.path.exists(path):
-        os.makedirs(path)
-    shutil.copyfile(file_path, os.path.join(path, file_name))
+def src_image(context, file_name, **kwargs):
+    ex_dir, file_path = src_file_copy(context, file_name)
     url = '/'.join(s.strip('/') for s in [ex_dir, file_name])
     url = url.replace('/./', '/')
     return '<img class="source-image" src="%s" alt="%s"/>' % (url, file_name)
+
+
+@contextfunction
+def src_iframe(context, file_name, **kwargs):
+    ex_dir, file_path = src_file_copy(context, file_name)
+    url = '/'.join(s.strip('/') for s in [ex_dir, file_name])
+    url = url.replace('/./', '/')
+    return '<iframe class="source-iframe" frameborder="0" src="%s">%s</iframe>' % (url, file_name)
 
 
 class SiteGenerator(object):
@@ -119,7 +127,8 @@ class SiteGenerator(object):
         ex_env = Environment(loader=FileSystemLoader(PROJ_ROOT))
         ex_env.globals.update(
             code_file=code_file,
-            source_image=source_image
+            src_image=src_image,
+            src_iframe=src_iframe
         )
         ex_template = ex_env.get_template('main_page.md')
 

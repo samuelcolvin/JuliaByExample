@@ -107,11 +107,15 @@ pre {
   color: black;
 }
 
-.source-image {
+.source-image, .source-iframe {
   width: 100%;
   border: 1px solid #ccc;
   border-radius: 4px;
   background-color: white;
+}
+
+.source-iframe {
+  height: 400px;
 }
 
 .code .c {

@@ -100,11 +100,25 @@ add comment about py plot
 PyPlot needs Python and matplotlib installed [matplotlib.pyplot docs](http://matplotlib.org/api/pyplot_api.html).
 -->
 
+### Bokeh
+
+[Bokeh Packge Page](http://bokeh.github.io/Bokeh.jl).
+
+Bokeh.jl builds on top of the [Bokeh](http://bokeh.pydata.org/en/latest/) project which is a fulling featured plotting
+library using html5 as a backend. Because the package does nothing more than generate an html file and open it in
+your browsers it should be extremely easy to install on any platform.
+
+(Admission: I wrote Bokeh.jl which is why I've but it first.)
+
+{{ code_file('bokeh.jl') }}
+
+{{ src_iframe('bokeh_plot.html') }}
+
 ### TextPlots
 
 [TextPlots Packge Page](https://github.com/sunetos/TextPlots.jl).
 
-TextPlots is an extemely simple plotting library which generates terminal plots using Braille characters.
+TextPlots is an extremely simple plotting library which generates terminal plots using Braille characters.
 
 It is well documented and requires no other packages or external libraries; 
 making it the simplest plotting option for Julia.
@@ -119,7 +133,7 @@ Matlab-like plotting. Installed via `Pkg.add("Winston")`
 
 {{ code_file('winston.jl') }}
 
-{{ source_image('winston.svg') }}
+{{ src_image('winston.svg') }}
 
 #### Gadfly
 
@@ -129,7 +143,7 @@ ggplot2-like plotting. Installed via `Pkg.add("Gadfly")`
 
 {{ code_file('gadfly.jl') }}
 
-{{ source_image('gadfly.png') }}
+{{ src_image('gadfly.png') }}
 
 ### DataFrames
 
