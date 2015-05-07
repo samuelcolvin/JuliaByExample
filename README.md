@@ -19,3 +19,10 @@ I am not an expert in Julia and this is a work in progress: there are almost cer
 from the examples. If you spot a problem create an issue, if you have a fix for a problem or want to add to the 
 examples please submit a pull request.
 
+To build (first setup your `env` with `deps/requirements.txt`): 
+
+    python deps/build
+
+To deploy:
+
+    ghp-import www/ -p
