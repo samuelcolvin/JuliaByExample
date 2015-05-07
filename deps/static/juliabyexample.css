@@ -9,6 +9,10 @@
   text-decoration: underline;
 }
 
+.nav .git-link {
+  margin-right: 0;
+}
+
 .hlink {
   font-size: 12pt;
   margin-left: 5px;

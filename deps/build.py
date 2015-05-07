@@ -32,7 +32,6 @@ PROJ_ROOT = os.path.realpath(os.path.join(THIS_PATH, os.pardir))
 STATIC_PATH = os.path.join(THIS_PATH, 'static')
 WWW_PATH = os.path.join(PROJ_ROOT, 'www')
 WWW_STATIC_PATH = os.path.join(WWW_PATH, 'static')
-TEMPLATE_PATH = os.path.join(THIS_PATH, 'templates')
 ROOT_URL = 'http://www.scolvin.com/juliabyexample'
 
 
@@ -56,7 +55,7 @@ def code_file(context, file_name, **extra_context):
     if not os.path.exists(new_path):
         os.makedirs(new_path)
     shutil.copyfile(file_path, os.path.join(new_path, file_name))
-    url = '/'.join(s.strip('/') for s in [ex_dir, ex_dir, file_name])
+    url = '/'.join(s.strip('/') for s in [ex_dir, file_name])
     url = url.replace('/./', '/')
     download_link = ('<a class="download-link" href="%s" title="download %s" data-toggle="tooltip" '
                      'data-placement="bottom">'
@@ -84,7 +83,7 @@ def source_image(context, file_name, **extra_context):
     if not os.path.exists(path):
         os.makedirs(path)
     shutil.copyfile(file_path, os.path.join(path, file_name))
-    url = '/'.join(s.strip('/') for s in [ex_dir, ex_dir, file_name])
+    url = '/'.join(s.strip('/') for s in [ex_dir, file_name])
     url = url.replace('/./', '/')
     return '<img class="source-image" src="%s" alt="%s"/>' % (url, file_name)
 
@@ -96,7 +95,7 @@ class SiteGenerator(object):
     def __init__(self, output=None):
         if output:
             self._output = output
-        self._env = Environment(loader=FileSystemLoader(TEMPLATE_PATH))
+        self._env = Environment(loader=FileSystemLoader(THIS_PATH))
         self.delete_www()
         self.generate_page()
         self.generate_statics()

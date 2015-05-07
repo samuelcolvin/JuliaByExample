@@ -2,12 +2,14 @@ Julia is a high-level, high-performance dynamic programming language for technic
 This site is a non official series of examples of Julia.
 
 Below are a series of examples of common operations in Julia. They assume you already have Julia installed and working
-(the examples are currently tested with Julia v0.3 - latest).
+(the examples are currently tested with **Julia v0.3.7**).
+
+[![Build Status](https://travis-ci.org/samuelcolvin/JuliaByExample.svg?branch=master)](https://travis-ci.org/samuelcolvin/JuliaByExample)
  
 ### Hello World
- 
+
 The simplest possible script.
- 
+
 {{ code_file('hello_world.jl') }}
 
 With Julia [installed and added to your path](http://julialang.org/downloads/) 
@@ -34,7 +36,7 @@ Collection of different string examples (string indexing is the same as array in
 ### String Manipulations
 
 {{ code_file('string_manipulation.jl') }} 
-d
+
 ### Arrays
 
 {{ code_file('arrays.jl') }} 
@@ -59,8 +61,8 @@ associative collections. Usage is very like python except for the rather odd `=>
 
 ### Loops and Map
 
-[For loops](http://julia.readthedocs.org/en/latest/manual/control-flow/#repeated-evaluation-loops) can 
-be defined in a number of ways.
+[For loops](http://julia.readthedocs.org/en/latest/manual/control-flow/#repeated-evaluation-loops) 
+can be defined in a number of ways.
 
 {{ code_file('loops_map.jl') }}
 
