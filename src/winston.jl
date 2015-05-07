@@ -9,12 +9,11 @@ display(pl)
 
 # by default display will not wait and the plot will vanish as soon as it appears
 # using readline is a blunt wait to allow the user to choose when to continue
-println("Press enter to continue: ")
-readline(STDIN)
+
+# println("Press enter to continue: ")
+# readline(STDIN)
 
 # save the current figure
 savefig("winston.svg")
 # .eps, .pdf, & .png are also supported
 # we used svg here because it respects the width and height specified above
-
-# TODO: needs more expansive explanation

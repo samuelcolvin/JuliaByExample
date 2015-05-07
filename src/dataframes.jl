@@ -152,7 +152,7 @@ delete!(iris, :randCol)
 # Same for rows
 # push!(df::DataFrame,iterable)
 # push an iterable as last row onto a dataframe:
-push!(iris, [4, 2.01, -1.5, 100.1, "alienSpecies"])
+push!(iris, [4, 2, -1.5, 100.1, "alienSpecies"])
 
 # show last few rows
 tail(iris)
@@ -160,24 +160,3 @@ tail(iris)
 # delete row with "alienSpecies"
 deleterows!(iris, findin(iris[:Species], ["alienSpecies"]))
 tail(iris)
-
-
-# Using DataFramesMeta.jl
-# -----------------------
-
-using DataFramesMeta
-
-# subset with DataFramesMeta
-# @ix gets rows/colums
-@ix(iris, :SepalWidth .> 4.0, [:SepalWidth, :Species])
-
-# @where gets rows
- @where(iris, (:PetalWidth .> 1) & (:SepalWidth .< 3.0))
-
-# create a new column with SepalWidth in 5 categories
-# very similar to R cut() and R transform()
-iris = transform( iris, widthBin = cut(iris[:SepalWidth],5))
-
-# DataFramesMeta also has a convenient macro syntax,
-# no need to re-specify the dataframe in the epxression!
-iris = @transform( iris, widthBin = cut(:SepalWidth,5))

@@ -6,7 +6,7 @@
       <meta name="keywords" content="julia, julialang, examples, by example, common, tasks, common tasks, simple, helloworld, hello world, documentation, tutorial">
       <meta name="description" content="Examples of Common tasks in Julia (Julia Lang)">
       <meta name="author" content="Samuel Colvin">
-      <title></title>
+      <title>Julia By Example</title>
       <link rel="icon" type="image/png" href="static/favicon.ico" />
       <link href="static/external/css/bootstrap.min.css" rel="stylesheet">
       <link href="static/pygments.css" rel="stylesheet">
@@ -16,7 +16,7 @@
         (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
         m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
         })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-        ga('create', 'UA-19169042-2', 'scolvin.com');
+        ga('create', 'UA-62733018-1', 'auto');
         ga('send', 'pageview');
       </script>
   </head>
@@ -38,7 +38,8 @@
           <div class="navbar-collapse collapse">
             <ul class="nav navbar-nav navbar-right">
               <li>
-                <a class="git-link" href="https://github.com/samuelcolvin/JuliaByExample" data-toggle="tooltip" data-placement="bottom" target="_blank" title="go to github">
+                <a class="git-link" href="https://github.com/samuelcolvin/JuliaByExample" data-toggle="tooltip"
+                   data-placement="bottom" target="_blank" title="source">
                   <img src="static/github.png" alt="Github Link"/>
                 </a>
               </li>
@@ -55,7 +56,9 @@
 This site is a non official series of examples of Julia.</p>
 
 <p>Below are a series of examples of common operations in Julia. They assume you already have Julia installed and working
-(the examples are currently tested with Julia v0.3 - latest).</p>
+(the examples are currently tested with <strong>Julia v0.3.7</strong>).</p>
+
+<p><a href="https://travis-ci.org/samuelcolvin/JuliaByExample"><img src="https://travis-ci.org/samuelcolvin/JuliaByExample.svg?branch=master" alt="Build Status" /></a></p>
 
 <h3 id="Hello-World">Hello World<a href="#Hello-World" class="hlink glyphicon glyphicon-link"></a></h3>
 
@@ -319,8 +322,6 @@ Further examples of number formatting are shown below.</p>
 <span class="n">println</span><span class="p">(</span><span class="n">r</span><span class="p">)</span> <span class="c">#&gt; 1, 2, 3, 4, 5, 6, 7, 8, 9, 10</span>
 </pre></div>
 
-<p>d</p>
-
 <h3 id="Arrays">Arrays<a href="#Arrays" class="hlink glyphicon glyphicon-link"></a></h3>
 
 <p><a class="git-link" href="https://github.com/samuelcolvin/JuliaByExample/blob/master/src/arrays.jl" data-toggle="tooltip" data-placement="bottom"
@@ -558,8 +559,8 @@ associative collections. Usage is very like python except for the rather odd <co
 
 <h3 id="Loops-and-Map">Loops and Map<a href="#Loops-and-Map" class="hlink glyphicon glyphicon-link"></a></h3>
 
-<p><a href="http://julia.readthedocs.org/en/latest/manual/control-flow/#repeated-evaluation-loops">For loops</a> can 
-be defined in a number of ways.</p>
+<p><a href="http://julia.readthedocs.org/en/latest/manual/control-flow/#repeated-evaluation-loops">For loops</a> 
+can be defined in a number of ways.</p>
 
 <p><a class="git-link" href="https://github.com/samuelcolvin/JuliaByExample/blob/master/src/loops_map.jl" data-toggle="tooltip" data-placement="bottom"
     target="_blank" title="go to github"><img src="static/github.png" alt="Github Link"/></a><a class="download-link" href="src/loops_map.jl" title="download loops_map.jl" data-toggle="tooltip" data-placement="bottom"><span class="glyphicon glyphicon-cloud-download"></span></a></p>
@@ -788,11 +789,45 @@ add comment about py plot
 PyPlot needs Python and matplotlib installed [matplotlib.pyplot docs](http://matplotlib.org/api/pyplot_api.html).
 -->
 
+<h3 id="Bokeh">Bokeh<a href="#Bokeh" class="hlink glyphicon glyphicon-link"></a></h3>
+
+<p><a href="http://bokeh.github.io/Bokeh.jl">Bokeh Packge Page</a>.</p>
+
+<p>Bokeh.jl builds on top of the <a href="http://bokeh.pydata.org/en/latest/">Bokeh</a> project which is a fulling featured plotting
+library using html5 as a backend. Because the package does nothing more than generate an html file and open it in
+your browsers it should be extremely easy to install on any platform.</p>
+
+<p>(Admission: I wrote Bokeh.jl which is why I've but it first.)</p>
+
+<p><a class="git-link" href="https://github.com/samuelcolvin/JuliaByExample/blob/master/src/bokeh.jl" data-toggle="tooltip" data-placement="bottom"
+    target="_blank" title="go to github"><img src="static/github.png" alt="Github Link"/></a><a class="download-link" href="src/bokeh.jl" title="download bokeh.jl" data-toggle="tooltip" data-placement="bottom"><span class="glyphicon glyphicon-cloud-download"></span></a></p>
+
+<div class="code"><pre><span class="k">using</span> <span class="n">Bokeh</span>
+<span class="k">using</span> <span class="n">Dates</span> <span class="c"># this is for julia &lt; 0.4, for &gt;=0.4 you would need Base.Dates</span>
+
+<span class="c"># here we have to set the size to get the plot to display properly below, usually you could skip this</span>
+<span class="n">Bokeh</span><span class="o">.</span><span class="n">width</span><span class="p">(</span><span class="mi">800</span><span class="p">)</span>
+<span class="n">Bokeh</span><span class="o">.</span><span class="n">height</span><span class="p">(</span><span class="mi">320</span><span class="p">)</span>
+
+<span class="n">start</span> <span class="o">=</span> <span class="n">now</span><span class="p">()</span>
+<span class="n">days</span> <span class="o">=</span> <span class="mi">720</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">map</span><span class="p">(</span><span class="n">d</span> <span class="o">-&gt;</span> <span class="n">start</span> <span class="o">+</span> <span class="n">Dates</span><span class="o">.</span><span class="n">Day</span><span class="p">(</span><span class="n">d</span><span class="p">),</span> <span class="mi">1</span><span class="p">:</span><span class="n">days</span><span class="p">)</span>
+<span class="n">y1</span> <span class="o">=</span> <span class="n">cumsum</span><span class="p">(</span><span class="n">rand</span><span class="p">(</span><span class="n">days</span><span class="p">)</span> <span class="o">-</span> <span class="mf">0.5</span><span class="p">)</span>
+<span class="n">small_bit</span> <span class="o">=</span> <span class="p">(</span><span class="n">maximum</span><span class="p">(</span><span class="n">y1</span><span class="p">)</span> <span class="o">-</span> <span class="n">minimum</span><span class="p">(</span><span class="n">y1</span><span class="p">))</span><span class="o">*</span><span class="mf">0.02</span>
+<span class="n">y2</span> <span class="o">=</span> <span class="n">y1</span> <span class="o">+</span> <span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">rand</span><span class="p">(</span><span class="n">days</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="n">small_bit</span>
+<span class="n">glyphs</span> <span class="o">=</span> <span class="p">[</span><span class="n">Glyph</span><span class="p">(:</span><span class="n">Line</span><span class="p">,</span> <span class="n">linecolor</span><span class="o">=</span><span class="s">&quot;red&quot;</span><span class="p">),</span> 
+          <span class="n">Glyph</span><span class="p">(:</span><span class="n">Circle</span><span class="p">,</span> <span class="n">fillcolor</span><span class="o">=</span><span class="s">&quot;rgba(255, 77, 255, 0.4)&quot;</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">6</span><span class="p">,</span> <span class="n">linecolor</span><span class="o">=</span><span class="s">&quot;transparent&quot;</span><span class="p">)]</span>
+<span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="p">[</span><span class="n">y1</span> <span class="n">y2</span><span class="p">],</span> <span class="n">glyphs</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s">&quot;Share Price Prediction&quot;</span><span class="p">,</span> <span class="n">legends</span><span class="o">=</span><span class="p">[</span><span class="s">&quot;Average&quot;</span><span class="p">,</span> <span class="s">&quot;Closing Price&quot;</span><span class="p">])</span>
+<span class="n">showplot</span><span class="p">()</span>
+</pre></div>
+
+<iframe class="source-iframe" frameborder="0" src="src/bokeh_plot.html">bokeh_plot.html</iframe>
+
 <h3 id="TextPlots">TextPlots<a href="#TextPlots" class="hlink glyphicon glyphicon-link"></a></h3>
 
 <p><a href="https://github.com/sunetos/TextPlots.jl">TextPlots Packge Page</a>.</p>
 
-<p>TextPlots is an extemely simple plotting library which generates terminal plots using Braille characters.</p>
+<p>TextPlots is an extremely simple plotting library which generates terminal plots using Braille characters.</p>
 
 <p>It is well documented and requires no other packages or external libraries; 
 making it the simplest plotting option for Julia.</p>
@@ -889,15 +924,14 @@ making it the simplest plotting option for Julia.</p>
 
 <span class="c"># by default display will not wait and the plot will vanish as soon as it appears</span>
 <span class="c"># using readline is a blunt wait to allow the user to choose when to continue</span>
-<span class="n">println</span><span class="p">(</span><span class="s">&quot;Press enter to continue: &quot;</span><span class="p">)</span>
-<span class="n">readline</span><span class="p">(</span><span class="n">STDIN</span><span class="p">)</span>
+
+<span class="c"># println(&quot;Press enter to continue: &quot;)</span>
+<span class="c"># readline(STDIN)</span>
 
 <span class="c"># save the current figure</span>
 <span class="n">savefig</span><span class="p">(</span><span class="s">&quot;winston.svg&quot;</span><span class="p">)</span>
 <span class="c"># .eps, .pdf, &amp; .png are also supported</span>
 <span class="c"># we used svg here because it respects the width and height specified above</span>
-
-<span class="c"># TODO: needs more expansive explanation</span>
 </pre></div>
 
 <p><img class="source-image" src="src/winston.svg" alt="winston.svg"/></p>
@@ -914,11 +948,9 @@ making it the simplest plotting option for Julia.</p>
 <div class="code"><pre><span class="k">using</span> <span class="n">Gadfly</span>
 
 <span class="c"># plot some data</span>
-<span class="n">pl</span> <span class="o">=</span> <span class="p">@</span><span class="n">plot</span><span class="p">(</span><span class="n">cos</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">/</span><span class="n">x</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">25</span><span class="p">)</span>
+<span class="n">pl</span> <span class="o">=</span> <span class="n">plot</span><span class="p">(</span><span class="n">x</span> <span class="o">-&gt;</span> <span class="n">cos</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">/</span><span class="n">x</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">25</span><span class="p">)</span>
 <span class="c"># and save it to a file</span>
 <span class="n">draw</span><span class="p">(</span><span class="n">PNG</span><span class="p">(</span><span class="s">&quot;gadfly.png&quot;</span><span class="p">,</span> <span class="mi">300</span><span class="p">,</span> <span class="mi">100</span><span class="p">),</span> <span class="n">pl</span><span class="p">)</span>
-
-<span class="c"># TODO: needs more expansive explanation</span>
 </pre></div>
 
 <p><img class="source-image" src="src/gadfly.png" alt="gadfly.png"/></p>
@@ -1087,7 +1119,7 @@ making it the simplest plotting option for Julia.</p>
 <span class="c"># Same for rows</span>
 <span class="c"># push!(df::DataFrame,iterable)</span>
 <span class="c"># push an iterable as last row onto a dataframe:</span>
-<span class="n">push</span><span class="o">!</span><span class="p">(</span><span class="n">iris</span><span class="p">,</span> <span class="p">[</span><span class="mi">4</span><span class="p">,</span> <span class="mf">2.01</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.5</span><span class="p">,</span> <span class="mf">100.1</span><span class="p">,</span> <span class="s">&quot;alienSpecies&quot;</span><span class="p">])</span>
+<span class="n">push</span><span class="o">!</span><span class="p">(</span><span class="n">iris</span><span class="p">,</span> <span class="p">[</span><span class="mi">4</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.5</span><span class="p">,</span> <span class="mf">100.1</span><span class="p">,</span> <span class="s">&quot;alienSpecies&quot;</span><span class="p">])</span>
 
 <span class="c"># show last few rows</span>
 <span class="n">tail</span><span class="p">(</span><span class="n">iris</span><span class="p">)</span>
@@ -1095,27 +1127,6 @@ making it the simplest plotting option for Julia.</p>
 <span class="c"># delete row with &quot;alienSpecies&quot;</span>
 <span class="n">deleterows</span><span class="o">!</span><span class="p">(</span><span class="n">iris</span><span class="p">,</span> <span class="n">findin</span><span class="p">(</span><span class="n">iris</span><span class="p">[:</span><span class="n">Species</span><span class="p">],</span> <span class="p">[</span><span class="s">&quot;alienSpecies&quot;</span><span class="p">]))</span>
 <span class="n">tail</span><span class="p">(</span><span class="n">iris</span><span class="p">)</span>
-
-
-<span class="c"># Using DataFramesMeta.jl</span>
-<span class="c"># -----------------------</span>
-
-<span class="k">using</span> <span class="n">DataFramesMeta</span>
-
-<span class="c"># subset with DataFramesMeta</span>
-<span class="c"># @ix gets rows/colums</span>
-<span class="p">@</span><span class="n">ix</span><span class="p">(</span><span class="n">iris</span><span class="p">,</span> <span class="p">:</span><span class="n">SepalWidth</span> <span class="o">.&gt;</span> <span class="mf">4.0</span><span class="p">,</span> <span class="p">[:</span><span class="n">SepalWidth</span><span class="p">,</span> <span class="p">:</span><span class="n">Species</span><span class="p">])</span>
-
-<span class="c"># @where gets rows</span>
- <span class="p">@</span><span class="n">where</span><span class="p">(</span><span class="n">iris</span><span class="p">,</span> <span class="p">(:</span><span class="n">PetalWidth</span> <span class="o">.&gt;</span> <span class="mi">1</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(:</span><span class="n">SepalWidth</span> <span class="o">.&lt;</span> <span class="mf">3.0</span><span class="p">))</span>
-
-<span class="c"># create a new column with SepalWidth in 5 categories</span>
-<span class="c"># very similar to R cut() and R transform()</span>
-<span class="n">iris</span> <span class="o">=</span> <span class="n">transform</span><span class="p">(</span> <span class="n">iris</span><span class="p">,</span> <span class="n">widthBin</span> <span class="o">=</span> <span class="n">cut</span><span class="p">(</span><span class="n">iris</span><span class="p">[:</span><span class="n">SepalWidth</span><span class="p">],</span><span class="mi">5</span><span class="p">))</span>
-
-<span class="c"># DataFramesMeta also has a convenient macro syntax,</span>
-<span class="c"># no need to re-specify the dataframe in the epxression!</span>
-<span class="n">iris</span> <span class="o">=</span> <span class="p">@</span><span class="n">transform</span><span class="p">(</span> <span class="n">iris</span><span class="p">,</span> <span class="n">widthBin</span> <span class="o">=</span> <span class="n">cut</span><span class="p">(:</span><span class="n">SepalWidth</span><span class="p">,</span><span class="mi">5</span><span class="p">))</span>
 </pre></div>
 
         </div>
@@ -1150,6 +1161,8 @@ making it the simplest plotting option for Julia.</p>
                 <li> <a href="#Packages-and-Including-of-Files">Packages and Including of Files</a> </li>
               
                 <li> <a href="#Plotting">Plotting</a> </li>
+              
+                <li> <a href="#Bokeh">Bokeh</a> </li>
               
                 <li> <a href="#TextPlots">TextPlots</a> </li>
               
