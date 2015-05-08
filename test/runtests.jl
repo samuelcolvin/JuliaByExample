@@ -1,19 +1,22 @@
 using Base.Test
 
-function print_evalfile(fpath)
-    path, fname = splitdir(fpath)
+# have to prevent Bokeh trying to open a browser window as it hands on travis
+using Bokeh
+Bokeh.noshow(true)
+
+function print_evalfile(fdir, fname)
     println("EVALUATING ", fname, ":\n*************")
-    result = evalfile(fpath)
+    result = evalfile(joinpath(fdir, fname))
     println("*************\n")
     return result
 end
 
-path, this_fname = splitdir(@__FILE__)
-path = joinpath(path, "../src")
-cd(path)
+fdir, this_fname = splitdir(@__FILE__)
+fdir = joinpath(fdir, "../src")
+cd(fdir)
 
 for fname in readdir(".")
     if endswith(fname, ".jl") && fname != this_fname
-        print_evalfile("$path/$fname")
+        print_evalfile(fdir, fname)
     end
 end
