@@ -33,7 +33,7 @@
               <span class="icon-bar"></span>
               <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="">Julia By Example</a>
+            <a class="navbar-brand" href="">Julia By Example (Spanish - Español)</a>
           </div>
           <div class="navbar-collapse collapse">
             <ul class="nav navbar-nav navbar-right">
@@ -52,32 +52,30 @@
       <div class="row">
         <div class="col-sm-9 content">
           
-          <p>Julia is a high-level, high-performance dynamic programming language for technical computing. 
-This site is a non official series of examples of Julia.</p>
 
-<p>Below are a series of examples of common operations in Julia. They assume you already have Julia installed and working
-(the examples are currently tested with <strong>Julia v0.3.7</strong>).</p>
+<p>Julia es un lenguaje de programación dinámico, de alto nivel y alto rendimiento para cómputo técnico. 
+Este sitio es una serie no oficial de ejemplos de Julia</p>
+
+<p>Abajo, hay una serie de ejemplos de operaciones comúnes en Julia. Estos asumen que usted tiene Julia instalado y funcionando (los ejemplos fueron probados con <strong>Julia v0.3.7</strong>).</p>
 
 <p><a href="https://travis-ci.org/samuelcolvin/JuliaByExample"><img src="https://travis-ci.org/samuelcolvin/JuliaByExample.svg?branch=master" alt="Build Status" /></a></p>
 
-<h3 id="Hello-World">Hello World<a href="#Hello-World" class="hlink glyphicon glyphicon-link"></a></h3>
+<h3 id="Hola-Mundo">Hola Mundo<a href="#Hola-Mundo" class="hlink glyphicon glyphicon-link"></a></h3>
 
-<p>The simplest possible script.</p>
+<p>El script más simple posible.</p>
 
 <p><a class="git-link" href="https://github.com/samuelcolvin/JuliaByExample/blob/master/src/hello_world.jl" data-toggle="tooltip" data-placement="bottom"
     target="_blank" title="go to github"><img src="static/github.png" alt="Github Link"/></a><a class="download-link" href="src/hello_world.jl" title="download hello_world.jl" data-toggle="tooltip" data-placement="bottom"><span class="glyphicon glyphicon-cloud-download"></span></a></p>
 
-<div class="code"><pre><span class="n">println</span><span class="p">(</span><span class="s">&quot;hello world&quot;</span><span class="p">)</span>
+<div class="code"><pre><span class="n">println</span><span class="p">(</span><span class="s">&quot;hola mundo&quot;</span><span class="p">)</span>
 </pre></div>
 
-<p>With Julia <a href="http://julialang.org/downloads/">installed and added to your path</a> 
-this script can be run by <code>julia hello_world.jl</code>, it can also be run from REPL by typing 
-<code>include("hello_world.jl")</code>, that will evaluate all valid expressions in that file and return the last output.</p>
+<p>Con Julia <a href="http://julialang.org/downloads/">instalado y agregado a su ruta</a>, 
+este script puede ejecutarse con <code>julia hello_world.jl</code>, también puede ser ejecutado desde REPL escribiendo <code>include("hello_world.jl")</code>, que evaluará todas las expresiones válidas en el fichero y retornará la última salida.</p>
 
-<h3 id="Simple-Functions">Simple Functions<a href="#Simple-Functions" class="hlink glyphicon glyphicon-link"></a></h3>
+<h3 id="Funciones-Simples">Funciones Simples<a href="#Funciones-Simples" class="hlink glyphicon glyphicon-link"></a></h3>
 
-<p>The example below shows two simple functions, how to call them and print the results. 
-Further examples of number formatting are shown below.</p>
+<p>Los ejemplos de abajo muestran dos funciones simples, cómo llamarlas e imprimir los resultados. Ejemplos para el formateo de números son mostrados mas abajo.</p>
 
 <p><a class="git-link" href="https://github.com/samuelcolvin/JuliaByExample/blob/master/src/functions.jl" data-toggle="tooltip" data-placement="bottom"
     target="_blank" title="go to github"><img src="static/github.png" alt="Github Link"/></a><a class="download-link" href="src/functions.jl" title="download functions.jl" data-toggle="tooltip" data-placement="bottom"><span class="glyphicon glyphicon-cloud-download"></span></a></p>
@@ -92,7 +90,7 @@ Further examples of number formatting are shown below.</p>
 <span class="c"># functions can also be defined more succinctly</span>
 <span class="n">quadratic</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">sqr_term</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span> <span class="o">=</span> <span class="p">(</span><span class="o">-</span><span class="n">b</span> <span class="o">+</span> <span class="n">sqr_term</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span><span class="n">a</span>
 
-<span class="c"># calculates x for 0 = a*x^2+b*x+c, <a href="TODO: links" target="_blank">arguments types</a> can be defined in function definitions</span>
+<span class="c"># calculates x for 0 = a*x^2+b*x+c, <a href="TODO: links" target="_blank">arguments Tipos</a> can be defined in function definitions</span>
 <span class="k">function</span><span class="nf"> quadratic2</span><span class="p">(</span><span class="n">a</span><span class="p">::</span><span class="kt">Float64</span><span class="p">,</span> <span class="n">b</span><span class="p">::</span><span class="kt">Float64</span><span class="p">,</span> <span class="n">c</span><span class="p">::</span><span class="kt">Float64</span><span class="p">)</span>
     <span class="c"># unlike other languages 2a is equivalent to 2*a</span>
     <span class="c"># a^2 is used instead of a**2 or pow(a,2)</span>
@@ -116,9 +114,9 @@ Further examples of number formatting are shown below.</p>
 <span class="c">#&gt; result 2: -2.0</span>
 </pre></div>
 
-<h3 id="Strings-Basics">Strings Basics<a href="#Strings-Basics" class="hlink glyphicon glyphicon-link"></a></h3>
+<h3 id="Cadenas-Basicas">Cadenas Básicas<a href="#Cadenas-Basicas" class="hlink glyphicon glyphicon-link"></a></h3>
 
-<p>Collection of different string examples (string indexing is the same as array indexing: see below).</p>
+<p>Colección de diferentes ejemplos de cadenas (la indexación de cadenas es la misma para la indexación de arreglos: ver abajo)</p>
 
 <p><a class="git-link" href="https://github.com/samuelcolvin/JuliaByExample/blob/master/src/strings_basics.jl" data-toggle="tooltip" data-placement="bottom"
     target="_blank" title="go to github"><img src="static/github.png" alt="Github Link"/></a><a class="download-link" href="src/strings_basics.jl" title="download strings_basics.jl" data-toggle="tooltip" data-placement="bottom"><span class="glyphicon glyphicon-cloud-download"></span></a></p>
@@ -159,7 +157,7 @@ Further examples of number formatting are shown below.</p>
 <span class="c">#&gt; THE QUICK BROWN FOX JUMPS OVER THE LAZY DOG Α,Β,Γ</span>
 <span class="c">#&gt; the quick brown fox jumps over the lazy dog α,β,γ</span>
 
-<span class="c"># sub strings can be indexed like arrays:</span>
+<span class="c"># sub strings can be indexed like Arreglos:</span>
 <span class="c"># (<a href="http://julia.readthedocs.org/en/latest/stdlib/base/#Base.show" target="_blank">show</a> prints the raw value)</span>
 <span class="n">show</span><span class="p">(</span><span class="n">s1</span><span class="p">[</span><span class="mi">11</span><span class="p">]);</span> <span class="n">println</span><span class="p">()</span>
 <span class="c">#&gt; &#39;b&#39;</span>
@@ -195,7 +193,7 @@ Further examples of number formatting are shown below.</p>
 <span class="c">#&gt; this and that</span>
 </pre></div>
 
-<h3 id="String-Converting-and-formatting">String: Converting and formatting<a href="#String-Converting-and-formatting" class="hlink glyphicon glyphicon-link"></a></h3>
+<h3 id="Convertir-y-formatear-cadenas">Cadenas: Convirtiendo y formateando<a href="#Convertir-y-formatear-cadenas" class="hlink glyphicon glyphicon-link"></a></h3>
 
 <p><a class="git-link" href="https://github.com/samuelcolvin/JuliaByExample/blob/master/src/formatting_converting_strings.jl" data-toggle="tooltip" data-placement="bottom"
     target="_blank" title="go to github"><img src="static/github.png" alt="Github Link"/></a><a class="download-link" href="src/formatting_converting_strings.jl" title="download formatting_converting_strings.jl" data-toggle="tooltip" data-placement="bottom"><span class="glyphicon glyphicon-cloud-download"></span></a></p>
@@ -239,7 +237,7 @@ Further examples of number formatting are shown below.</p>
 <span class="c">#&gt; print an integer: 10000000000</span>
 </pre></div>
 
-<h3 id="String-Manipulations">String Manipulations<a href="#String-Manipulations" class="hlink glyphicon glyphicon-link"></a></h3>
+<h3 id="Manipulaciones-de-Cadenas">Manipulaciones de Cadenas<a href="#Manipulaciones-de-Cadenas" class="hlink glyphicon glyphicon-link"></a></h3>
 
 <p><a class="git-link" href="https://github.com/samuelcolvin/JuliaByExample/blob/master/src/string_manipulation.jl" data-toggle="tooltip" data-placement="bottom"
     target="_blank" title="go to github"><img src="static/github.png" alt="Github Link"/></a><a class="download-link" href="src/string_manipulation.jl" title="download string_manipulation.jl" data-toggle="tooltip" data-placement="bottom"><span class="glyphicon glyphicon-cloud-download"></span></a></p>
@@ -273,13 +271,13 @@ Further examples of number formatting are shown below.</p>
 <span class="n">show</span><span class="p">(</span><span class="n">r</span><span class="p">);</span> <span class="n">println</span><span class="p">()</span>
 <span class="c">#&gt; &quot;The quick red fox jumps over the lazy dog&quot;</span>
 
-<span class="c"># there are also functions for regular expressions that return RegexMatch types</span>
+<span class="c"># there are also functions for regular expressions that return RegexMatch Tipos</span>
 <span class="c"># <a href="http://julia.readthedocs.org/en/latest/stdlib/base/#Base.match" target="_blank">match</a> scans left to right for the first match (specified starting index optional)</span>
 <span class="n">r</span> <span class="o">=</span> <span class="n">match</span><span class="p">(</span><span class="n">r</span><span class="s">&quot;b[\w]*n&quot;</span><span class="p">,</span> <span class="n">s1</span><span class="p">)</span>
 <span class="n">println</span><span class="p">(</span><span class="n">r</span><span class="p">)</span>
 <span class="c">#&gt; RegexMatch(&quot;brown&quot;)</span>
 
-<span class="c"># RegexMatch types have a property match that holds the matched string</span>
+<span class="c"># RegexMatch Tipos have a property match that holds the matched string</span>
 <span class="n">show</span><span class="p">(</span><span class="n">r</span><span class="o">.</span><span class="n">match</span><span class="p">);</span> <span class="n">println</span><span class="p">()</span>
 <span class="c">#&gt; &quot;brown&quot;</span>
 
@@ -322,17 +320,17 @@ Further examples of number formatting are shown below.</p>
 <span class="n">println</span><span class="p">(</span><span class="n">r</span><span class="p">)</span> <span class="c">#&gt; 1, 2, 3, 4, 5, 6, 7, 8, 9, 10</span>
 </pre></div>
 
-<h3 id="Arrays">Arrays<a href="#Arrays" class="hlink glyphicon glyphicon-link"></a></h3>
+<h3 id="Arreglos">Arreglos<a href="#Arreglos" class="hlink glyphicon glyphicon-link"></a></h3>
 
-<p><a class="git-link" href="https://github.com/samuelcolvin/JuliaByExample/blob/master/src/arrays.jl" data-toggle="tooltip" data-placement="bottom"
-    target="_blank" title="go to github"><img src="static/github.png" alt="Github Link"/></a><a class="download-link" href="src/arrays.jl" title="download arrays.jl" data-toggle="tooltip" data-placement="bottom"><span class="glyphicon glyphicon-cloud-download"></span></a></p>
+<p><a class="git-link" href="https://github.com/samuelcolvin/JuliaByExample/blob/master/src/Arreglos.jl" data-toggle="tooltip" data-placement="bottom"
+    target="_blank" title="go to github"><img src="static/github.png" alt="Github Link"/></a><a class="download-link" href="src/Arreglos.jl" title="download Arreglos.jl" data-toggle="tooltip" data-placement="bottom"><span class="glyphicon glyphicon-cloud-download"></span></a></p>
 
 <div class="code"><pre><span class="k">function</span><span class="nf"> printsum</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
     <span class="c"># <a href="http://julia.readthedocs.org/en/latest/stdlib/base/#Base.summary" target="_blank">summary</a> generates a summary of an object</span>
     <span class="n">println</span><span class="p">(</span><span class="n">summary</span><span class="p">(</span><span class="n">a</span><span class="p">),</span> <span class="s">&quot;: &quot;</span><span class="p">,</span> <span class="n">repr</span><span class="p">(</span><span class="n">a</span><span class="p">))</span>
 <span class="k">end</span>
 
-<span class="c"># arrays can be initialised directly:</span>
+<span class="c"># Arreglos can be initialised directly:</span>
 <span class="n">a1</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">]</span>
 <span class="n">printsum</span><span class="p">(</span><span class="n">a1</span><span class="p">)</span>
 <span class="c">#&gt; 3-element Array{Int64,1}: [1,2,3]</span>
@@ -343,33 +341,33 @@ Further examples of number formatting are shown below.</p>
 <span class="c">#&gt; 0-element Array{None,1}: None[]</span>
 
 <span class="c"># since this array has no type, functions like push! (see below) don&#39;t work</span>
-<span class="c"># instead arrays can be initialised with a type:</span>
+<span class="c"># instead Arreglos can be initialised with a type:</span>
 <span class="n">a3</span> <span class="o">=</span> <span class="kt">Int64</span><span class="p">[]</span>
 <span class="n">printsum</span><span class="p">(</span><span class="n">a3</span><span class="p">)</span>
 <span class="c">#&gt; 0-element Array{Int64,1}: []</span>
 
-<span class="c"># ranges are different from arrays:</span>
+<span class="c"># ranges are different from Arreglos:</span>
 <span class="n">a4</span> <span class="o">=</span> <span class="mi">1</span><span class="p">:</span><span class="mi">20</span>
 <span class="n">printsum</span><span class="p">(</span><span class="n">a4</span><span class="p">)</span>
 <span class="c">#&gt; 20-element UnitRange{Int64}: 1:20</span>
 
-<span class="c"># however they can be used to create arrays thus:</span>
+<span class="c"># however they can be used to create Arreglos thus:</span>
 <span class="n">a4</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="mi">20</span><span class="p">]</span>
 <span class="n">printsum</span><span class="p">(</span><span class="n">a4</span><span class="p">)</span>
 <span class="c">#&gt; 20-element Array{Int64,1}: [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20]</span>
 
-<span class="c"># arrays can also be generated from <a href="http://julia.readthedocs.org/en/latest/manual/arrays/#comprehensions" target="_blank">comprehensions</a>:</span>
+<span class="c"># Arreglos can also be generated from <a href="http://julia.readthedocs.org/en/latest/manual/Arreglos/#comprehensions" target="_blank">comprehensions</a>:</span>
 <span class="n">a5</span> <span class="o">=</span> <span class="p">[</span><span class="mi">2</span><span class="o">^</span><span class="n">i</span> <span class="k">for</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">:</span><span class="mi">10</span><span class="p">]</span>
 <span class="n">printsum</span><span class="p">(</span><span class="n">a5</span><span class="p">)</span>
 <span class="c">#&gt; 10-element Array{Int64,1}: [2,4,8,16,32,64,128,256,512,1024]</span>
 
-<span class="c"># arrays can be any type, so arrays of arrays can be created:</span>
+<span class="c"># Arreglos can be any type, so Arreglos of Arreglos can be created:</span>
 <span class="n">a6</span> <span class="o">=</span> <span class="p">(</span><span class="n">Array</span><span class="p">{</span><span class="kt">Int64</span><span class="p">,</span> <span class="mi">1</span><span class="p">})[]</span>
 <span class="n">printsum</span><span class="p">(</span><span class="n">a6</span><span class="p">)</span>
 <span class="c">#&gt; 0-element Array{Array{Int64,1},1}: []</span>
-<span class="c"># (note this is a &quot;jagged array&quot; (i.e., an array of arrays), not a <a href="http://julia.readthedocs.org/en/latest/manual/arrays/" target="_blank">multidimensional array</a>, these are not covered here)</span>
+<span class="c"># (note this is a &quot;jagged array&quot; (i.e., an array of Arreglos), not a <a href="http://julia.readthedocs.org/en/latest/manual/Arreglos/" target="_blank">multidimensional array</a>, these are not covered here)</span>
 
-<span class="c"># Julia provided a number of <a href="http://docs.julialang.org/en/latest/stdlib/base/#dequeues" target="_blank">&quot;Dequeue&quot;</a> functions, the most common for appending to the end of arrays is <a href="http://docs.julialang.org/en/latest/stdlib/base/#Base.push!" target="_blank"><strong>push!</strong></a></span>
+<span class="c"># Julia provided a number of <a href="http://docs.julialang.org/en/latest/stdlib/base/#dequeues" target="_blank">&quot;Dequeue&quot;</a> functions, the most common for appending to the end of Arreglos is <a href="http://docs.julialang.org/en/latest/stdlib/base/#Base.push!" target="_blank"><strong>push!</strong></a></span>
 <span class="c"># ! at the end of a function name indicates that the first argument is updated.</span>
 
 <span class="n">push</span><span class="o">!</span><span class="p">(</span><span class="n">a1</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
@@ -386,9 +384,9 @@ Further examples of number formatting are shown below.</p>
 <span class="n">printsum</span><span class="p">(</span><span class="n">a6</span><span class="p">)</span>
 <span class="c">#&gt; 1-element Array{Array{Int64,1},1}: [[1,2,3]]</span>
 
-<span class="c"># using repeat() to create arrays</span>
+<span class="c"># using repeat() to create Arreglos</span>
 <span class="c"># you must use the keywords &quot;inner&quot; and &quot;outer&quot;</span>
-<span class="c"># all arguments must be arrays (not ranges)</span>
+<span class="c"># all arguments must be Arreglos (not ranges)</span>
 <span class="n">a7</span> <span class="o">=</span> <span class="n">repeat</span><span class="p">(</span><span class="n">a1</span><span class="p">,</span><span class="n">inner</span><span class="o">=</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span><span class="n">outer</span><span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
 <span class="n">printsum</span><span class="p">(</span><span class="n">a7</span><span class="p">)</span>
 <span class="c">#&gt; 8-element Array{Int64,1}: [1,1,2,2,3,3,4,4]</span>
@@ -397,7 +395,7 @@ Further examples of number formatting are shown below.</p>
 <span class="c">#&gt; 8-element Array{Int64,1}: [4,3,2,1,4,3,2,1]</span>
 </pre></div>
 
-<h3 id="Error-Handling">Error Handling<a href="#Error-Handling" class="hlink glyphicon glyphicon-link"></a></h3>
+<h3 id="Manejo-de-Errores">Manejo de Errores<a href="#Manejo-de-Errores" class="hlink glyphicon glyphicon-link"></a></h3>
 
 <p><a class="git-link" href="https://github.com/samuelcolvin/JuliaByExample/blob/master/src/error_handling.jl" data-toggle="tooltip" data-placement="bottom"
     target="_blank" title="go to github"><img src="static/github.png" alt="Github Link"/></a><a class="download-link" href="src/error_handling.jl" title="download error_handling.jl" data-toggle="tooltip" data-placement="bottom"><span class="glyphicon glyphicon-cloud-download"></span></a></p>
@@ -412,13 +410,12 @@ Further examples of number formatting are shown below.</p>
 <span class="n">println</span><span class="p">(</span><span class="s">&quot;Continuing after error&quot;</span><span class="p">)</span>
 </pre></div>
 
-<h3 id="Multidimensional-Arrays">Multidimensional Arrays<a href="#Multidimensional-Arrays" class="hlink glyphicon glyphicon-link"></a></h3>
+<h3 id="Arreglos-Multidimensionales">Arreglos Multidimensionales<a href="#Arreglos-Multidimensionales" class="hlink glyphicon glyphicon-link"></a></h3>
 
-<p>Julia has very good multidimensional array capabilities. 
-Check out <a href="http://julia.readthedocs.org/en/latest/manual/arrays/">the manual</a>.</p>
+<p>Julia tiene capacidades muy buenas para el manejo de arreglos multidimensionales. Cheque <a href="http://julia.readthedocs.org/en/latest/manual/Arreglos/">el manual</a>.</p>
 
-<p><a class="git-link" href="https://github.com/samuelcolvin/JuliaByExample/blob/master/src/multiarrays.jl" data-toggle="tooltip" data-placement="bottom"
-    target="_blank" title="go to github"><img src="static/github.png" alt="Github Link"/></a><a class="download-link" href="src/multiarrays.jl" title="download multiarrays.jl" data-toggle="tooltip" data-placement="bottom"><span class="glyphicon glyphicon-cloud-download"></span></a></p>
+<p><a class="git-link" href="https://github.com/samuelcolvin/JuliaByExample/blob/master/src/multiArreglos.jl" data-toggle="tooltip" data-placement="bottom"
+    target="_blank" title="go to github"><img src="static/github.png" alt="Github Link"/></a><a class="download-link" href="src/multiArreglos.jl" title="download multiArreglos.jl" data-toggle="tooltip" data-placement="bottom"><span class="glyphicon glyphicon-cloud-download"></span></a></p>
 
 <div class="code"><pre><span class="c"># repeat can be useful to expand a grid</span>
 <span class="c"># as in R&#39;s expand.grid() function:</span>
@@ -440,7 +437,7 @@ Check out <a href="http://julia.readthedocs.org/en/latest/manual/arrays/">the ma
 <span class="c">#&gt;  1 3 4</span>
 <span class="c">#&gt;  2 3 4]</span>
 
-<span class="c"># for simple repetitions of arrays,</span>
+<span class="c"># for simple repetitions of Arreglos,</span>
 <span class="c"># use repmat</span>
 <span class="n">m2</span> <span class="o">=</span> <span class="n">repmat</span><span class="p">(</span><span class="n">m1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span>     <span class="c"># replicate a9 once into dim1 and twice into dim2</span>
 <span class="n">println</span><span class="p">(</span><span class="s">&quot;size: &quot;</span><span class="p">,</span> <span class="n">size</span><span class="p">(</span><span class="n">m2</span><span class="p">))</span>
@@ -451,7 +448,7 @@ Check out <a href="http://julia.readthedocs.org/en/latest/manual/arrays/">the ma
 <span class="c">#&gt; size: (24,3)</span>
 
 <span class="c"># Julia comprehensions are another way to easily create </span>
-<span class="c"># multidimensional arrays</span>
+<span class="c"># multidimensional Arreglos</span>
 
 <span class="n">m4</span> <span class="o">=</span> <span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="n">j</span><span class="o">+</span><span class="n">k</span> <span class="k">for</span> <span class="n">i</span><span class="o">=</span><span class="mi">1</span><span class="p">:</span><span class="mi">2</span><span class="p">,</span> <span class="n">j</span><span class="o">=</span><span class="mi">1</span><span class="p">:</span><span class="mi">3</span><span class="p">,</span> <span class="n">k</span><span class="o">=</span><span class="mi">1</span><span class="p">:</span><span class="mi">2</span><span class="p">]</span> <span class="c"># creates a 2x3x2 array of Int64</span>
 <span class="n">m5</span> <span class="o">=</span> <span class="p">[</span><span class="s">&quot;Hi Im # </span><span class="si">$</span><span class="s">(i+2*(j-1 + 3*(k-1)))&quot;</span> <span class="k">for</span> <span class="n">i</span><span class="o">=</span><span class="mi">1</span><span class="p">:</span><span class="mi">2</span><span class="p">,</span> <span class="n">j</span><span class="o">=</span><span class="mi">1</span><span class="p">:</span><span class="mi">3</span><span class="p">,</span> <span class="n">k</span><span class="o">=</span><span class="mi">1</span><span class="p">:</span><span class="mi">2</span><span class="p">]</span> <span class="c"># expressions are very flexible</span>
@@ -476,7 +473,7 @@ Check out <a href="http://julia.readthedocs.org/en/latest/manual/arrays/">the ma
 <span class="n">findmax</span><span class="p">(</span><span class="n">m4</span><span class="p">,</span><span class="mi">3</span><span class="p">)</span>    <span class="c"># find the max elt and its index along dim 2 (available only in very recent Julia versions)</span>
 
 <span class="c"># Broadcasting</span>
-<span class="c"># when you combine arrays of different sizes in an operation,</span>
+<span class="c"># when you combine Arreglos of different sizes in an operation,</span>
 <span class="c"># an attempt is made to &quot;spread&quot; or &quot;broadcast&quot; the smaller array</span>
 <span class="c"># so that the sizes match up. broadcast operators are preceded by a dot: </span>
 
@@ -517,10 +514,10 @@ Check out <a href="http://julia.readthedocs.org/en/latest/manual/arrays/">the ma
 <span class="c">#&gt; DimensionMismatch(&quot;tried to assign 3x2 array to 2x3x1 destination&quot;)</span>
 </pre></div>
 
-<h3 id="Dictionaries">Dictionaries<a href="#Dictionaries" class="hlink glyphicon glyphicon-link"></a></h3>
+<h3 id="Diccionarios">Diccionarios<a href="#Diccionarios" class="hlink glyphicon glyphicon-link"></a></h3>
 
-<p>Julia uses <a href="http://docs.julialang.org/en/latest/stdlib/base/#associative-collections">Dicts</a> as 
-associative collections. Usage is very like python except for the rather odd <code>=&gt;</code> definition syntax.</p>
+<p>Julia usa <a href="http://docs.julialang.org/en/latest/stdlib/base/#associative-collections">Dicts</a> como 
+colecciones asociativas. El uso es muy parecido a python excepto por su bastante extraña <code>=&gt;</code> definición de sintaxis.</p>
 
 <p><a class="git-link" href="https://github.com/samuelcolvin/JuliaByExample/blob/master/src/dicts.jl" data-toggle="tooltip" data-placement="bottom"
     target="_blank" title="go to github"><img src="static/github.png" alt="Github Link"/></a><a class="download-link" href="src/dicts.jl" title="download dicts.jl" data-toggle="tooltip" data-placement="bottom"><span class="glyphicon glyphicon-cloud-download"></span></a></p>
@@ -538,7 +535,7 @@ associative collections. Usage is very like python except for the rather odd <co
 <span class="n">a2</span> <span class="o">=</span> <span class="n">Dict</span><span class="p">{</span><span class="kt">Int64</span><span class="p">,</span> <span class="n">String</span><span class="p">}()</span>
 <span class="n">a2</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">=</span><span class="s">&quot;zero&quot;</span>
 
-<span class="c"># dicts, like arrays, may also be created from <a href="http://julia.readthedocs.org/en/latest/manual/arrays/#comprehensions" target="_blank">comprehensions</a></span>
+<span class="c"># dicts, like Arreglos, may also be created from <a href="http://julia.readthedocs.org/en/latest/manual/Arreglos/#comprehensions" target="_blank">comprehensions</a></span>
 <span class="n">a3</span> <span class="o">=</span> <span class="p">{</span><span class="n">i</span> <span class="o">=&gt;</span> <span class="p">@</span><span class="n">sprintf</span><span class="p">(</span><span class="s">&quot;%d&quot;</span><span class="p">,</span> <span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">:</span><span class="mi">10</span><span class="p">}</span>
 <span class="n">printsum</span><span class="p">(</span><span class="n">a3</span><span class="p">)</span><span class="c">#&gt; Dict{Any,Any}: {5=&gt;&quot;5&quot;,4=&gt;&quot;4&quot;,6=&gt;&quot;6&quot;,7=&gt;&quot;7&quot;,2=&gt;&quot;2&quot;,10=&gt;&quot;10&quot;,9=&gt;&quot;9&quot;,8=&gt;&quot;8&quot;,3=&gt;&quot;3&quot;,1=&gt;&quot;1&quot;}</span>
 
@@ -557,10 +554,10 @@ associative collections. Usage is very like python except for the rather odd <co
 <span class="n">printsum</span><span class="p">(</span><span class="n">collect</span><span class="p">(</span><span class="n">values</span><span class="p">(</span><span class="n">a1</span><span class="p">)))</span><span class="c">#&gt; 3-element Array{Any,1}: {&quot;two&quot;,&quot;three&quot;,&quot;one&quot;}</span>
 </pre></div>
 
-<h3 id="Loops-and-Map">Loops and Map<a href="#Loops-and-Map" class="hlink glyphicon glyphicon-link"></a></h3>
+<h3 id="Ciclos-y-Mapa">Ciclos y Mapa<a href="#Ciclos-y-Mapa" class="hlink glyphicon glyphicon-link"></a></h3>
 
 <p><a href="http://julia.readthedocs.org/en/latest/manual/control-flow/#repeated-evaluation-loops">For loops</a> 
-can be defined in a number of ways.</p>
+pueden ser definidos en un número de formas.</p>
 
 <p><a class="git-link" href="https://github.com/samuelcolvin/JuliaByExample/blob/master/src/loops_map.jl" data-toggle="tooltip" data-placement="bottom"
     target="_blank" title="go to github"><img src="static/github.png" alt="Github Link"/></a><a class="download-link" href="src/loops_map.jl" title="download loops_map.jl" data-toggle="tooltip" data-placement="bottom"><span class="glyphicon glyphicon-cloud-download"></span></a></p>
@@ -575,7 +572,7 @@ can be defined in a number of ways.</p>
 <span class="k">end</span>
 <span class="n">println</span><span class="p">()</span> <span class="c">#&gt; 1, 2, 3, 4, 5, </span>
 
-<span class="c"># arrays can also be looped over directly:</span>
+<span class="c"># Arreglos can also be looped over directly:</span>
 <span class="n">a1</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">]</span>
 <span class="k">for</span> <span class="n">i</span> <span class="k">in</span> <span class="n">a1</span>
     <span class="n">print</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="s">&quot;, &quot;</span><span class="p">)</span>
@@ -616,19 +613,19 @@ can be defined in a number of ways.</p>
 <span class="k">end</span>
 <span class="n">println</span><span class="p">()</span> <span class="c">#&gt; 1: one, 2: two, 3: three, </span>
 
-<span class="c"># (note enumerate starts from 1 since Julia arrays are 1 indexed unlike python)</span>
+<span class="c"># (note enumerate starts from 1 since Julia Arreglos are 1 indexed unlike python)</span>
 
 <span class="c"># <a href="" target="_blank">map</a> works as you might expect performing the given function on each member of an array or iter much like comprehensions</span>
 <span class="n">a4</span> <span class="o">=</span> <span class="n">map</span><span class="p">((</span><span class="n">x</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">x</span><span class="o">^</span><span class="mi">2</span><span class="p">,</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">7</span><span class="p">])</span>
 <span class="n">printsum</span><span class="p">(</span><span class="n">a4</span><span class="p">)</span> <span class="c">#&gt; 4-element Array{Int64,1}: [1,4,9,49]</span>
 </pre></div>
 
-<h3 id="Types">Types<a href="#Types" class="hlink glyphicon glyphicon-link"></a></h3>
+<h3 id="Tipos">Tipos<a href="#Tipos" class="hlink glyphicon glyphicon-link"></a></h3>
 
-<p>Types are a key way of structuring data within Julia.</p>
+<p>Tipos (types) son una forma clave de la estructuración de datos dentro de Julia.</p>
 
-<p><a class="git-link" href="https://github.com/samuelcolvin/JuliaByExample/blob/master/src/types.jl" data-toggle="tooltip" data-placement="bottom"
-    target="_blank" title="go to github"><img src="static/github.png" alt="Github Link"/></a><a class="download-link" href="src/types.jl" title="download types.jl" data-toggle="tooltip" data-placement="bottom"><span class="glyphicon glyphicon-cloud-download"></span></a></p>
+<p><a class="git-link" href="https://github.com/samuelcolvin/JuliaByExample/blob/master/src/Tipos.jl" data-toggle="tooltip" data-placement="bottom"
+    target="_blank" title="go to github"><img src="static/github.png" alt="Github Link"/></a><a class="download-link" href="src/Tipos.jl" title="download Tipos.jl" data-toggle="tooltip" data-placement="bottom"><span class="glyphicon glyphicon-cloud-download"></span></a></p>
 
 <div class="code"><pre><span class="c"># Type Definitions are probably most similar to tyepdefs in c?</span>
 <span class="c"># a simple type with no special constructor functions might look like this</span>
@@ -649,7 +646,7 @@ can be defined in a number of ways.</p>
 <span class="n">printsum</span><span class="p">(</span><span class="n">people</span><span class="p">)</span>
 <span class="c">#&gt; 2-element Array{Person,1}: [Person(&quot;Steve&quot;,true,42.0,0),Person(&quot;Jade&quot;,false,17.0,3)]</span>
 
-<span class="c"># types may also contains arrays and dicts</span>
+<span class="c"># Tipos may also contains Arreglos and dicts</span>
 <span class="c"># constructor functions can be defined to easily create objects</span>
 <span class="k">type</span><span class="nc"> Family</span>
     <span class="n">name</span><span class="p">::</span><span class="n">String</span>
@@ -670,12 +667,12 @@ can be defined in a number of ways.</p>
 <span class="c">#&gt; Family(&quot;jones&quot;,String[&quot;anna&quot;,&quot;bob&quot;,&quot;charlie&quot;,&quot;dick&quot;],true)</span>
 </pre></div>
 
-<h3 id="Input-Output">Input &amp; Output<a href="#Input-Output" class="hlink glyphicon glyphicon-link"></a></h3>
+<h3 id="Entrada-Salida">Entrada &amp; Salida<a href="#Entrada-Salida" class="hlink glyphicon glyphicon-link"></a></h3>
 
-<p>The basic syntax for reading and writing files in Julia is quite similar to python.</p>
+<p>La sintaxis básica para leer y escribir ficheros en Julia es muy similar a python.</p>
 
-<p>The <code>simple.dat</code> file used in this example is available 
-<a href="https://github.com/samuelcolvin/JuliaByExample/blob/master/common_usage/simple.dat">from github</a>.</p>
+<p>El fichero <code>simple.dat</code> usado en este ejemplo está disponible 
+<a href="https://github.com/samuelcolvin/JuliaByExample/blob/master/common_usage/simple.dat">en github</a>.</p>
 
 <p><a class="git-link" href="https://github.com/samuelcolvin/JuliaByExample/blob/master/src/io.jl" data-toggle="tooltip" data-placement="bottom"
     target="_blank" title="go to github"><img src="static/github.png" alt="Github Link"/></a><a class="download-link" href="src/io.jl" title="download io.jl" data-toggle="tooltip" data-placement="bottom"><span class="glyphicon glyphicon-cloud-download"></span></a></p>
@@ -727,10 +724,10 @@ can be defined in a number of ways.</p>
 <span class="c">#&gt; &quot;some content\nmore content more on the same line&quot;</span>
 </pre></div>
 
-<h3 id="Packages-and-Including-of-Files">Packages and Including of Files<a href="#Packages-and-Including-of-Files" class="hlink glyphicon glyphicon-link"></a></h3>
+<h3 id="Paquetes-e-inclusion-de-ficheros">Paquetes e Inclusión de Ficheros<a href="#Paquetes-e-inclusion-de-ficheros" class="hlink glyphicon glyphicon-link"></a></h3>
 
-<p><a href="http://docs.julialang.org/en/latest/packages/packagelist/">Packages</a> 
-extend the functionality of Julia's standard library. </p>
+<p>Los <a href="http://docs.julialang.org/en/latest/packages/packagelist/">Paquetes</a> 
+extienden la funcionalidad de la librería estándar de Julia.</p>
 
 <p><a class="git-link" href="https://github.com/samuelcolvin/JuliaByExample/blob/master/src/using_packages.jl" data-toggle="tooltip" data-placement="bottom"
     target="_blank" title="go to github"><img src="static/github.png" alt="Github Link"/></a><a class="download-link" href="src/using_packages.jl" title="download using_packages.jl" data-toggle="tooltip" data-placement="bottom"><span class="glyphicon glyphicon-cloud-download"></span></a></p>
@@ -777,10 +774,9 @@ extend the functionality of Julia's standard library. </p>
 <span class="n">Gadfly</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="mi">10</span><span class="p">],</span> <span class="n">y</span><span class="o">=</span><span class="n">rand</span><span class="p">(</span><span class="mi">10</span><span class="p">))</span>
 </pre></div>
 
-<h3 id="Plotting">Plotting<a href="#Plotting" class="hlink glyphicon glyphicon-link"></a></h3>
+<h3 id="Ploteando">Ploteando (Graficando)<a href="#Ploteando" class="hlink glyphicon glyphicon-link"></a></h3>
 
-<p>Plotting in Julia is only possible with additional Packages. 
-Examples of some of the main packages are given below.</p>
+<p>Plotear (graficar) en Julia es solo posible con paquetes adicionales. Ejemplos de los paquetes principales son proporcionados abajo.</p>
 
 <!--
 TODO:
@@ -791,13 +787,11 @@ PyPlot needs Python and matplotlib installed [matplotlib.pyplot docs](http://mat
 
 <h3 id="Bokeh">Bokeh<a href="#Bokeh" class="hlink glyphicon glyphicon-link"></a></h3>
 
-<p><a href="http://bokeh.github.io/Bokeh.jl">Bokeh Packge Page</a>.</p>
+<p><a href="http://bokeh.github.io/Bokeh.jl">Página de paquete Bokeh</a>.</p>
 
-<p>Bokeh.jl builds on top of the <a href="http://bokeh.pydata.org/en/latest/">Bokeh</a> project which is a fulling featured plotting
-library using html5 as a backend. Because the package does nothing more than generate an html file and open it in
-your browsers it should be extremely easy to install on any platform.</p>
+<p>Bokeh.jl está hecho sobre el proyecto <a href="http://bokeh.pydata.org/en/latest/">Bokeh</a>, el cual es una librería de ploteo llena de características usando html5 como un `backend`. Debido a que el paquete no hace nada mas que generar un fichero html y abrir este último en su navegador, debe ser extremadamente fácil de instalar en cualquier plataforma.</p>
 
-<p>(Admission: I wrote Bokeh.jl which is why I've but it first.)</p>
+<p>(Aclaración: He escrito Bokeh.jl, es por lo cual lo he puesto primero.)</p>
 
 <p><a class="git-link" href="https://github.com/samuelcolvin/JuliaByExample/blob/master/src/bokeh.jl" data-toggle="tooltip" data-placement="bottom"
     target="_blank" title="go to github"><img src="static/github.png" alt="Github Link"/></a><a class="download-link" href="src/bokeh.jl" title="download bokeh.jl" data-toggle="tooltip" data-placement="bottom"><span class="glyphicon glyphicon-cloud-download"></span></a></p>
@@ -825,12 +819,11 @@ your browsers it should be extremely easy to install on any platform.</p>
 
 <h3 id="TextPlots">TextPlots<a href="#TextPlots" class="hlink glyphicon glyphicon-link"></a></h3>
 
-<p><a href="https://github.com/sunetos/TextPlots.jl">TextPlots Packge Page</a>.</p>
+<p><a href="https://github.com/sunetos/TextPlots.jl">Página de paquete TextPlots</a>.</p>
 
-<p>TextPlots is an extremely simple plotting library which generates terminal plots using Braille characters.</p>
+<p>TextPlots es una librería de ploteo extremadamente fácil, la cual genera gráficas (ploteos) de terminal usando caracteres de Braille.</p>
 
-<p>It is well documented and requires no other packages or external libraries; 
-making it the simplest plotting option for Julia.</p>
+<p>Está muy bien documentado y no requiere otros paquetes o librerías externas; haciendo éste la opción más simple de ploteo para Julia.</p>
 
 <p><a class="git-link" href="https://github.com/samuelcolvin/JuliaByExample/blob/master/src/textplots.jl" data-toggle="tooltip" data-placement="bottom"
     target="_blank" title="go to github"><img src="static/github.png" alt="Github Link"/></a><a class="download-link" href="src/textplots.jl" title="download textplots.jl" data-toggle="tooltip" data-placement="bottom"><span class="glyphicon glyphicon-cloud-download"></span></a></p>
@@ -906,16 +899,16 @@ making it the simplest plotting option for Julia.</p>
 
 <h4 id="Winston">Winston<a href="#Winston" class="hlink glyphicon glyphicon-link"></a></h4>
 
-<p><a href="https://github.com/nolta/Winston.jl">Winston Package Page</a></p>
+<p><a href="https://github.com/nolta/Winston.jl">Página de paquete Winston</a></p>
 
-<p>Matlab-like plotting. Installed via <code>Pkg.add("Winston")</code></p>
+<p>Ploteo estilo Matlab. Instalado vía <code>Pkg.add("Winston")</code></p>
 
 <p><a class="git-link" href="https://github.com/samuelcolvin/JuliaByExample/blob/master/src/winston.jl" data-toggle="tooltip" data-placement="bottom"
     target="_blank" title="go to github"><img src="static/github.png" alt="Github Link"/></a><a class="download-link" href="src/winston.jl" title="download winston.jl" data-toggle="tooltip" data-placement="bottom"><span class="glyphicon glyphicon-cloud-download"></span></a></p>
 
 <div class="code"><pre><span class="k">using</span> <span class="n">Winston</span>
 
-<span class="c"># optionally call figure prior to plotting to set the size</span>
+<span class="c"># optionally call figure prior to Ploteando to set the size</span>
 <span class="n">figure</span><span class="p">(</span><span class="n">width</span><span class="o">=</span><span class="mi">600</span><span class="p">,</span> <span class="n">height</span><span class="o">=</span><span class="mi">400</span><span class="p">)</span>
 <span class="c"># plot some data</span>
 <span class="n">pl</span> <span class="o">=</span> <span class="n">plot</span><span class="p">(</span><span class="n">cumsum</span><span class="p">(</span><span class="n">rand</span><span class="p">(</span><span class="mi">500</span><span class="p">)</span> <span class="o">.-</span> <span class="mf">0.5</span><span class="p">),</span> <span class="s">&quot;r&quot;</span><span class="p">,</span> <span class="n">cumsum</span><span class="p">(</span><span class="n">rand</span><span class="p">(</span><span class="mi">500</span><span class="p">)</span> <span class="o">.-</span> <span class="mf">0.5</span><span class="p">),</span> <span class="s">&quot;b&quot;</span><span class="p">)</span>
@@ -938,9 +931,9 @@ making it the simplest plotting option for Julia.</p>
 
 <h4 id="Gadfly">Gadfly<a href="#Gadfly" class="hlink glyphicon glyphicon-link"></a></h4>
 
-<p><a href="https://github.com/dcjones/Gadfly.jl">Gadfly Package Page</a></p>
+<p><a href="https://github.com/dcjones/Gadfly.jl">Página de paquete Gadfly</a></p>
 
-<p>ggplot2-like plotting. Installed via <code>Pkg.add("Gadfly")</code></p>
+<p>Ploteo estilo ggplot2. Instalado vía <code>Pkg.add("Gadfly")</code></p>
 
 <p><a class="git-link" href="https://github.com/samuelcolvin/JuliaByExample/blob/master/src/gadfly.jl" data-toggle="tooltip" data-placement="bottom"
     target="_blank" title="go to github"><img src="static/github.png" alt="Github Link"/></a><a class="download-link" href="src/gadfly.jl" title="download gadfly.jl" data-toggle="tooltip" data-placement="bottom"><span class="glyphicon glyphicon-cloud-download"></span></a></p>
@@ -957,10 +950,10 @@ making it the simplest plotting option for Julia.</p>
 
 <h3 id="DataFrames">DataFrames<a href="#DataFrames" class="hlink glyphicon glyphicon-link"></a></h3>
 
-<p>The <a href="https://github.com/JuliaStats/DataFrames.jl">DataFrames.jl package</a> provides tool for working with tabular data.</p>
+<p>El paquete <a href="https://github.com/JuliaStats/DataFrames.jl">DataFrames.jl </a> proporciona herramientas para trabajar con datos tabulares.</p>
 
-<p>The <code>iris.csv</code> file used in this example is available 
-<a href="https://github.com/samuelcolvin/JuliaByExample/blob/master/common_usage/iris.csv">from github</a>.</p>
+<p>El fichero <code>iris.csv</code> usado en éste ejemplo se encuentra disponible 
+<a href="https://github.com/samuelcolvin/JuliaByExample/blob/master/common_usage/iris.csv">en github</a>.</p>
 
 <p><a class="git-link" href="https://github.com/samuelcolvin/JuliaByExample/blob/master/src/dataframes.jl" data-toggle="tooltip" data-placement="bottom"
     target="_blank" title="go to github"><img src="static/github.png" alt="Github Link"/></a><a class="download-link" href="src/dataframes.jl" title="download dataframes.jl" data-toggle="tooltip" data-placement="bottom"><span class="glyphicon glyphicon-cloud-download"></span></a></p>
@@ -1024,10 +1017,10 @@ making it the simplest plotting option for Julia.</p>
 <span class="c"># showing DataFrames</span>
 <span class="c"># ------------------</span>
 
-<span class="c"># Check the names and element types of the columns of our new DataFrame</span>
+<span class="c"># Check the names and element Tipos of the columns of our new DataFrame</span>
 <span class="n">showln</span><span class="p">(</span><span class="n">names</span><span class="p">(</span><span class="n">iris</span><span class="p">))</span>
 <span class="c">#&gt; [:SepalLength,:SepalWidth,:PetalLength,:PetalWidth,:Species]</span>
-<span class="n">showln</span><span class="p">(</span><span class="n">eltypes</span><span class="p">(</span><span class="n">iris</span><span class="p">))</span>
+<span class="n">showln</span><span class="p">(</span><span class="n">elTipos</span><span class="p">(</span><span class="n">iris</span><span class="p">))</span>
 <span class="c">#&gt; Type[Float64,Float64,Float64,Float64,UTF8String]</span>
 
 <span class="c"># Subset the DataFrame to only include rows for one species</span>
@@ -1134,33 +1127,33 @@ making it the simplest plotting option for Julia.</p>
           <div class="sidebar" data-spy="affix" data-offset-top="150">
             <ul class="nav sidenav">
               
-                <li> <a href="#Hello-World">Hello World</a> </li>
+                <li> <a href="#Hola-Mundo">Hola Mundo</a> </li>
               
-                <li> <a href="#Simple-Functions">Simple Functions</a> </li>
+                <li> <a href="#Funciones-Simples">Funciones Simples</a> </li>
               
-                <li> <a href="#Strings-Basics">Strings Basics</a> </li>
+                <li> <a href="#Cadenas-Basicas">Cadenas Básicas</a> </li>
               
-                <li> <a href="#String-Converting-and-formatting">String: Converting and formatting</a> </li>
+                <li> <a href="#Convertir-y-formatear-cadenas">Cadenas: Convirtiendo y formateando</a> </li>
               
-                <li> <a href="#String-Manipulations">String Manipulations</a> </li>
+                <li> <a href="#Manipulaciones-de-Cadenas">Manipulaciones de Cadenas</a> </li>
               
-                <li> <a href="#Arrays">Arrays</a> </li>
+                <li> <a href="#Arreglos">Arreglos</a> </li>
               
-                <li> <a href="#Error-Handling">Error Handling</a> </li>
+                <li> <a href="#Manejo-de-Errores">Manejo de Errores</a> </li>
               
-                <li> <a href="#Multidimensional-Arrays">Multidimensional Arrays</a> </li>
+                <li> <a href="#Arreglos-Multidimensionales">Multidimensional Arreglos</a> </li>
               
-                <li> <a href="#Dictionaries">Dictionaries</a> </li>
+                <li> <a href="#Diccionarios">Diccionarios</a> </li>
               
-                <li> <a href="#Loops-and-Map">Loops and Map</a> </li>
+                <li> <a href="#Ciclos-y-Mapa">Ciclos y Mapa</a> </li>
               
-                <li> <a href="#Types">Types</a> </li>
+                <li> <a href="#Tipos">Tipos</a> </li>
               
-                <li> <a href="#Input-Output">Input &amp; Output</a> </li>
+                <li> <a href="#Entrada-Salida">Entrada &amp; Salida</a> </li>
               
-                <li> <a href="#Packages-and-Including-of-Files">Packages and Including of Files</a> </li>
+                <li> <a href="#Paquetes-e-inclusion-de-ficheros">Paquetes e Inclusión de Ficheros</a> </li>
               
-                <li> <a href="#Plotting">Plotting</a> </li>
+                <li> <a href="#Ploteando">Ploteando (Graficando)</a> </li>
               
                 <li> <a href="#Bokeh">Bokeh</a> </li>
               
