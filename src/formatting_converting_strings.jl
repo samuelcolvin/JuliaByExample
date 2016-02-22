@@ -1,9 +1,9 @@
-# strings can be converted using [float](http://julia.readthedocs.org/en/latest/stdlib/base/#Base.float) and [int](http://julia.readthedocs.org/en/latest/stdlib/base/#Base.int):
+# strings can be converted using [float](http://julia.readthedocs.org/en/latest/stdlib/base/#Base.float) and [parse](http://julia.readthedocs.org/en/latest/stdlib/numbers/#Base.parse):
 e_str1 = "2.718"
 e = float(e_str1)
 println(5e)
 #> 13.5914
-num_15 = int("15")
+num_15 = parse(Int, "15")
 println(3num_15)
 #> 45
 
