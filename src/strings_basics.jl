@@ -17,14 +17,14 @@ print(" that.\n")
 c1 = 'a'
 println(c1)
 #> a
-# the ascii value of a char can be found with int():
-println(c1, " ascii value = ", int(c1))
+# the ascii value of a char can be found with Int():
+println(c1, " ascii value = ", Int(c1))
 #> a ascii value = 97
-println("int('α') == ", int('α'))
-#> int('α') == 945
+println("Int('α') == ", Int('α'))
+#> Int('α') == 945
 
 # so be aware that
-println(int('1') == 1)
+println(Int('1') == 1)
 #> false
 
 # strings can be converted to upper case or lower case:

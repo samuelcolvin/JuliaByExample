@@ -52,11 +52,10 @@
       <div class="row">
         <div class="col-sm-9 content">
           
-          <p>Julia is a high-level, high-performance dynamic programming language for technical computing. 
-This site is a non official series of examples of Julia.</p>
+          <p>Set of unofficial examples of Julia the high-level, high-performance dynamic programming language for technical computing.</p>
 
 <p>Below are a series of examples of common operations in Julia. They assume you already have Julia installed and working
-(the examples are currently tested with <strong>Julia v0.3.7</strong>).</p>
+(the examples are currently tested with <strong>Julia v0.4.5</strong>).</p>
 
 <p><a href="https://travis-ci.org/samuelcolvin/JuliaByExample"><img src="https://travis-ci.org/samuelcolvin/JuliaByExample.svg?branch=master" alt="Build Status" /></a></p>
 
@@ -142,14 +141,14 @@ Further examples of number formatting are shown below.</p>
 <span class="n">c1</span> <span class="o">=</span> <span class="sc">&#39;a&#39;</span>
 <span class="n">println</span><span class="p">(</span><span class="n">c1</span><span class="p">)</span>
 <span class="c">#&gt; a</span>
-<span class="c"># the ascii value of a char can be found with int():</span>
-<span class="n">println</span><span class="p">(</span><span class="n">c1</span><span class="p">,</span> <span class="s">&quot; ascii value = &quot;</span><span class="p">,</span> <span class="n">int</span><span class="p">(</span><span class="n">c1</span><span class="p">))</span>
+<span class="c"># the ascii value of a char can be found with Int():</span>
+<span class="n">println</span><span class="p">(</span><span class="n">c1</span><span class="p">,</span> <span class="s">&quot; ascii value = &quot;</span><span class="p">,</span> <span class="kt">Int</span><span class="p">(</span><span class="n">c1</span><span class="p">))</span>
 <span class="c">#&gt; a ascii value = 97</span>
-<span class="n">println</span><span class="p">(</span><span class="s">&quot;int(&#39;α&#39;) == &quot;</span><span class="p">,</span> <span class="n">int</span><span class="p">(</span><span class="sc">&#39;α&#39;</span><span class="p">))</span>
-<span class="c">#&gt; int(&#39;α&#39;) == 945</span>
+<span class="n">println</span><span class="p">(</span><span class="s">&quot;Int(&#39;α&#39;) == &quot;</span><span class="p">,</span> <span class="kt">Int</span><span class="p">(</span><span class="sc">&#39;α&#39;</span><span class="p">))</span>
+<span class="c">#&gt; Int(&#39;α&#39;) == 945</span>
 
 <span class="c"># so be aware that</span>
-<span class="n">println</span><span class="p">(</span><span class="n">int</span><span class="p">(</span><span class="sc">&#39;1&#39;</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">println</span><span class="p">(</span><span class="kt">Int</span><span class="p">(</span><span class="sc">&#39;1&#39;</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)</span>
 <span class="c">#&gt; false</span>
 
 <span class="c"># strings can be converted to upper case or lower case:</span>
@@ -205,7 +204,7 @@ Further examples of number formatting are shown below.</p>
 <span class="n">e</span> <span class="o">=</span> <span class="n">float</span><span class="p">(</span><span class="n">e_str1</span><span class="p">)</span>
 <span class="n">println</span><span class="p">(</span><span class="mi">5</span><span class="n">e</span><span class="p">)</span>
 <span class="c">#&gt; 13.5914</span>
-<span class="n">num_15</span> <span class="o">=</span> <span class="n">int</span><span class="p">(</span><span class="s">&quot;15&quot;</span><span class="p">)</span>
+<span class="n">num_15</span> <span class="o">=</span> <span class="n">parse</span><span class="p">(</span><span class="kt">Int</span><span class="p">,</span> <span class="s">&quot;15&quot;</span><span class="p">)</span>
 <span class="n">println</span><span class="p">(</span><span class="mi">3</span><span class="n">num_15</span><span class="p">)</span>
 <span class="c">#&gt; 45</span>
 
@@ -233,8 +232,8 @@ Further examples of number formatting are shown below.</p>
 <span class="c">#&gt; a string: look I&#39;m a string!</span>
 <span class="p">@</span><span class="n">printf</span> <span class="s">&quot;right justify a string: %50s</span><span class="se">\n</span><span class="s">&quot;</span> <span class="s">&quot;width 50, text right justified!&quot;</span>
 <span class="c">#&gt; right justify a string:                    width 50, text right justified!</span>
-<span class="p">@</span><span class="n">printf</span> <span class="s">&quot;a pointer: %p</span><span class="se">\n</span><span class="s">&quot;</span> <span class="mf">1e10</span>
-<span class="c">#&gt; a pointer: 0x00000002540be400</span>
+<span class="p">@</span><span class="n">printf</span> <span class="s">&quot;a pointer: %p</span><span class="se">\n</span><span class="s">&quot;</span> <span class="mi">100000000</span>
+<span class="c">#&gt; a pointer: 0x0000000005f5e100</span>
 <span class="p">@</span><span class="n">printf</span> <span class="s">&quot;print a integer: %d</span><span class="se">\n</span><span class="s">&quot;</span> <span class="mf">1e10</span>
 <span class="c">#&gt; print an integer: 10000000000</span>
 </pre></div>
@@ -313,12 +312,12 @@ Further examples of number formatting are shown below.</p>
 <span class="n">show</span><span class="p">(</span><span class="n">r</span><span class="p">);</span> <span class="n">println</span><span class="p">()</span> <span class="c">#&gt; [&quot;hello&quot;,&quot; there&quot;,&quot;bob&quot;]</span>
 <span class="n">r</span> <span class="o">=</span> <span class="n">split</span><span class="p">(</span><span class="s">&quot;hello, there,bob&quot;</span><span class="p">,</span> <span class="s">&quot;, &quot;</span><span class="p">)</span>
 <span class="n">show</span><span class="p">(</span><span class="n">r</span><span class="p">);</span> <span class="n">println</span><span class="p">()</span> <span class="c">#&gt; [&quot;hello&quot;,&quot;there,bob&quot;]</span>
-<span class="n">r</span> <span class="o">=</span> <span class="n">split</span><span class="p">(</span><span class="s">&quot;hello, there,bob&quot;</span><span class="p">,</span> <span class="p">[</span><span class="sc">&#39;,&#39;</span><span class="p">,</span> <span class="sc">&#39; &#39;</span><span class="p">],</span> <span class="mi">0</span><span class="p">,</span> <span class="n">false</span><span class="p">)</span>
+<span class="n">r</span> <span class="o">=</span> <span class="n">split</span><span class="p">(</span><span class="s">&quot;hello, there,bob&quot;</span><span class="p">,</span> <span class="p">[</span><span class="sc">&#39;,&#39;</span><span class="p">,</span> <span class="sc">&#39; &#39;</span><span class="p">],</span> <span class="n">limit</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">keep</span><span class="o">=</span><span class="n">false</span><span class="p">)</span>
 <span class="n">show</span><span class="p">(</span><span class="n">r</span><span class="p">);</span> <span class="n">println</span><span class="p">()</span> <span class="c">#&gt; [&quot;hello&quot;,&quot;there&quot;,&quot;bob&quot;]</span>
 <span class="c"># (the last two arguements are limit and include_empty, see docs)</span>
 
 <span class="c"># the opposite of split: <a href="http://docs.julialang.org/en/latest/stdlib/base/#Base.join" target="_blank">join</a> is simply</span>
-<span class="n">r</span><span class="o">=</span> <span class="n">join</span><span class="p">([</span><span class="mi">1</span><span class="p">:</span><span class="mi">10</span><span class="p">],</span> <span class="s">&quot;, &quot;</span><span class="p">)</span>
+<span class="n">r</span><span class="o">=</span> <span class="n">join</span><span class="p">(</span><span class="n">collect</span><span class="p">(</span><span class="mi">1</span><span class="p">:</span><span class="mi">10</span><span class="p">),</span> <span class="s">&quot;, &quot;</span><span class="p">)</span>
 <span class="n">println</span><span class="p">(</span><span class="n">r</span><span class="p">)</span> <span class="c">#&gt; 1, 2, 3, 4, 5, 6, 7, 8, 9, 10</span>
 </pre></div>
 
@@ -354,7 +353,7 @@ Further examples of number formatting are shown below.</p>
 <span class="c">#&gt; 20-element UnitRange{Int64}: 1:20</span>
 
 <span class="c"># however they can be used to create arrays thus:</span>
-<span class="n">a4</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="mi">20</span><span class="p">]</span>
+<span class="n">a4</span> <span class="o">=</span> <span class="n">collect</span><span class="p">(</span><span class="mi">1</span><span class="p">:</span><span class="mi">20</span><span class="p">)</span>
 <span class="n">printsum</span><span class="p">(</span><span class="n">a4</span><span class="p">)</span>
 <span class="c">#&gt; 20-element Array{Int64,1}: [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20]</span>
 
@@ -423,9 +422,9 @@ Check out <a href="http://julia.readthedocs.org/en/latest/manual/arrays/">the ma
 <div class="code"><pre><span class="c"># repeat can be useful to expand a grid</span>
 <span class="c"># as in R&#39;s expand.grid() function:</span>
 
-<span class="n">m1</span> <span class="o">=</span> <span class="n">hcat</span><span class="p">(</span><span class="n">repeat</span><span class="p">([</span><span class="mi">1</span><span class="p">:</span><span class="mi">2</span><span class="p">],</span><span class="n">inner</span><span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span><span class="n">outer</span><span class="o">=</span><span class="p">[</span><span class="mi">3</span><span class="o">*</span><span class="mi">2</span><span class="p">]),</span>
-          <span class="n">repeat</span><span class="p">([</span><span class="mi">1</span><span class="p">:</span><span class="mi">3</span><span class="p">],</span><span class="n">inner</span><span class="o">=</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span><span class="n">outer</span><span class="o">=</span><span class="p">[</span><span class="mi">2</span><span class="p">]),</span>
-          <span class="n">repeat</span><span class="p">([</span><span class="mi">1</span><span class="p">:</span><span class="mi">4</span><span class="p">],</span><span class="n">inner</span><span class="o">=</span><span class="p">[</span><span class="mi">3</span><span class="p">],</span><span class="n">outer</span><span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="p">]))</span>
+<span class="n">m1</span> <span class="o">=</span> <span class="n">hcat</span><span class="p">(</span><span class="n">repeat</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">],</span><span class="n">inner</span><span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span><span class="n">outer</span><span class="o">=</span><span class="p">[</span><span class="mi">3</span><span class="o">*</span><span class="mi">2</span><span class="p">]),</span>
+          <span class="n">repeat</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">],</span><span class="n">inner</span><span class="o">=</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span><span class="n">outer</span><span class="o">=</span><span class="p">[</span><span class="mi">2</span><span class="p">]),</span>
+          <span class="n">repeat</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">],</span><span class="n">inner</span><span class="o">=</span><span class="p">[</span><span class="mi">3</span><span class="p">],</span><span class="n">outer</span><span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="p">]))</span>
 <span class="n">printsum</span><span class="p">(</span><span class="n">m1</span><span class="p">)</span>
 <span class="c">#&gt; 12x3 Array{Int64,2}: [1 1 1</span>
 <span class="c">#&gt;  2 1 1</span>
@@ -481,7 +480,7 @@ Check out <a href="http://julia.readthedocs.org/en/latest/manual/arrays/">the ma
 <span class="c"># so that the sizes match up. broadcast operators are preceded by a dot: </span>
 
 <span class="n">m4</span> <span class="o">.+</span> <span class="mi">3</span>       <span class="c"># add 3 to all elements</span>
-<span class="n">m4</span> <span class="o">.+</span> <span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="mi">2</span><span class="p">]</span>      <span class="c"># adds vector [1,2] to all elements along first dim</span>
+<span class="n">m4</span> <span class="o">.+</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">]</span>      <span class="c"># adds vector [1,2] to all elements along first dim</span>
 
 <span class="c"># slices and views</span>
 <span class="n">m4</span><span class="p">[:,:,</span><span class="mi">1</span><span class="p">]</span>  <span class="c"># holds dim 3 fixed and displays the resulting view</span>
@@ -526,7 +525,7 @@ associative collections. Usage is very like python except for the rather odd <co
     target="_blank" title="go to github"><img src="static/github.png" alt="Github Link"/></a><a class="download-link" href="src/dicts.jl" title="download dicts.jl" data-toggle="tooltip" data-placement="bottom"><span class="glyphicon glyphicon-cloud-download"></span></a></p>
 
 <div class="code"><pre><span class="c"># dicts can be initialised directly:</span>
-<span class="n">a1</span> <span class="o">=</span> <span class="p">{</span><span class="mi">1</span><span class="o">=&gt;</span><span class="s">&quot;one&quot;</span><span class="p">,</span> <span class="mi">2</span><span class="o">=&gt;</span><span class="s">&quot;two&quot;</span><span class="p">}</span>
+<span class="n">a1</span> <span class="o">=</span> <span class="n">Dict</span><span class="p">(</span><span class="mi">1</span><span class="o">=&gt;</span><span class="s">&quot;one&quot;</span><span class="p">,</span> <span class="mi">2</span><span class="o">=&gt;</span><span class="s">&quot;two&quot;</span><span class="p">)</span>
 <span class="n">printsum</span><span class="p">(</span><span class="n">a1</span><span class="p">)</span> <span class="c">#&gt; Dict{Any,Any}: {2=&gt;&quot;two&quot;,1=&gt;&quot;one&quot;}</span>
 
 <span class="c"># then added to:</span>
@@ -535,11 +534,11 @@ associative collections. Usage is very like python except for the rather odd <co
 <span class="c"># (note dicts cannot be assumed to keep their original order)</span>
 
 <span class="c"># dicts may also be created with the type explicitly set</span>
-<span class="n">a2</span> <span class="o">=</span> <span class="n">Dict</span><span class="p">{</span><span class="kt">Int64</span><span class="p">,</span> <span class="n">String</span><span class="p">}()</span>
+<span class="n">a2</span> <span class="o">=</span> <span class="n">Dict</span><span class="p">{</span><span class="kt">Int64</span><span class="p">,</span> <span class="n">AbstractString</span><span class="p">}()</span>
 <span class="n">a2</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">=</span><span class="s">&quot;zero&quot;</span>
 
 <span class="c"># dicts, like arrays, may also be created from <a href="http://julia.readthedocs.org/en/latest/manual/arrays/#comprehensions" target="_blank">comprehensions</a></span>
-<span class="n">a3</span> <span class="o">=</span> <span class="p">{</span><span class="n">i</span> <span class="o">=&gt;</span> <span class="p">@</span><span class="n">sprintf</span><span class="p">(</span><span class="s">&quot;%d&quot;</span><span class="p">,</span> <span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">:</span><span class="mi">10</span><span class="p">}</span>
+<span class="n">a3</span> <span class="o">=</span> <span class="n">Dict</span><span class="p">([</span><span class="n">i</span> <span class="o">=&gt;</span> <span class="p">@</span><span class="n">sprintf</span><span class="p">(</span><span class="s">&quot;%d&quot;</span><span class="p">,</span> <span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">:</span><span class="mi">10</span><span class="p">])</span>
 <span class="n">printsum</span><span class="p">(</span><span class="n">a3</span><span class="p">)</span><span class="c">#&gt; Dict{Any,Any}: {5=&gt;&quot;5&quot;,4=&gt;&quot;4&quot;,6=&gt;&quot;6&quot;,7=&gt;&quot;7&quot;,2=&gt;&quot;2&quot;,10=&gt;&quot;10&quot;,9=&gt;&quot;9&quot;,8=&gt;&quot;8&quot;,3=&gt;&quot;3&quot;,1=&gt;&quot;1&quot;}</span>
 
 <span class="c"># as you would expect, Julia comes with all the normal helper functions</span>
@@ -583,7 +582,7 @@ can be defined in a number of ways.</p>
 <span class="n">println</span><span class="p">()</span> <span class="c">#&gt; 1, 2, 3, 4, </span>
 
 <span class="c"># <strong>continue</strong> and <strong>break</strong> work in the same way as python</span>
-<span class="n">a2</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="mi">20</span><span class="p">]</span>
+<span class="n">a2</span> <span class="o">=</span> <span class="n">collect</span><span class="p">(</span><span class="mi">1</span><span class="p">:</span><span class="mi">20</span><span class="p">)</span>
 <span class="k">for</span> <span class="n">i</span> <span class="k">in</span> <span class="n">a2</span>
     <span class="k">if</span> <span class="n">i</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">!=</span> <span class="mi">0</span>
         <span class="k">continue</span>
@@ -602,7 +601,7 @@ can be defined in a number of ways.</p>
 <span class="k">end</span>
 <span class="n">println</span><span class="p">()</span> <span class="c">#&gt; 4, 3, 2, 1,</span>
 
-<span class="n">d1</span> <span class="o">=</span> <span class="p">{</span><span class="mi">1</span><span class="o">=&gt;</span><span class="s">&quot;one&quot;</span><span class="p">,</span> <span class="mi">2</span><span class="o">=&gt;</span><span class="s">&quot;two&quot;</span><span class="p">,</span> <span class="mi">3</span><span class="o">=&gt;</span><span class="s">&quot;three&quot;</span><span class="p">}</span>
+<span class="n">d1</span> <span class="o">=</span> <span class="n">Dict</span><span class="p">(</span><span class="mi">1</span><span class="o">=&gt;</span><span class="s">&quot;one&quot;</span><span class="p">,</span> <span class="mi">2</span><span class="o">=&gt;</span><span class="s">&quot;two&quot;</span><span class="p">,</span> <span class="mi">3</span><span class="o">=&gt;</span><span class="s">&quot;three&quot;</span><span class="p">)</span>
 <span class="c"># dicts may be looped through using the keys function:</span>
 <span class="k">for</span> <span class="n">k</span> <span class="k">in</span> <span class="n">sort</span><span class="p">(</span><span class="n">collect</span><span class="p">(</span><span class="n">keys</span><span class="p">(</span><span class="n">d1</span><span class="p">)))</span>
     <span class="n">print</span><span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="s">&quot;: &quot;</span><span class="p">,</span> <span class="n">d1</span><span class="p">[</span><span class="n">k</span><span class="p">],</span> <span class="s">&quot;, &quot;</span><span class="p">)</span>
@@ -633,7 +632,7 @@ can be defined in a number of ways.</p>
 <div class="code"><pre><span class="c"># Type Definitions are probably most similar to tyepdefs in c?</span>
 <span class="c"># a simple type with no special constructor functions might look like this</span>
 <span class="k">type</span><span class="nc"> Person</span>
-    <span class="n">name</span><span class="p">::</span><span class="n">String</span>
+    <span class="n">name</span><span class="p">::</span><span class="n">AbstractString</span>
     <span class="n">male</span><span class="p">::</span><span class="kt">Bool</span>
     <span class="n">age</span><span class="p">::</span><span class="kt">Float64</span>
     <span class="n">children</span><span class="p">::</span><span class="kt">Int</span>
@@ -652,22 +651,22 @@ can be defined in a number of ways.</p>
 <span class="c"># types may also contains arrays and dicts</span>
 <span class="c"># constructor functions can be defined to easily create objects</span>
 <span class="k">type</span><span class="nc"> Family</span>
-    <span class="n">name</span><span class="p">::</span><span class="n">String</span>
-    <span class="n">members</span><span class="p">::</span><span class="n">Array</span><span class="p">{</span><span class="n">String</span><span class="p">,</span> <span class="mi">1</span><span class="p">}</span>
+    <span class="n">name</span><span class="p">::</span><span class="n">AbstractString</span>
+    <span class="n">members</span><span class="p">::</span><span class="n">Array</span><span class="p">{</span><span class="n">AbstractString</span><span class="p">,</span> <span class="mi">1</span><span class="p">}</span>
     <span class="n">extended</span><span class="p">::</span><span class="kt">Bool</span>
     <span class="c"># constructor that takes one argument and generates a default</span>
     <span class="c"># for the other two values</span>
-    <span class="n">Family</span><span class="p">(</span><span class="n">name</span><span class="p">::</span><span class="n">String</span><span class="p">)</span> <span class="o">=</span> <span class="nb">new</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">String</span><span class="p">[],</span> <span class="n">false</span><span class="p">)</span>
+    <span class="n">Family</span><span class="p">(</span><span class="n">name</span><span class="p">::</span><span class="n">AbstractString</span><span class="p">)</span> <span class="o">=</span> <span class="nb">new</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">AbstractString</span><span class="p">[],</span> <span class="n">false</span><span class="p">)</span>
     <span class="c"># constructor that takes two arguements and infers the third</span>
-    <span class="n">Family</span><span class="p">(</span><span class="n">name</span><span class="p">::</span><span class="n">String</span><span class="p">,</span> <span class="n">members</span><span class="p">)</span> <span class="o">=</span> <span class="nb">new</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">members</span><span class="p">,</span> <span class="n">length</span><span class="p">(</span><span class="n">members</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">3</span><span class="p">)</span>
+    <span class="n">Family</span><span class="p">(</span><span class="n">name</span><span class="p">::</span><span class="n">AbstractString</span><span class="p">,</span> <span class="n">members</span><span class="p">)</span> <span class="o">=</span> <span class="nb">new</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">members</span><span class="p">,</span> <span class="n">length</span><span class="p">(</span><span class="n">members</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">3</span><span class="p">)</span>
 <span class="k">end</span>
 
 <span class="n">fam1</span> <span class="o">=</span> <span class="n">Family</span><span class="p">(</span><span class="s">&quot;blogs&quot;</span><span class="p">)</span>
 <span class="n">println</span><span class="p">(</span><span class="n">fam1</span><span class="p">)</span>
-<span class="c">#&gt; Family(&quot;blogs&quot;,String[],false)</span>
+<span class="c">#&gt; Family(&quot;blogs&quot;,AbstractString[],false)</span>
 <span class="n">fam2</span> <span class="o">=</span> <span class="n">Family</span><span class="p">(</span><span class="s">&quot;jones&quot;</span><span class="p">,</span> <span class="p">[</span><span class="s">&quot;anna&quot;</span><span class="p">,</span> <span class="s">&quot;bob&quot;</span><span class="p">,</span> <span class="s">&quot;charlie&quot;</span><span class="p">,</span> <span class="s">&quot;dick&quot;</span><span class="p">])</span>
 <span class="n">println</span><span class="p">(</span><span class="n">fam2</span><span class="p">)</span>
-<span class="c">#&gt; Family(&quot;jones&quot;,String[&quot;anna&quot;,&quot;bob&quot;,&quot;charlie&quot;,&quot;dick&quot;],true)</span>
+<span class="c">#&gt; Family(&quot;jones&quot;,AbstractString[&quot;anna&quot;,&quot;bob&quot;,&quot;charlie&quot;,&quot;dick&quot;],true)</span>
 </pre></div>
 
 <h3 id="Input-Output">Input &amp; Output<a href="#Input-Output" class="hlink glyphicon glyphicon-link"></a></h3>
@@ -763,18 +762,6 @@ extend the functionality of Julia's standard library. </p>
 
 <span class="c"># Using `import` is especially useful if there are conflicts in function/type-names</span>
 <span class="c"># between packages.</span>
-<span class="c"># Example:</span>
-<span class="c"># Winston as well as Gadfly provide a plot() function (see below).</span>
-<span class="n">Pkg</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="s">&quot;Winston&quot;</span><span class="p">)</span>
-<span class="n">Pkg</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="s">&quot;Gadfly&quot;</span><span class="p">)</span>
-
-<span class="c"># If you were to &quot;import&quot; both of the packages with `using`, there would be a conflict.</span>
-<span class="c"># That can be prevented by using `import`, as follows:</span>
-<span class="k">import</span> <span class="n">Winston</span>
-<span class="k">import</span> <span class="n">Gadfly</span>
-
-<span class="n">Winston</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">rand</span><span class="p">(</span><span class="mi">4</span><span class="p">))</span>
-<span class="n">Gadfly</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="mi">10</span><span class="p">],</span> <span class="n">y</span><span class="o">=</span><span class="n">rand</span><span class="p">(</span><span class="mi">10</span><span class="p">))</span>
 </pre></div>
 
 <h3 id="Plotting">Plotting<a href="#Plotting" class="hlink glyphicon glyphicon-link"></a></h3>
@@ -788,121 +775,6 @@ add comment about py plot
 
 PyPlot needs Python and matplotlib installed [matplotlib.pyplot docs](http://matplotlib.org/api/pyplot_api.html).
 -->
-
-<h3 id="Bokeh">Bokeh<a href="#Bokeh" class="hlink glyphicon glyphicon-link"></a></h3>
-
-<p><a href="http://bokeh.github.io/Bokeh.jl">Bokeh Packge Page</a>.</p>
-
-<p>Bokeh.jl builds on top of the <a href="http://bokeh.pydata.org/en/latest/">Bokeh</a> project which is a fulling featured plotting
-library using html5 as a backend. Because the package does nothing more than generate an html file and open it in
-your browsers it should be extremely easy to install on any platform.</p>
-
-<p>(Admission: I wrote Bokeh.jl which is why I've but it first.)</p>
-
-<p><a class="git-link" href="https://github.com/samuelcolvin/JuliaByExample/blob/master/src/bokeh.jl" data-toggle="tooltip" data-placement="bottom"
-    target="_blank" title="go to github"><img src="static/github.png" alt="Github Link"/></a><a class="download-link" href="src/bokeh.jl" title="download bokeh.jl" data-toggle="tooltip" data-placement="bottom"><span class="glyphicon glyphicon-cloud-download"></span></a></p>
-
-<div class="code"><pre><span class="k">using</span> <span class="n">Bokeh</span>
-<span class="k">using</span> <span class="n">Dates</span> <span class="c"># this is for julia &lt; 0.4, for &gt;=0.4 you would need Base.Dates</span>
-
-<span class="c"># here we have to set the size to get the plot to display properly below, usually you could skip this</span>
-<span class="n">Bokeh</span><span class="o">.</span><span class="n">width</span><span class="p">(</span><span class="mi">800</span><span class="p">)</span>
-<span class="n">Bokeh</span><span class="o">.</span><span class="n">height</span><span class="p">(</span><span class="mi">320</span><span class="p">)</span>
-
-<span class="n">start</span> <span class="o">=</span> <span class="n">now</span><span class="p">()</span>
-<span class="n">days</span> <span class="o">=</span> <span class="mi">720</span>
-<span class="n">x</span> <span class="o">=</span> <span class="n">map</span><span class="p">(</span><span class="n">d</span> <span class="o">-&gt;</span> <span class="n">start</span> <span class="o">+</span> <span class="n">Dates</span><span class="o">.</span><span class="n">Day</span><span class="p">(</span><span class="n">d</span><span class="p">),</span> <span class="mi">1</span><span class="p">:</span><span class="n">days</span><span class="p">)</span>
-<span class="n">y1</span> <span class="o">=</span> <span class="n">cumsum</span><span class="p">(</span><span class="n">rand</span><span class="p">(</span><span class="n">days</span><span class="p">)</span> <span class="o">-</span> <span class="mf">0.5</span><span class="p">)</span>
-<span class="n">small_bit</span> <span class="o">=</span> <span class="p">(</span><span class="n">maximum</span><span class="p">(</span><span class="n">y1</span><span class="p">)</span> <span class="o">-</span> <span class="n">minimum</span><span class="p">(</span><span class="n">y1</span><span class="p">))</span><span class="o">*</span><span class="mf">0.02</span>
-<span class="n">y2</span> <span class="o">=</span> <span class="n">y1</span> <span class="o">+</span> <span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">rand</span><span class="p">(</span><span class="n">days</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="n">small_bit</span>
-<span class="n">glyphs</span> <span class="o">=</span> <span class="p">[</span><span class="n">Glyph</span><span class="p">(:</span><span class="n">Line</span><span class="p">,</span> <span class="n">linecolor</span><span class="o">=</span><span class="s">&quot;red&quot;</span><span class="p">),</span> 
-          <span class="n">Glyph</span><span class="p">(:</span><span class="n">Circle</span><span class="p">,</span> <span class="n">fillcolor</span><span class="o">=</span><span class="s">&quot;rgba(255, 77, 255, 0.4)&quot;</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">6</span><span class="p">,</span> <span class="n">linecolor</span><span class="o">=</span><span class="s">&quot;transparent&quot;</span><span class="p">)]</span>
-<span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="p">[</span><span class="n">y1</span> <span class="n">y2</span><span class="p">],</span> <span class="n">glyphs</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s">&quot;Share Price Prediction&quot;</span><span class="p">,</span> <span class="n">legends</span><span class="o">=</span><span class="p">[</span><span class="s">&quot;Average&quot;</span><span class="p">,</span> <span class="s">&quot;Closing Price&quot;</span><span class="p">])</span>
-<span class="n">showplot</span><span class="p">()</span>
-</pre></div>
-
-<iframe class="source-iframe" frameborder="0" src="src/bokeh_plot.html">bokeh_plot.html</iframe>
-
-<h3 id="TextPlots">TextPlots<a href="#TextPlots" class="hlink glyphicon glyphicon-link"></a></h3>
-
-<p><a href="https://github.com/sunetos/TextPlots.jl">TextPlots Packge Page</a>.</p>
-
-<p>TextPlots is an extremely simple plotting library which generates terminal plots using Braille characters.</p>
-
-<p>It is well documented and requires no other packages or external libraries; 
-making it the simplest plotting option for Julia.</p>
-
-<p><a class="git-link" href="https://github.com/samuelcolvin/JuliaByExample/blob/master/src/textplots.jl" data-toggle="tooltip" data-placement="bottom"
-    target="_blank" title="go to github"><img src="static/github.png" alt="Github Link"/></a><a class="download-link" href="src/textplots.jl" title="download textplots.jl" data-toggle="tooltip" data-placement="bottom"><span class="glyphicon glyphicon-cloud-download"></span></a></p>
-
-<div class="code"><pre><span class="k">using</span> <span class="n">TextPlots</span>
-
-<span class="n">plot</span><span class="p">(</span><span class="n">x</span> <span class="o">-&gt;</span> <span class="n">cos</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="o">-</span><span class="mi">1</span><span class="p">:</span><span class="mi">1</span><span class="p">)</span>
-<span class="c">#&gt; cos(x)</span>
-<span class="c">#&gt;        1 ⡤⠤⠤⠤⠤⠤⠤⠤⠤⠤⠤⠤⠤⠤⠤⠤⠤⠤⠤⠤⠤⠤⠤⠤⠤⠤⠤⠤⠤⠤⠤⠤⠤⠤⠤⠤⠤⠤⠤⠤⠤⠤⠤⠤⠤⠤⠤⠤⠤⠤⠤⠤⠤⠤⠤⠤⠤⠤⠤⠤⠤⢤</span>
-<span class="c">#&gt;          ⡇⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣀⠤⠒⠊⠉⠉⠉⠉⠉⠉⠑⠒⠤⣀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢸</span>
-<span class="c">#&gt;          ⡇⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⡠⠒⠉⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠉⠒⢄⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢸</span>
-<span class="c">#&gt;          ⡇⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⠔⠉⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠉⠢⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢸</span>
-<span class="c">#&gt;          ⡇⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⠔⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⠢⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢸</span>
-<span class="c">#&gt;          ⡇⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⠔⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⠢⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢸</span>
-<span class="c">#&gt;          ⡇⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⡠⠂⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠐⢄⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢸</span>
-<span class="c">#&gt;          ⡇⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⠌⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠡⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢸</span>
-<span class="c">#&gt;          ⡇⠀⠀⠀⠀⠀⠀⠀⠀⠀⠠⠂⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠐⠄⠀⠀⠀⠀⠀⠀⠀⠀⠀⢸</span>
-<span class="c">#&gt;          ⡇⠀⠀⠀⠀⠀⠀⠀⠀⡐⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⢂⠀⠀⠀⠀⠀⠀⠀⠀⢸</span>
-<span class="c">#&gt;          ⡇⠀⠀⠀⠀⠀⠀⡠⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠡⡀⠀⠀⠀⠀⠀⠀⢸</span>
-<span class="c">#&gt;          ⡇⠀⠀⠀⠀⠀⢐⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠐⡀⠀⠀⠀⠀⠀⢸</span>
-<span class="c">#&gt;          ⡇⠀⠀⠀⠀⠠⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⠄⠀⠀⠀⠀⢸</span>
-<span class="c">#&gt;          ⡇⠀⠀⢀⠊⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⢂⠀⠀⠀⢸</span>
-<span class="c">#&gt;          ⡇⠀⢀⠐⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢂⠀⠀⢸</span>
-<span class="c">#&gt;          ⡇⢀⠐⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢂⠀⢸</span>
-<span class="c">#&gt;          ⡇⡐⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢂⢸</span>
-<span class="c">#&gt;  0.54030 ⠓⠒⠒⠒⠒⠒⠒⠒⠒⠒⠒⠒⠒⠒⠒⠒⠒⠒⠒⠒⠒⠒⠒⠒⠒⠒⠒⠒⠒⠒⠒⠒⠒⠒⠒⠒⠒⠒⠒⠒⠒⠒⠒⠒⠒⠒⠒⠒⠒⠒⠒⠒⠒⠒⠒⠒⠒⠒⠒⠒⠒⠚</span>
-<span class="c">#&gt;         -1                                                            1</span>
-
-<span class="n">plot</span><span class="p">([</span><span class="n">x</span> <span class="o">-&gt;</span> <span class="n">cos</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="n">x</span> <span class="o">-&gt;</span> <span class="n">cos</span><span class="p">(</span><span class="n">x</span> <span class="o">+</span> <span class="nb">pi</span><span class="p">)],</span> <span class="mi">0</span><span class="p">:</span><span class="mi">5</span><span class="p">)</span>
-<span class="c">#&gt; cos(x), cos(x + pi)</span>
-<span class="c">#&gt;        1 ⡤⠤⠤⠤⠤⠤⠤⠤⠤⠤⠤⠤⠤⠤⠤⠤⠤⠤⠤⠤⠤⠤⠤⠤⠤⠤⠤⠤⠤⠤⠤⠤⠤⠤⠤⠤⠤⠤⠤⠤⠤⠤⠤⠤⠤⠤⠤⠤⠤⠤⠤⠤⠤⠤⠤⠤⠤⠤⠤⠤⠤⢤</span>
-<span class="c">#&gt;          ⡇⠉⠉⠉⠒⠤⣀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⡠⠔⠊⠉⠉⠉⠉⠉⠑⠒⠤⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢸</span>
-<span class="c">#&gt;          ⡇⠀⠀⠀⠀⠀⠀⠉⠢⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⡠⠒⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⠑⠤⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢸</span>
-<span class="c">#&gt;          ⡇⠀⠀⠀⠀⠀⠀⠀⠀⠈⠢⠄⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⡠⠊⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⠢⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢸</span>
-<span class="c">#&gt;          ⡇⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⠢⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⡠⠊⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⠢⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢸</span>
-<span class="c">#&gt;          ⡇⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⠢⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⠌⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠐⢄⠀⠀⠀⠀⠀⠀⠀⠀⢸</span>
-<span class="c">#&gt;          ⡇⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠑⢄⠀⠀⠀⠀⠀⠀⡐⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠡⡀⠀⠀⠀⠀⠀⢀⢸</span>
-<span class="c">#&gt;          ⡇⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠢⡀⠀⠀⠠⠊⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⢂⠀⠀⠀⡠⠁⢸</span>
-<span class="c">#&gt;          ⡇⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠐⢄⠔⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠑⣀⠌⠀⠀⢸</span>
-<span class="c">#&gt;          ⡇⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠠⠊⠢⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⡠⠉⢂⠀⠀⢸</span>
-<span class="c">#&gt;          ⡇⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠔⠁⠀⠀⠐⢄⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⠌⠀⠀⠀⠑⡀⢸</span>
-<span class="c">#&gt;          ⡇⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⡠⠊⠀⠀⠀⠀⠀⠀⠡⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⡐⠁⠀⠀⠀⠀⠀⠈⢸</span>
-<span class="c">#&gt;          ⡇⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⠔⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⢂⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠠⠊⠀⠀⠀⠀⠀⠀⠀⠀⢸</span>
-<span class="c">#&gt;          ⡇⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⠔⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠑⢄⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⠔⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⢸</span>
-<span class="c">#&gt;          ⡇⠀⠀⠀⠀⠀⠀⠀⠀⢀⠔⠂⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠑⢄⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⠔⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢸</span>
-<span class="c">#&gt;          ⡇⠀⠀⠀⠀⠀⠀⣀⠔⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠑⠤⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⡠⠒⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢸</span>
-<span class="c">#&gt;          ⡇⣀⣀⣀⠤⠒⠉⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⠑⠢⢄⣀⣀⣀⣀⣀⡠⠤⠒⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢸</span>
-<span class="c">#&gt;       -1 ⠓⠒⠒⠒⠒⠒⠒⠒⠒⠒⠒⠒⠒⠒⠒⠒⠒⠒⠒⠒⠒⠒⠒⠒⠒⠒⠒⠒⠒⠒⠒⠒⠒⠒⠒⠒⠒⠒⠒⠒⠒⠒⠒⠒⠒⠒⠒⠒⠒⠒⠒⠒⠒⠒⠒⠒⠒⠒⠒⠒⠒⠚</span>
-<span class="c">#&gt;          0                                                            5</span>
-
-<span class="n">plot</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">7</span><span class="p">],</span> <span class="p">[</span><span class="mi">13</span><span class="p">,</span> <span class="mi">11</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">7</span><span class="p">])</span>
-<span class="c">#&gt; scatter plot</span>
-<span class="c">#&gt;       13 ⡤⠤⠤⠤⠤⠤⠤⠤⠤⠤⠤⠤⠤⠤⠤⠤⠤⠤⠤⠤⠤⠤⠤⠤⠤⠤⠤⠤⠤⠤⠤⠤⠤⠤⠤⠤⠤⠤⠤⠤⠤⠤⠤⠤⠤⠤⠤⠤⠤⠤⠤⠤⠤⠤⠤⠤⠤⠤⠤⠤⠤⢤</span>
-<span class="c">#&gt;          ⡇⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢸</span>
-<span class="c">#&gt;          ⡇⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢸</span>
-<span class="c">#&gt;          ⡇⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢸</span>
-<span class="c">#&gt;          ⡇⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢸</span>
-<span class="c">#&gt;          ⡇⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢸</span>
-<span class="c">#&gt;          ⡇⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢸</span>
-<span class="c">#&gt;          ⡇⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢸</span>
-<span class="c">#&gt;          ⡇⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢸</span>
-<span class="c">#&gt;          ⡇⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢸</span>
-<span class="c">#&gt;          ⡇⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢸</span>
-<span class="c">#&gt;          ⡇⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢸</span>
-<span class="c">#&gt;          ⡇⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢸</span>
-<span class="c">#&gt;          ⡇⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢸</span>
-<span class="c">#&gt;          ⡇⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢸</span>
-<span class="c">#&gt;          ⡇⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⡀⢸</span>
-<span class="c">#&gt;          ⡇⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢸</span>
-<span class="c">#&gt;        7 ⠓⠒⠒⠒⠒⠒⠒⠒⠒⠒⠒⠒⠒⠒⠒⠒⠒⠒⠒⠒⠒⠒⠒⠒⠒⠒⠒⠒⠒⠒⠒⠒⠒⠒⠒⠒⠒⠒⠒⠒⠒⠒⠒⠒⠒⠒⠒⠒⠒⠒⠒⠒⠒⠒⠒⠒⠒⠒⠒⠒⠒⠚</span>
-<span class="c">#&gt;          1                                                            7</span>
-</pre></div>
 
 <h4 id="Winston">Winston<a href="#Winston" class="hlink glyphicon glyphicon-link"></a></h4>
 
@@ -935,25 +807,6 @@ making it the simplest plotting option for Julia.</p>
 </pre></div>
 
 <p><img class="source-image" src="src/winston.svg" alt="winston.svg"/></p>
-
-<h4 id="Gadfly">Gadfly<a href="#Gadfly" class="hlink glyphicon glyphicon-link"></a></h4>
-
-<p><a href="https://github.com/dcjones/Gadfly.jl">Gadfly Package Page</a></p>
-
-<p>ggplot2-like plotting. Installed via <code>Pkg.add("Gadfly")</code></p>
-
-<p><a class="git-link" href="https://github.com/samuelcolvin/JuliaByExample/blob/master/src/gadfly.jl" data-toggle="tooltip" data-placement="bottom"
-    target="_blank" title="go to github"><img src="static/github.png" alt="Github Link"/></a><a class="download-link" href="src/gadfly.jl" title="download gadfly.jl" data-toggle="tooltip" data-placement="bottom"><span class="glyphicon glyphicon-cloud-download"></span></a></p>
-
-<div class="code"><pre><span class="k">using</span> <span class="n">Gadfly</span>
-
-<span class="c"># plot some data</span>
-<span class="n">pl</span> <span class="o">=</span> <span class="n">plot</span><span class="p">(</span><span class="n">x</span> <span class="o">-&gt;</span> <span class="n">cos</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">/</span><span class="n">x</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">25</span><span class="p">)</span>
-<span class="c"># and save it to a file</span>
-<span class="n">draw</span><span class="p">(</span><span class="n">PNG</span><span class="p">(</span><span class="s">&quot;gadfly.png&quot;</span><span class="p">,</span> <span class="mi">300</span><span class="p">,</span> <span class="mi">100</span><span class="p">),</span> <span class="n">pl</span><span class="p">)</span>
-</pre></div>
-
-<p><img class="source-image" src="src/gadfly.png" alt="gadfly.png"/></p>
 
 <h3 id="DataFrames">DataFrames<a href="#DataFrames" class="hlink glyphicon glyphicon-link"></a></h3>
 
@@ -1066,8 +919,8 @@ making it the simplest plotting option for Julia.</p>
 <span class="c">#&gt; | 3     | &quot;virginica&quot;  | 50 |</span>
 
 <span class="c"># Discretize entire columns at a time</span>
-<span class="n">iris</span><span class="p">[:</span><span class="n">SepalLength</span><span class="p">]</span> <span class="o">=</span> <span class="n">iround</span><span class="p">(</span><span class="n">iris</span><span class="p">[:</span><span class="n">SepalLength</span><span class="p">])</span>
-<span class="n">iris</span><span class="p">[:</span><span class="n">SepalWidth</span><span class="p">]</span> <span class="o">=</span> <span class="n">iround</span><span class="p">(</span><span class="n">iris</span><span class="p">[:</span><span class="n">SepalWidth</span><span class="p">])</span>
+<span class="n">iris</span><span class="p">[:</span><span class="n">SepalLength</span><span class="p">]</span> <span class="o">=</span> <span class="n">round</span><span class="p">(</span><span class="n">Integer</span><span class="p">,</span> <span class="n">iris</span><span class="p">[:</span><span class="n">SepalLength</span><span class="p">])</span>
+<span class="n">iris</span><span class="p">[:</span><span class="n">SepalWidth</span><span class="p">]</span> <span class="o">=</span> <span class="n">round</span><span class="p">(</span><span class="n">Integer</span><span class="p">,</span> <span class="n">iris</span><span class="p">[:</span><span class="n">SepalWidth</span><span class="p">])</span>
 
 
 <span class="c"># Tabulate data according to discretized columns to see &quot;clusters&quot;</span>
@@ -1115,18 +968,6 @@ making it the simplest plotting option for Julia.</p>
 
 <span class="c"># remove it</span>
 <span class="n">delete</span><span class="o">!</span><span class="p">(</span><span class="n">iris</span><span class="p">,</span> <span class="p">:</span><span class="n">randCol</span><span class="p">)</span>
-
-<span class="c"># Same for rows</span>
-<span class="c"># push!(df::DataFrame,iterable)</span>
-<span class="c"># push an iterable as last row onto a dataframe:</span>
-<span class="n">push</span><span class="o">!</span><span class="p">(</span><span class="n">iris</span><span class="p">,</span> <span class="p">[</span><span class="mi">4</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.5</span><span class="p">,</span> <span class="mf">100.1</span><span class="p">,</span> <span class="s">&quot;alienSpecies&quot;</span><span class="p">])</span>
-
-<span class="c"># show last few rows</span>
-<span class="n">tail</span><span class="p">(</span><span class="n">iris</span><span class="p">)</span>
-
-<span class="c"># delete row with &quot;alienSpecies&quot;</span>
-<span class="n">deleterows</span><span class="o">!</span><span class="p">(</span><span class="n">iris</span><span class="p">,</span> <span class="n">findin</span><span class="p">(</span><span class="n">iris</span><span class="p">[:</span><span class="n">Species</span><span class="p">],</span> <span class="p">[</span><span class="s">&quot;alienSpecies&quot;</span><span class="p">]))</span>
-<span class="n">tail</span><span class="p">(</span><span class="n">iris</span><span class="p">)</span>
 </pre></div>
 
         </div>
@@ -1162,13 +1003,7 @@ making it the simplest plotting option for Julia.</p>
               
                 <li> <a href="#Plotting">Plotting</a> </li>
               
-                <li> <a href="#Bokeh">Bokeh</a> </li>
-              
-                <li> <a href="#TextPlots">TextPlots</a> </li>
-              
                 <li> <a href="#Winston">Winston</a> </li>
-              
-                <li> <a href="#Gadfly">Gadfly</a> </li>
               
                 <li> <a href="#DataFrames">DataFrames</a> </li>
               
