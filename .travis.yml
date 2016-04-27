@@ -1,12 +1,6 @@
 language: julia
 julia:
-    - release
-    - nightly
-matrix:
-  allow_failures:
-    - julia: nightly
-notifications:
-    email: false
+  - release
 script:
-    - if [[ -a .git/shallow ]]; then git fetch --unshallow; fi
-    - xvfb-run julia -e 'Pkg.clone(pwd()); Pkg.build("JuliaByExample"); Pkg.test("JuliaByExample")';
+  - if [[ -a .git/shallow ]]; then git fetch --unshallow; fi
+  - xvfb-run julia -e 'Pkg.clone(pwd()); Pkg.build("JuliaByExample"); Pkg.test("JuliaByExample")';
