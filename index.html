@@ -542,18 +542,20 @@ associative collections. Usage is very like python except for the rather odd <co
 <span class="n">printsum</span><span class="p">(</span><span class="n">a3</span><span class="p">)</span><span class="c">#&gt; Dict{Any,Any}: {5=&gt;&quot;5&quot;,4=&gt;&quot;4&quot;,6=&gt;&quot;6&quot;,7=&gt;&quot;7&quot;,2=&gt;&quot;2&quot;,10=&gt;&quot;10&quot;,9=&gt;&quot;9&quot;,8=&gt;&quot;8&quot;,3=&gt;&quot;3&quot;,1=&gt;&quot;1&quot;}</span>
 
 <span class="c"># as you would expect, Julia comes with all the normal helper functions</span>
-<span class="c"># for dicts, e.g., (haskey)[http://docs.julialang.org/en/latest/stdlib/base/#Base.haskey]</span>
+<span class="c"># for dicts, e.g., <a href="http://docs.julialang.org/en/latest/stdlib/base/#Base.haskey" target="_blank">haskey</a></span>
 <span class="n">println</span><span class="p">(</span><span class="n">haskey</span><span class="p">(</span><span class="n">a1</span><span class="p">,</span><span class="mi">1</span><span class="p">))</span> <span class="c">#&gt; true</span>
 
 <span class="c"># which is equivalent to</span>
 <span class="n">println</span><span class="p">(</span><span class="mi">1</span> <span class="k">in</span> <span class="n">keys</span><span class="p">(</span><span class="n">a1</span><span class="p">))</span> <span class="c">#&gt; true</span>
 <span class="c"># where <a href="http://docs.julialang.org/en/latest/stdlib/base/#Base.keys" target="_blank">keys</a> creates an iterator over the keys of the dictionary</span>
 
-<span class="c"># similar to keys, (values)[http://docs.julialang.org/en/latest/stdlib/base/#Base.values] get iterators over the dict&#39;s values:</span>
-<span class="n">printsum</span><span class="p">(</span><span class="n">values</span><span class="p">(</span><span class="n">a1</span><span class="p">))</span> <span class="c">#&gt; ValueIterator{Dict{Any,Any}}: ValueIterator{Dict{Any,Any}}({2=&gt;&quot;two&quot;,3=&gt;&quot;three&quot;,1=&gt;&quot;one&quot;})</span>
+<span class="c"># similar to keys, <a href="http://docs.julialang.org/en/latest/stdlib/base/#Base.values" target="_blank">values</a> get iterators over the dict&#39;s values:</span>
+<span class="n">printsum</span><span class="p">(</span><span class="n">values</span><span class="p">(</span><span class="n">a1</span><span class="p">))</span> 
+<span class="c">#&gt; Base.ValueIterator for a Dict{Int64,ASCIIString} with 3 entries: ASCIIString[&quot;two&quot;,&quot;three&quot;,&quot;one&quot;]</span>
 
 <span class="c"># use <a href="http://docs.julialang.org/en/latest/stdlib/base/#Base.collect" target="_blank">collect</a> to get an array:</span>
-<span class="n">printsum</span><span class="p">(</span><span class="n">collect</span><span class="p">(</span><span class="n">values</span><span class="p">(</span><span class="n">a1</span><span class="p">)))</span><span class="c">#&gt; 3-element Array{Any,1}: {&quot;two&quot;,&quot;three&quot;,&quot;one&quot;}</span>
+<span class="n">printsum</span><span class="p">(</span><span class="n">collect</span><span class="p">(</span><span class="n">values</span><span class="p">(</span><span class="n">a1</span><span class="p">)))</span>
+<span class="c">#&gt; 3-element Array{ASCIIString,1}: ASCIIString[&quot;two&quot;,&quot;three&quot;,&quot;one&quot;]</span>
 </pre></div>
 
 <h3 id="Loops-and-Map">Loops and Map<a href="#Loops-and-Map" class="hlink glyphicon glyphicon-link"></a></h3>
