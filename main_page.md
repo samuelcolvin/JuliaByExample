@@ -100,17 +100,6 @@ add comment about py plot
 PyPlot needs Python and matplotlib installed [matplotlib.pyplot docs](http://matplotlib.org/api/pyplot_api.html).
 -->
 
-### TextPlots
-
-[TextPlots Packge Page](https://github.com/sunetos/TextPlots.jl).
-
-TextPlots is an extremely simple plotting library which generates terminal plots using Braille characters.
-
-It is well documented and requires no other packages or external libraries; 
-making it the simplest plotting option for Julia.
-
-{{ code_file('textplots.jl') }}
-
 #### Winston
 
 [Winston Package Page](https://github.com/nolta/Winston.jl)

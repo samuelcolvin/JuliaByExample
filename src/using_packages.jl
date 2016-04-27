@@ -26,15 +26,3 @@ Calculus.derivative(x -> cos(x), 1.0)
 
 # Using `import` is especially useful if there are conflicts in function/type-names
 # between packages.
-# Example:
-# Winston as well as TextPlots provide a plot() function (see below).
-Pkg.add("Winston")
-Pkg.add("TextPlots")
-
-# If you were to "import" both of the packages with `using`, there would be a conflict.
-# That can be prevented by using `import`, as follows:
-import Winston
-import TextPlots
-
-Winston.plot(rand(4))
-TextPlots.plot(x=[1:10], y=rand(10))
