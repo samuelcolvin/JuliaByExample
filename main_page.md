@@ -100,20 +100,6 @@ add comment about py plot
 PyPlot needs Python and matplotlib installed [matplotlib.pyplot docs](http://matplotlib.org/api/pyplot_api.html).
 -->
 
-### Bokeh
-
-[Bokeh Packge Page](http://bokeh.github.io/Bokeh.jl).
-
-Bokeh.jl builds on top of the [Bokeh](http://bokeh.pydata.org/en/latest/) project which is a fulling featured plotting
-library using html5 as a backend. Because the package does nothing more than generate an html file and open it in
-your browsers it should be extremely easy to install on any platform.
-
-(Admission: I wrote Bokeh.jl which is why I've but it first.)
-
-{{ code_file('bokeh.jl') }}
-
-{{ src_iframe('bokeh_plot.html') }}
-
 ### TextPlots
 
 [TextPlots Packge Page](https://github.com/sunetos/TextPlots.jl).
