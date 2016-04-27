@@ -1,8 +1,7 @@
-Julia is a high-level, high-performance dynamic programming language for technical computing. 
-This site is a non official series of examples of Julia.
+Set of unofficial examples of Julia the high-level, high-performance dynamic programming language for technical computing.
 
 Below are a series of examples of common operations in Julia. They assume you already have Julia installed and working
-(the examples are currently tested with **Julia v0.3.7**).
+(the examples are currently tested with **Julia v0.4.5**).
 
 [![Build Status](https://travis-ci.org/samuelcolvin/JuliaByExample.svg?branch=master)](https://travis-ci.org/samuelcolvin/JuliaByExample)
  

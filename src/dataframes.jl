@@ -148,15 +148,3 @@ insert!(iris, 5, rand(nrow(iris)), :randCol)
 
 # remove it
 delete!(iris, :randCol)
-
-# # Same for rows
-# # push!(df::DataFrame,iterable)
-# # push an iterable as last row onto a dataframe:
-# push!(iris, [4, 2, 1.5, 100.1, "alienSpecies"])
-
-# # show last few rows
-# tail(iris)
-
-# # delete row with "alienSpecies"
-# deleterows!(iris, findin(iris[:Species], ["alienSpecies"]))
-# tail(iris)
