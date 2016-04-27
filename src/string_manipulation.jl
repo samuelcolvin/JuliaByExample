@@ -67,10 +67,10 @@ r = split("hello, there,bob", ',')
 show(r); println() #> ["hello"," there","bob"]
 r = split("hello, there,bob", ", ")
 show(r); println() #> ["hello","there,bob"]
-r = split("hello, there,bob", [',', ' '], 0, false)
+r = split("hello, there,bob", [',', ' '], limit=0, keep=false)
 show(r); println() #> ["hello","there","bob"]
 # (the last two arguements are limit and include_empty, see docs)
 
 # the opposite of split: [join](http://docs.julialang.org/en/latest/stdlib/base/#Base.join) is simply
-r= join([1:10], ", ")
+r= join(collect(1:10), ", ")
 println(r) #> 1, 2, 3, 4, 5, 6, 7, 8, 9, 10

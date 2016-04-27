@@ -99,8 +99,8 @@ showln(by(iris, :Species, df -> size(df, 1)))
 #> | 3     | "virginica"  | 50 |
 
 # Discretize entire columns at a time
-iris[:SepalLength] = iround(iris[:SepalLength])
-iris[:SepalWidth] = iround(iris[:SepalWidth])
+iris[:SepalLength] = round(Integer, iris[:SepalLength])
+iris[:SepalWidth] = round(Integer, iris[:SepalWidth])
 
 
 # Tabulate data according to discretized columns to see "clusters"
@@ -148,15 +148,3 @@ insert!(iris, 5, rand(nrow(iris)), :randCol)
 
 # remove it
 delete!(iris, :randCol)
-
-# Same for rows
-# push!(df::DataFrame,iterable)
-# push an iterable as last row onto a dataframe:
-push!(iris, [4, 2, -1.5, 100.1, "alienSpecies"])
-
-# show last few rows
-tail(iris)
-
-# delete row with "alienSpecies"
-deleterows!(iris, findin(iris[:Species], ["alienSpecies"]))
-tail(iris)

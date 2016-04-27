@@ -21,7 +21,7 @@ end
 println() #> 1, 2, 3, 4, 
 
 # **continue** and **break** work in the same way as python
-a2 = [1:20]
+a2 = collect(1:20)
 for i in a2
     if i % 2 != 0
         continue
@@ -40,7 +40,7 @@ while !isempty(a1)
 end
 println() #> 4, 3, 2, 1,
 
-d1 = {1=>"one", 2=>"two", 3=>"three"}
+d1 = Dict(1=>"one", 2=>"two", 3=>"three")
 # dicts may be looped through using the keys function:
 for k in sort(collect(keys(d1)))
     print(k, ": ", d1[k], ", ")

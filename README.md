@@ -21,7 +21,7 @@ examples please submit a pull request.
 
 To build (first setup your `env` with `deps/requirements.txt`): 
 
-    python deps/build
+    python deps/build.py
 
 To deploy:
 

@@ -1,9 +1,5 @@
 using Base.Test
 
-# have to prevent Bokeh trying to open a browser window as it hands on travis
-using Bokeh
-Bokeh.noshow(true)
-
 function print_evalfile(fdir, fname)
     println("EVALUATING ", fname, ":\n*************")
     result = evalfile(joinpath(fdir, fname))
