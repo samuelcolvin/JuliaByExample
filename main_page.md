@@ -121,16 +121,6 @@ Matlab-like plotting. Installed via `Pkg.add("Winston")`
 
 {{ src_image('winston.svg') }}
 
-#### Gadfly
-
-[Gadfly Package Page](https://github.com/dcjones/Gadfly.jl)
-
-ggplot2-like plotting. Installed via `Pkg.add("Gadfly")`
-
-{{ code_file('gadfly.jl') }}
-
-{{ src_image('gadfly.png') }}
-
 ### DataFrames
 
 The [DataFrames.jl package](https://github.com/JuliaStats/DataFrames.jl) provides tool for working with tabular data.

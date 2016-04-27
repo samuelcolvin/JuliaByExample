@@ -7,9 +7,9 @@ function printsum(a)
 end
 # </hide>
 
-m1 = hcat(repeat([1:2],inner=[1],outer=[3*2]),
-		  repeat([1:3],inner=[2],outer=[2]),
-		  repeat([1:4],inner=[3],outer=[1]))
+m1 = hcat(repeat([1,2],inner=[1],outer=[3*2]),
+		  repeat([1,2,3],inner=[2],outer=[2]),
+		  repeat([1,2,3,4],inner=[3],outer=[1]))
 printsum(m1)
 #> 12x3 Array{Int64,2}: [1 1 1
 #>  2 1 1
@@ -65,7 +65,7 @@ findmax(m4,3)	# find the max elt and its index along dim 2 (available only in ve
 # so that the sizes match up. broadcast operators are preceded by a dot: 
 
 m4 .+ 3		# add 3 to all elements
-m4 .+ [1:2]		# adds vector [1,2] to all elements along first dim
+m4 .+ [1,2]		# adds vector [1,2] to all elements along first dim
 
 # slices and views
 m4[:,:,1]	# holds dim 3 fixed and displays the resulting view
