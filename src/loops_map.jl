@@ -58,4 +58,4 @@ println() #> 1: one, 2: two, 3: three,
 
 # [map]() works as you might expect performing the given function on each member of an array or iter much like comprehensions
 a4 = map((x) -> x^2, [1, 2, 3, 7])
-printsum(a4) #> 4-element Array{Int64,1}: [1,4,9,49]
+print(a4) #> 4-element Array{Int64,1}: [1,4,9,49]
