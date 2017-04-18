@@ -1,4 +1,4 @@
-# strings can be converted using [float](http://julia.readthedocs.org/en/latest/stdlib/base/#Base.float) and [int](http://julia.readthedocs.org/en/latest/stdlib/base/#Base.int):
+# strings can be converted using [float](http://julia.readthedocs.org/en/latest/stdlib/base/#Base.float) and [parse](http://julia.readthedocs.org/en/latest/stdlib/numbers/#Base.parse):
 e_str1 = "2.718"
 e = float(e_str1)
 println(5e)
