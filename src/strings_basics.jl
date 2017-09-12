@@ -48,10 +48,10 @@ show(s1[end-10:end]); println()
 #> "dog α,β,γ"
 
 # julia allows string [Interpolation](http://julia.readthedocs.org/en/latest/manual/strings/#interpolation):
-a = "wolcome"
+a = "welcome"
 b = "julia"
 println("$a to $b.")
-#> wolcome to julia.
+#> welcome to julia.
 
 # this can extend to evaluate statements:
 println("1 + 2 = $(1 + 2)")
