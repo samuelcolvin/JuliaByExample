@@ -44,7 +44,7 @@ println(r)
 
 # [eachmatch](http://julia.readthedocs.org/en/latest/stdlib/base/#Base.eachmatch) returns an iterator over all the matches
 r = eachmatch(r"[\w]{4,}", s1)
-for(i in r) print("\"$(i.match)\" ") end
+for i in r print("\"$(i.match)\" ") end
 println()
 #> "quick" "brown" "jumps" "over" "lazy" 
 
