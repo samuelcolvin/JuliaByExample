@@ -63,6 +63,6 @@ printsum(a6)
 a7 = repeat(a1,inner=[2],outer=[1])
 printsum(a7)
 #> 8-element Array{Int64,1}: [1,1,2,2,3,3,4,4]
-a8 = repeat([4:-1:1],inner=[1],outer=[2])
+a8 = repeat(collect(4:-1:1),inner=[1],outer=[2])
 printsum(a8)
 #> 8-element Array{Int64,1}: [4,3,2,1,4,3,2,1]
