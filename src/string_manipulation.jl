@@ -44,7 +44,7 @@ println(r)
 
 # [eachmatch](http://julia.readthedocs.org/en/latest/stdlib/base/#Base.eachmatch) returns an iterator over all the matches
 r = eachmatch(r"[\w]{4,}", s1)
-for(i in r) print("\"$(i.match)\" ") end
+for i in r print("\"$(i.match)\" ") end
 println()
 #> "quick" "brown" "jumps" "over" "lazy" 
 
@@ -72,5 +72,5 @@ show(r); println() #> ["hello","there","bob"]
 # (the last two arguements are limit and include_empty, see docs)
 
 # the opposite of split: [join](http://docs.julialang.org/en/latest/stdlib/base/#Base.join) is simply
-r= join(collect(1:10), ", ")
+r = join(collect(1:10), ", ")
 println(r) #> 1, 2, 3, 4, 5, 6, 7, 8, 9, 10

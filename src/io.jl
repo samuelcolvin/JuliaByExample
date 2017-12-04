@@ -13,14 +13,14 @@ end
 
 f = open(fname,"r")
 showall(readlines(f))
-#> Union(ASCIIString,UTF8String)["this is a simple file containing\n","text and numbers:\n","43.3\n","17\n"]
+#> String["this is a simple file containing","text and numbers:","43.3","17"]
 close(f)
 
 f = open(fname,"r")
-fstring = readall(f)
+fstring = readstring(f)
 close(f)
 println(summary(fstring))
-#> ASCIIString
+#> String
 print(fstring)
 #> this is a simple file containing
 #> text and numbers:
@@ -40,6 +40,6 @@ close(f)
 # "do" above just creates an anonymous function and passes it to open
 # we can use the same logic to pass readall and thereby succinctly
 # open, read and close a file in one line
-outfile_content = open(readall, outfile, "r")
+outfile_content = open(readstring, outfile, "r")
 println(repr(outfile_content))
 #> "some content\nmore content more on the same line"
