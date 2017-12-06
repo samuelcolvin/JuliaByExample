@@ -11,18 +11,7 @@ m1 = hcat(repeat([1,2],inner=[1],outer=[3*2]),
 		  repeat([1,2,3],inner=[2],outer=[2]),
 		  repeat([1,2,3,4],inner=[3],outer=[1]))
 printsum(m1)
-#> 12x3 Array{Int64,2}: [1 1 1
-#>  2 1 1
-#>  1 2 1
-#>  2 2 2
-#>  1 3 2
-#>  2 3 2
-#>  1 1 3
-#>  2 1 3
-#>  1 2 3
-#>  2 2 4
-#>  1 3 4
-#>  2 3 4]
+#> 12×3 Array{Int64,2}: [1 1 1; 2 1 1; 1 2 1; 2 2 2; 1 3 2; 2 3 2; 1 1 3; 2 1 3; 1 2 3; 2 2 4; 1 3 4; 2 3 4]
 
 # for simple repetitions of arrays,
 # use repmat
@@ -38,10 +27,13 @@ println("size: ", size(m3))
 # multidimensional arrays
 
 m4 = [i+j+k for i=1:2, j=1:3, k=1:2]	# creates a 2x3x2 array of Int64
-m5 = ["Hi Im # $(i+2*(j-1 + 3*(k-1)))" for i=1:2, j=1:3, k=1:2]	# expressions are very flexible
+m5 = ["Hi Im # $(i+2*(j-1 + 3*(k-1)))" for i=1:2, j=1:3, k=1:2]	
+# expressions are very flexible
 # you can specify the type of the array by just 
 # placing it in front of the expression
-m5 = ASCIIString["Hi Im element # $(i+2*(j-1 + 3*(k-1)))" for i=1:2, j=1:3, k=1:2]
+Pkg.add("LegacyStrings")
+import LegacyStrings
+m5 = LegacyStrings.ASCIIString["Hi Im element # $(i+2*(j-1 + 3*(k-1)))" for i=1:2, j=1:3, k=1:2]
 printsum(m5)
 #> 2x3x2 Array{ASCIIString,3}: ASCIIString["Hi Im element # 1" "Hi Im element # 3" "Hi Im element # 5"
 #>             "Hi Im element # 2" "Hi Im element # 4" "Hi Im element # 6"]
@@ -57,7 +49,7 @@ sum(m4,3)		# takes the sum over the third dimension
 sum(m4,(1,3))	# sum over first and third dim
 
 maximum(m4,2)	# find the max elt along dim 2
-findmax(m4,3)	# find the max elt and its index along dim 2 (available only in very recent Julia versions)
+findmax(m4,3)	# find the max elt and its index along dim 3 (available only in very recent Julia versions)
 
 # Broadcasting
 # when you combine arrays of different sizes in an operation,
@@ -68,7 +60,7 @@ m4 .+ 3		# add 3 to all elements
 m4 .+ [1,2]		# adds vector [1,2] to all elements along first dim
 
 # slices and views
-m4[:,:,1]	# holds dim 3 fixed and displays the resulting view
+m4=m4[:,:,1]	# holds dim 3 fixed 
 m4[:,2,:]	# that's a 2x1x2 array. not very intuititive to look at
 
 # get rid of dimensions with size 1:
