@@ -23,9 +23,9 @@ showln(df[:B])
 #> [2.718281828459045,3.141592653589793]
 
 showln(df[3])
-#> ASCIIString["xx","xy"]
+#> String["xx","xy"]
 showln(df[:C])
-#> ASCIIString["xx","xy"]
+#> String["xx","xy"]
 
 # The rows of a DataFrame can be indexed only by using numbers
 showln(df[1, :])
@@ -47,12 +47,12 @@ showln(df[1:2, :])
 iris = readtable("iris.csv")
 
 # the iris dataset (and plenty of others) is also available from
-using RDatasets
+using RData, RDatasets
 iris = dataset("datasets","iris")
 
 # you can directly import your own R .rda dataframe with
 # mydf = DataFrame(read_rda("path/to/your/df.rda")["name_of_df"]), e.g.
-diamonds = DataFrame(read_rda(joinpath(Pkg.dir("RDatasets"),"data","ggplot2","diamonds.rda"))["diamonds"])
+diamonds = DataFrame(load(joinpath(Pkg.dir("RDatasets"),"data","ggplot2","diamonds.rda"))["diamonds"])
 
 # showing DataFrames
 # ------------------
@@ -99,8 +99,8 @@ showln(by(iris, :Species, df -> size(df, 1)))
 #> | 3     | "virginica"  | 50 |
 
 # Discretize entire columns at a time
-iris[:SepalLength] = round(Integer, iris[:SepalLength])
-iris[:SepalWidth] = round(Integer, iris[:SepalWidth])
+iris[:SepalLength] = round.(Integer, iris[:SepalLength])
+iris[:SepalWidth] = round.(Integer, iris[:SepalWidth])
 
 
 # Tabulate data according to discretized columns to see "clusters"
