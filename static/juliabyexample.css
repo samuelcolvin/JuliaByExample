@@ -1,0 +1,141 @@
+.git-link {
+  margin-right: 30px;
+}
+
+.git-link, .download-link {
+  float: right;
+  color: black;
+  font-size: 90%;
+  text-decoration: underline;
+}
+
+.nav .git-link {
+  margin-right: 0;
+}
+
+.hlink {
+  font-size: 12pt;
+  margin-left: 5px;
+  display: none;
+}
+
+h1:hover .hlink, h2:hover .hlink, h3:hover .hlink, h4:hover .hlink, h5:hover .hlink, h6:hover .hlink {
+  display: inline-block;
+  text-decoration: none;
+}
+
+.download-link {
+  font-size: 170%;
+  padding: 4px;
+  margin-right: 8px;
+}
+
+a.download-link:hover, a.download-link:focus {
+  color: black;
+  text-decoration: none;
+}
+
+.git-link img {
+  width: 25px;
+  height: 25px;
+  margin-top: 6px;
+}
+
+.navbar {
+  background-color: white;
+  border-radius: 15px 15px 0 0;
+  margin-right: -15px;
+  margin-left: -15px;
+}
+
+.navbar-collapse {
+  padding: 0px 20px;
+}
+
+.navbar-default .navbar-brand {
+  color: black;
+}
+.navbar-default .navbar-nav>.active>a, .navbar-default .navbar-nav>.active>a:hover, .navbar-default .navbar-nav>.active>a:focus {
+  background-color: white;
+  font-weight: 700;
+}
+
+.navbar .git-link {
+  padding-bottom: 5px;
+  padding-top: 7px;
+}
+
+.container {
+  background-color: #eee;
+  margin-top: 60px;
+  margin-bottom: 100px;
+  box-shadow: 0 0 30px #aaa;
+  border: 1px solid #ccc;
+  border-radius: 15px;
+}
+
+.content {
+  padding: 0px 0px 50px 20px;
+}
+
+pre {
+  background-color: white;
+  overflow: visible;
+}
+
+.sidebar {
+  margin-top: 5px;
+}
+
+.sidebar.affix {
+  position: fixed;
+  top: 0px;
+  width: 17%;
+}
+
+.sidebar.affix a:hover, .sidebar.affix a:focus {
+  background: none !important;
+}
+
+.sidebar a {
+  color: #666;
+  padding: 4px 15px !important;
+}
+
+.sidebar .active a {
+  font-weight: 700;
+  color: black;
+}
+
+.source-image, .source-iframe {
+  width: 100%;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  background-color: white;
+}
+
+.source-iframe {
+  height: 400px;
+}
+
+.code .c {
+  font-style: normal;
+}
+
+@media (max-width: 760px){
+  .container {
+    margin-top: 0px;
+    box-shadow: none;
+    border: none;
+    border-radius: 0px;
+    margin-bottom: 0px;
+  }
+  
+  .navbar {
+    border-radius: 0px;
+  }
+  
+  .content {
+    padding: 0px 10px;
+  }
+}
