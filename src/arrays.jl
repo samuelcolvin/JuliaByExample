@@ -38,9 +38,11 @@ printsum(a5)
 a6 = (Array{Int64, 1})[]
 printsum(a6)
 #> 0-element Array{Array{Int64,1},1}: []
-# (note this is a "jagged array" (i.e., an array of arrays), not a [multidimensional array](http://julia.readthedocs.org/en/latest/manual/arrays/), these are not covered here)
+# (note this is a "jagged array" (i.e., an array of arrays), not a [multidimensional array](http://julia.readthedocs.org/en/latest/manual/arrays/),
+# these are not covered here)
 
-# Julia provided a number of ["Dequeue"](http://docs.julialang.org/en/latest/stdlib/base/#dequeues) functions, the most common for appending to the end of arrays is [**push!**](http://docs.julialang.org/en/latest/stdlib/base/#Base.push!)
+# Julia provided a number of ["Dequeue"](http://docs.julialang.org/en/latest/stdlib/base/#dequeues) functions, the most common for appending to the end of arrays
+# is [**push!**](http://docs.julialang.org/en/latest/stdlib/base/#Base.push!)
 # ! at the end of a function name indicates that the first argument is updated.
 
 push!(a1, 4)

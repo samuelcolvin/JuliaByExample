@@ -23,21 +23,22 @@ m3 = repmat(m1,2,1) 	# replicate a9 twice into dim1 and once into dim2
 println("size: ", size(m3))
 #> size: (24,3)
 
-# Julia comprehensions are another way to easily create 
+# Julia comprehensions are another way to easily create
 # multidimensional arrays
 
 m4 = [i+j+k for i=1:2, j=1:3, k=1:2]	# creates a 2x3x2 array of Int64
-m5 = ["Hi Im # $(i+2*(j-1 + 3*(k-1)))" for i=1:2, j=1:3, k=1:2]	
+m5 = ["Hi Im # $(i+2*(j-1 + 3*(k-1)))" for i=1:2, j=1:3, k=1:2]
 # expressions are very flexible
-# you can specify the type of the array by just 
+# you can specify the type of the array by just
 # placing it in front of the expression
 Pkg.add("LegacyStrings")
 import LegacyStrings
 m5 = LegacyStrings.ASCIIString["Hi Im element # $(i+2*(j-1 + 3*(k-1)))" for i=1:2, j=1:3, k=1:2]
 printsum(m5)
-#> 2x3x2 Array{LegacyStrings.ASCIIString,3}: LegacyStrings.ASCIIString["Hi Im element # 7" "Hi Im element # 9" "Hi Im element # 11"
+#> 2x3x2 Array{LegacyStrings.ASCIIString,3}: LegacyStrings.ASCIIString["Hi Im element # 7"
+#> "Hi Im element # 9" "Hi Im element # 11"
 #>             "Hi Im element # 8" "Hi Im element # 10" "Hi Im element # 12"]
-#> 
+#>
 #> LegacyStrings.ASCIIString["Hi Im element # 7" "Hi Im element # 9" "Hi Im element # 11"
 #>             "Hi Im element # 8" "Hi Im element # 10" "Hi Im element # 12"]
 
@@ -54,13 +55,13 @@ findmax(m4,3)	# find the max elt and its index along dim 3 (available only in ve
 # Broadcasting
 # when you combine arrays of different sizes in an operation,
 # an attempt is made to "spread" or "broadcast" the smaller array
-# so that the sizes match up. broadcast operators are preceded by a dot: 
+# so that the sizes match up. broadcast operators are preceded by a dot:
 
 m4 .+ 3		# add 3 to all elements
 m4 .+ [1,2]		# adds vector [1,2] to all elements along first dim
 
 # slices and views
-m4=m4[:,:,1]	# holds dim 3 fixed 
+m4=m4[:,:,1]	# holds dim 3 fixed
 m4[:,2,:]	# that's a 2x1x2 array. not very intuititive to look at
 
 # get rid of dimensions with size 1:
@@ -71,7 +72,7 @@ m4[:,:,1] = rand(1:6,2,3)
 printsum(m4)
 #> 2x3x2 Array{Int64,3}: [3 5 2
 #>  2 2 2]
-#> 
+#>
 #> [4 5 6
 #>  5 6 7]
 
