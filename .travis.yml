@@ -3,4 +3,4 @@ julia:
   - 1.0.0
 script:
   - if [[ -a .git/shallow ]]; then git fetch --unshallow; fi
-  - xvfb-run julia -e 'using Pkg; Pkg.build(); Pkg.test()';
+  - xvfb-run julia -e 'using Pkg; Pkg.build($pkgname); Pkg.test($pkgname)';
