@@ -1,6 +1,6 @@
 language: julia
 julia:
-  - release
+  - 1.0.0
 script:
   - if [[ -a .git/shallow ]]; then git fetch --unshallow; fi
-  - xvfb-run julia -e 'Pkg.clone(pwd()); Pkg.build("JuliaByExample"); Pkg.test("JuliaByExample")';
+  - xvfb-run julia -e 'using Pkg; Pkg.build(); Pkg.test()';
