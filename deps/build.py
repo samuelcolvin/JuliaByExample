@@ -141,11 +141,14 @@ class SiteGenerator(object):
         page_text = template.render(examples=examples, tags=self.tags, **self.ctx)
         file_name = 'index.html'
         page_path = os.path.join(WWW_PATH, file_name)
-        open(page_path, 'w').write(page_text.encode('utf8'))
+        with open(page_path, 'w', encoding="UTF8") as f:
+            f.write(page_text)
+
         self._output('generated %s' % file_name)
 
     def test_for_missing_files(self, example_dir):
-        desc_text = open(os.path.join(PROJ_ROOT, 'main_page.md')).read()
+        with open(os.path.join(PROJ_ROOT, 'main_page.md'), encoding="UTF8") as f:
+            desc_text = f.read()
         quoted_files = set(re.findall("{{ *code_file\( *'(.*?)' *\) *}}", desc_text))
         actual_files = set([fn for fn in os.listdir(example_dir) if
                             fn.endswith('.jl') and fn not in ['addcomments.jl', 'test_examples.jl']])
@@ -173,7 +176,8 @@ class SiteGenerator(object):
     def generate_pyg_css(self):
         pyg_css = HtmlFormatter().get_style_defs('.code')
         file_path = os.path.join(WWW_STATIC_PATH, 'pygments.css')
-        open(file_path, 'w').write(pyg_css.encode('utf8'))
+        with open(file_path, 'w', encoding="UTF8") as f:
+            f.write(pyg_css)
 
     def download_libraries(self):
         grablib_path = os.path.join(THIS_PATH, 'grablib.json')
@@ -182,14 +186,14 @@ class SiteGenerator(object):
         grablib.grab(grablib_path, libs_root=libs_root)
 
     def _output(self, msg):
-        print msg
+        print(msg)
 
 
 def list_examples_by_size(examples_dir='src'):
     path = os.path.join(PROJ_ROOT, examples_dir)
     files = [(os.path.getsize(os.path.join(path, fn)), fn) for fn in os.listdir(path)]
     files.sort()
-    print ''.join(['\n\n#### %s\n\n{{ code_file(\'%s\') }} ' % (fn, fn) for _, fn in files if fn.endswith('.jl')])
+    print(''.join(['\n\n#### %s\n\n{{ code_file(\'%s\') }} ' % (fn, fn) for _, fn in files if fn.endswith('.jl')]))
 
 
 if __name__ == '__main__':
@@ -197,4 +201,4 @@ if __name__ == '__main__':
         list_examples_by_size()
     else:
         SiteGenerator()
-        print 'Successfully generated site at %s' % WWW_PATH
+        print('Successfully generated site at %s' % WWW_PATH)
