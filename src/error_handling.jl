@@ -1,8 +1,7 @@
-a=[]
-# [try, catch](http://julia.readthedocs.org/en/latest/manual/control-flow/#the-try-catch-statement) can be used to deal with errors as with many other languages
+# [try, catch](https://docs.julialang.org/en/v1/manual/control-flow/#The-try/catch-statement-1) can be used to deal with errors as with many other languages
 try
     push!(a,1)
 catch err
-    showerror(STDOUT, err, backtrace());println()
+    showerror(stdout, err, backtrace());println()
 end
 println("Continuing after error")

@@ -1,7 +1,7 @@
 
-# [function](http://docs.julialang.org:8000/en/latest/manual/functions/#functions) to calculate the volume of a sphere
+# [function](https://docs.julialang.org/en/v1/manual/functions/#man-functions-1) to calculate the volume of a sphere
 function sphere_vol(r)
-    # julia allows [Unicode names](http://docs.julialang.org/en/latest/manual/unicode-input/) (in UTF-8 encoding)
+    # julia allows [Unicode names](https://docs.julialang.org/en/v1/manual/unicode-input/#Unicode-Input-1) (in UTF-8 encoding)
     # so either "pi" or the symbol π can be used
     return 4/3*pi*r^3
 end
@@ -9,7 +9,7 @@ end
 # functions can also be defined more succinctly
 quadratic(a, sqr_term, b) = (-b + sqr_term) / 2a
 
-# calculates x for 0 = a*x^2+b*x+c, [arguments types](TODO: links) can be defined in function definitions
+# calculates x for 0 = a*x^2+b*x+c, [arguments types](https://docs.julialang.org/en/v1/manual/functions/#Further-Reading-1) can be defined in function definitions
 function quadratic2(a::Float64, b::Float64, c::Float64)
     # unlike other languages 2a is equivalent to 2*a
     # a^2 is used instead of a**2 or pow(a,2)
@@ -17,12 +17,13 @@ function quadratic2(a::Float64, b::Float64, c::Float64)
     r1 = quadratic(a, sqr_term, b)
     r2 = quadratic(a, -sqr_term, b)
     # multiple values can be returned from a function using tuples
-    # if the [return](http://docs.julialang.org:8000/en/latest/manual/functions/#the-return-keyword) keyword is omitted, the last term is returned
+    # if the [return](https://docs.julialang.org/en/v1/manual/functions/#The-return-Keyword-1) keyword is omitted, the last term is returned
     r1, r2
 end
 
 vol = sphere_vol(3)
 # @printf allows number formatting but does not automatically append the \n to statements, see below
+using Printf
 @printf "volume = %0.3f\n" vol 
 #> volume = 113.097
 

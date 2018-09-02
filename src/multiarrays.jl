@@ -14,12 +14,12 @@ printsum(m1)
 #> 12×3 Array{Int64,2}: [1 1 1; 2 1 1; 1 2 1; 2 2 2; 1 3 2; 2 3 2; 1 1 3; 2 1 3; 1 2 3; 2 2 4; 1 3 4; 2 3 4]
 
 # for simple repetitions of arrays,
-# use repmat
-m2 = repmat(m1,1,2) 	# replicate a9 once into dim1 and twice into dim2
+# use repeat
+m2 = repeat(m1,1,2) 	# replicate a9 once into dim1 and twice into dim2
 println("size: ", size(m2))
 #> size: (12,6)
 
-m3 = repmat(m1,2,1) 	# replicate a9 twice into dim1 and once into dim2
+m3 = repeat(m1,2,1) 	# replicate a9 twice into dim1 and once into dim2
 println("size: ", size(m3))
 #> size: (24,3)
 
@@ -31,6 +31,7 @@ m5 = ["Hi Im # $(i+2*(j-1 + 3*(k-1)))" for i=1:2, j=1:3, k=1:2]
 # expressions are very flexible
 # you can specify the type of the array by just
 # placing it in front of the expression
+using Pkg
 Pkg.add("LegacyStrings")
 import LegacyStrings
 m5 = LegacyStrings.ASCIIString["Hi Im element # $(i+2*(j-1 + 3*(k-1)))" for i=1:2, j=1:3, k=1:2]
@@ -46,11 +47,11 @@ printsum(m5)
 # many functions in Julia have an array method
 # to be applied to specific dimensions of an array:
 
-sum(m4,3)		# takes the sum over the third dimension
-sum(m4,(1,3))	# sum over first and third dim
+sum(m4, dims=3)		# takes the sum over the third dimension
+sum(m4, dims=(1,3))	# sum over first and third dim
 
-maximum(m4,2)	# find the max elt along dim 2
-findmax(m4,3)	# find the max elt and its index along dim 3 (available only in very recent Julia versions)
+maximum(m4, dims=2)	# find the max elt along dim 2
+findmax(m4, dims=3)	# find the max elt and its index along dim 3 (available only in very recent Julia versions)
 
 # Broadcasting
 # when you combine arrays of different sizes in an operation,
@@ -65,7 +66,7 @@ m4=m4[:,:,1]	# holds dim 3 fixed
 m4[:,2,:]	# that's a 2x1x2 array. not very intuititive to look at
 
 # get rid of dimensions with size 1:
-squeeze(m4[:,2,:],2)	# that's better
+dropdims(m4[:,2,:], dims=2)	# that's better 
 
 # assign new values to a certain view
 m4[:,:,1] = rand(1:6,2,3)

@@ -1,8 +1,9 @@
 # You might not want to run this file completely, as the Pkg-commands can take a
 # long time to complete.
+using Pkg
 
 # list all available packages:
-Pkg.available()
+#Pkg.available()
 
 # install one package (e.g. [Calculus](https://github.com/johnmyleswhite/Calculus.jl)) and all its dependencies:
 Pkg.add("Calculus")

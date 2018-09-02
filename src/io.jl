@@ -1,9 +1,9 @@
 fname = "simple.dat"
-# using [do](http://julia.readthedocs.org/en/latest/manual/functions/#block-syntax-for-function-arguments) means the file is closed automatically
+# using [do](https://docs.julialang.org/en/v1/manual/functions/#Do-Block-Syntax-for-Function-Arguments-1) means the file is closed automatically
 # in the same way "with" does in python
 open(fname,"r") do f
 	for line in eachline(f)
-	    print(line)
+	    println(line)
 	end
 end
 #> this is a simple file containing
@@ -12,12 +12,12 @@ end
 #> 17
 
 f = open(fname,"r")
-showall(readlines(f))
 #> String["this is a simple file containing","text and numbers:","43.3","17"]
+show(readlines(f)); println()
 close(f)
 
 f = open(fname,"r")
-fstring = readstring(f)
+fstring = read(f, String)
 close(f)
 println(summary(fstring))
 #> String
@@ -40,6 +40,6 @@ close(f)
 # "do" above just creates an anonymous function and passes it to open
 # we can use the same logic to pass readall and thereby succinctly
 # open, read and close a file in one line
-outfile_content = open(readstring, outfile, "r")
+outfile_content = open(f->read(f, String), outfile, "r")
 println(repr(outfile_content))
 #> "some content\nmore content more on the same line"

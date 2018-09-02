@@ -1,5 +1,5 @@
 function printsum(a)
-    # [summary](http://julia.readthedocs.org/en/latest/stdlib/base/#Base.summary) generates a summary of an object
+    # [summary](https://docs.julialang.org/en/v1/base/io-network/#Base.summary) generates a summary of an object
     println(summary(a), ": ", repr(a))
 end
 
@@ -29,7 +29,7 @@ a4 = collect(1:20)
 printsum(a4)
 #> 20-element Array{Int64,1}: [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20]
 
-# arrays can also be generated from [comprehensions](http://julia.readthedocs.org/en/latest/manual/arrays/#comprehensions):
+# arrays can also be generated from [comprehensions](https://docs.julialang.org/en/v1/manual/arrays/#Comprehensions-1):
 a5 = [2^i for i = 1:10]
 printsum(a5)
 #> 10-element Array{Int64,1}: [2,4,8,16,32,64,128,256,512,1024]
@@ -38,11 +38,11 @@ printsum(a5)
 a6 = (Array{Int64, 1})[]
 printsum(a6)
 #> 0-element Array{Array{Int64,1},1}: []
-# (note this is a "jagged array" (i.e., an array of arrays), not a [multidimensional array](http://julia.readthedocs.org/en/latest/manual/arrays/),
+# (note this is a "jagged array" (i.e., an array of arrays), not a [multidimensional array](https://docs.julialang.org/en/v1/manual/arrays/),
 # these are not covered here)
 
-# Julia provided a number of ["Dequeue"](http://docs.julialang.org/en/latest/stdlib/base/#dequeues) functions, the most common for appending to the end of arrays
-# is [**push!**](http://docs.julialang.org/en/latest/stdlib/base/#Base.push!)
+# Julia provided a number of ["Dequeue"](https://docs.julialang.org/en/v1/base/collections/#Dequeues-1) functions, the most common for appending to the end of arrays
+# is [**push!**](https://docs.julialang.org/en/v1/base/collections/#Base.push!)
 # ! at the end of a function name indicates that the first argument is updated.
 
 push!(a1, 4)

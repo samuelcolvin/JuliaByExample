@@ -1,7 +1,7 @@
 Set of unofficial examples of Julia the high-level, high-performance dynamic programming language for technical computing.
 
 Below are a series of examples of common operations in Julia. They assume you already have Julia installed and working
-(the examples are currently tested with **Julia v0.6.2**).
+(the examples are currently tested with **Julia v1.0.0**).
 
 [![Build Status](https://travis-ci.org/samuelcolvin/JuliaByExample.svg?branch=master)](https://travis-ci.org/samuelcolvin/JuliaByExample)
 
@@ -11,7 +11,7 @@ The simplest possible script.
 
 {{ code_file('hello_world.jl') }}
 
-With Julia [installed and added to your path](http://julialang.org/downloads/)
+With Julia [installed and added to your path](https://julialang.org/downloads/)
 this script can be run by `julia hello_world.jl`, it can also be run from REPL by typing
 `include("hello_world.jl")`, that will evaluate all valid expressions in that file and return the last output.
 
@@ -47,20 +47,20 @@ Collection of different string examples (string indexing is the same as array in
 ### Multidimensional Arrays
 
 Julia has very good multidimensional array capabilities.
-Check out [the manual](http://julia.readthedocs.org/en/latest/manual/arrays/).
+Check out [the manual](https://docs.julialang.org/en/v1/manual/arrays/).
 
 {{ code_file('multiarrays.jl') }}
 
 ### Dictionaries
 
-Julia uses [Dicts](http://docs.julialang.org/en/latest/stdlib/base/#associative-collections) as
+Julia uses [Dicts](https://docs.julialang.org/en/v1/base/collections/#Dictionaries-1) as
 associative collections. Usage is very like python except for the rather odd `=>` definition syntax.
 
 {{ code_file('dicts.jl') }}
 
 ### Loops and Map
 
-[For loops](http://julia.readthedocs.org/en/latest/manual/control-flow/#repeated-evaluation-loops)
+[For loops](https://docs.julialang.org/en/v1/manual/control-flow/#man-loops-1)
 can be defined in a number of ways.
 
 {{ code_file('loops_map.jl') }}
@@ -96,7 +96,7 @@ Examples of some of the main packages are given below.
 TODO:
 add comment about py plot
 
-PyPlot needs Python and matplotlib installed [matplotlib.pyplot docs](http://matplotlib.org/api/pyplot_api.html).
+PyPlot needs Python and matplotlib installed [matplotlib.pyplot docs](https://matplotlib.org/api/pyplot_api.html).
 -->
 
 #### Winston
@@ -115,5 +115,7 @@ The [DataFrames.jl package](https://github.com/JuliaStats/DataFrames.jl) provide
 
 The `iris.csv` file used in this example is available
 [from github](https://github.com/samuelcolvin/JuliaByExample/blob/master/common_usage/iris.csv).
+
+You may also need [CSV.jl package](https://github.com/JuliaData/CSV.jl) to read data from CSV file.
 
 {{ code_file('dataframes.jl') }}

@@ -3,7 +3,7 @@ showln(x) = (show(x); println())
 # TODO: needs more links to docs.
 
 # A DataFrame is an in-memory database
-df = DataFrame(A = [1, 2], B = [e, pi], C = ["xx", "xy"])
+df = DataFrame(A = [1, 2], B = [ℯ, π], C = ["xx", "xy"])
 showln(df)
 #> 2x3 DataFrame
 #> |-------|---|---------|------|
@@ -43,16 +43,18 @@ showln(df[1:2, :])
 # importing data into DataFrames
 # ------------------------------
 
-# DataFrames can be loaded from CSV files using readtable()
-iris = readtable("iris.csv")
+using CSV
+
+# DataFrames can be loaded from CSV files using CSV.read()
+iris = CSV.read("iris.csv")
 
 # the iris dataset (and plenty of others) is also available from
 using RData, RDatasets
 iris = dataset("datasets","iris")
 
 # you can directly import your own R .rda dataframe with
-# mydf = DataFrame(read_rda("path/to/your/df.rda")["name_of_df"]), e.g.
-diamonds = DataFrame(load(joinpath(Pkg.dir("RDatasets"),"data","ggplot2","diamonds.rda"))["diamonds"])
+# mydf = load("path/to/your/df.rda")["name_of_df"], e.g.
+diamonds = load(joinpath(dirname(pathof(RDatasets)),"..","data","ggplot2","diamonds.rda"))["diamonds"]
 
 # showing DataFrames
 # ------------------

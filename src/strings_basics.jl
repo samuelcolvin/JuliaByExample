@@ -4,8 +4,8 @@ s1 = "The quick brown fox jumps over the lazy dog α,β,γ"
 println(s1)
 #> The quick brown fox jumps over the lazy dog α,β,γ
 
-# [println](http://julia.readthedocs.org/en/latest/stdlib/base/#Base.println) adds a new line to the end of output
-# [print](http://julia.readthedocs.org/en/latest/stdlib/base/#Base.print) can be used if you dont want that:
+# [println](https://docs.julialang.org/en/v1/base/io-network/#Base.println) adds a new line to the end of output
+# [print](https://docs.julialang.org/en/v1/base/io-network/#Base.print) can be used if you dont want that:
 print("this")
 #> this
 print(" and")
@@ -35,7 +35,7 @@ println(s1_caps, "\n", s1_lower)
 #> the quick brown fox jumps over the lazy dog α,β,γ
 
 # sub strings can be indexed like arrays:
-# ([show](http://julia.readthedocs.org/en/latest/stdlib/base/#Base.show) prints the raw value)
+# ([show](https://docs.julialang.org/en/v1/base/io-network/#Base.show-Tuple{Any}) prints the raw value)
 show(s1[11]); println()
 #> 'b'
 
@@ -47,11 +47,11 @@ show(s1[1:10]); println()
 show(s1[end-10:end]); println()
 #> "dog α,β,γ"
 
-# julia allows string [Interpolation](http://julia.readthedocs.org/en/latest/manual/strings/#interpolation):
-a = "wolcome"
+# julia allows string [Interpolation](https://docs.julialang.org/en/v1/manual/strings/#string-interpolation-1):
+a = "welcome"
 b = "julia"
 println("$a to $b.")
-#> wolcome to julia.
+#> welcome to julia.
 
 # this can extend to evaluate statements:
 println("1 + 2 = $(1 + 2)")
