@@ -9,7 +9,7 @@ function removeold(code::String)
 	# end of the file so new output comments dont go on the same
 	# line as the last command
 	# endsnewline = endswith(code, "\n")
-	code=join(filter(x-> !beginswith(x, OUTPUT_COMMENTS), split(code, ['\n'])), "\n")
+	code=join(filter(x-> !startswith(x, OUTPUT_COMMENTS), split(code, ['\n'])), "\n")
 	return !endswith(code, "\n") ? string(code, "\n") : code
 end
 
@@ -19,18 +19,19 @@ function getoutput(code::String)
 	# variables from eval contaminate the function
 	# so we use the hack __var to avoid variable mixup
 	pos = 1
-	const STDOUT_OLD = STDOUT
-	output = (Int, String)[]
+	STDOUT_OLD = stdout
+	output = Tuple{Int64,String}[]
 	ns = Module()
 	begin
 		while true
-			statement, newpos = parse(code, pos, raise=false)
-			statement.head == :error ? break: (pos = newpos)
+			statement, newpos = Meta.parse(code, pos, raise=false)
+			# (statement.head == :error) ? break : (pos = newpos)
+			(statement == nothing) ? break : (pos = newpos)
 			stdout, stdin = redirect_stdout()
-			eval(ns, statement)
+			Core.eval(ns, statement)
 			redirect_stdout(STDOUT_OLD)
 			close(stdin)
-			result = readall(stdout)
+			result = read(stdout, String)
 			close(stdout)
 			if length(result) > 0
 				push!(output, (pos, result))
@@ -40,14 +41,14 @@ function getoutput(code::String)
 	return output
 end
 
-function insert_output(code::String, output::Array{(Int64,String), 1})
+function insert_output(code::String, output::Array{Tuple{Int64,String},1})
 	# insert the output from above back into the code after the 
 	# expression which created it
 	function tocomment(text::String)
 		stripped = strip(text, [' ', '\n', '\t'])
 		return length(stripped) == 0 ?
 			"\n" :
-			string(OUTPUT_COMMENTS, replace(stripped, "\n", "\n$OUTPUT_COMMENTS"), "\n")
+			string(OUTPUT_COMMENTS, replace(stripped, "\n" => "\n$OUTPUT_COMMENTS"), "\n")
 	end
 	reverse!(output)
 	for (pos, text) in output
@@ -69,7 +70,7 @@ function convertfile(fname::String)
 		println("## ERROR: the file \"$fname\" does not appear to be a julia file (i.e., it doesn't end with .jl)")
 		return
 	end
-	const code = removeold(open(readall, fname, "r"))
+	code = removeold(open(f->read(f, String), fname, "r"))
 	output = getoutput(code)
 	newcode = insert_output(code, output)
 	open(fname, "w") do f
