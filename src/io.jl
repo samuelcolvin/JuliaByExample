@@ -12,8 +12,8 @@ end
 #> 17
 
 f = open(fname,"r")
-#> String["this is a simple file containing","text and numbers:","43.3","17"]
 show(readlines(f)); println()
+#> ["this is a simple file containing", "text and numbers:", "43.3", "17"]
 close(f)
 
 f = open(fname,"r")

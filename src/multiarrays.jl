@@ -17,11 +17,11 @@ printsum(m1)
 # use repeat
 m2 = repeat(m1,1,2) 	# replicate a9 once into dim1 and twice into dim2
 println("size: ", size(m2))
-#> size: (12,6)
+#> size: (12, 6)
 
 m3 = repeat(m1,2,1) 	# replicate a9 twice into dim1 and once into dim2
 println("size: ", size(m3))
-#> size: (24,3)
+#> size: (24, 3)
 
 # Julia comprehensions are another way to easily create
 # multidimensional arrays
@@ -36,12 +36,11 @@ Pkg.add("LegacyStrings")
 import LegacyStrings
 m5 = LegacyStrings.ASCIIString["Hi Im element # $(i+2*(j-1 + 3*(k-1)))" for i=1:2, j=1:3, k=1:2]
 printsum(m5)
-#> 2x3x2 Array{LegacyStrings.ASCIIString,3}: LegacyStrings.ASCIIString["Hi Im element # 7"
-#> "Hi Im element # 9" "Hi Im element # 11"
-#>             "Hi Im element # 8" "Hi Im element # 10" "Hi Im element # 12"]
-#>
-#> LegacyStrings.ASCIIString["Hi Im element # 7" "Hi Im element # 9" "Hi Im element # 11"
-#>             "Hi Im element # 8" "Hi Im element # 10" "Hi Im element # 12"]
+#> 2×3×2 Array{LegacyStrings.ASCIIString,3}: LegacyStrings.ASCIIString["Hi Im element # 1" 
+#> 	"Hi Im element # 3" "Hi Im element # 5"; "Hi Im element # 2" "Hi Im element # 4" "Hi Im element # 6"]
+#> 
+#> LegacyStrings.ASCIIString["Hi Im element # 7" "Hi Im element # 9" "Hi Im element # 11"; 
+#> 	"Hi Im element # 8" "Hi Im element # 10" "Hi Im element # 12"]
 
 # Array reductions
 # many functions in Julia have an array method
@@ -71,11 +70,7 @@ dropdims(m4[:,2,:], dims=2)	# that's better
 # assign new values to a certain view
 m4[:,:,1] = rand(1:6,2,3)
 printsum(m4)
-#> 2x3x2 Array{Int64,3}: [3 5 2
-#>  2 2 2]
-#>
-#> [4 5 6
-#>  5 6 7]
+#> 2×3 Array{Int64,2}: [3 5 3; 1 3 5]
 
 # (for more examples of try, catch see Error Handling above)
 try
@@ -84,7 +79,7 @@ try
 catch err
 	println(err)
 end
-#> InexactError()
+#> InexactError(:Int64, Int64, 0.7603891754678744)
 
 try
 	# this will cause an error, you have to assign the right shape
@@ -92,4 +87,4 @@ try
 catch err
 	println(err)
 end
-#> DimensionMismatch("tried to assign 3x2 array to 2x3x1 destination")
+#> DimensionMismatch("tried to assign 3×2 array to 2×3×1 destination")

@@ -2,7 +2,7 @@
 e_str1 = "2.718"
 e = parse(Float64, e_str1)
 println(5e)
-#> 13.5914
+#> 13.59
 num_15 = parse(Int, "15")
 println(3num_15)
 #> 45
@@ -10,8 +10,8 @@ println(3num_15)
 # numbers can be converted to strings and formatted using [printf](https://docs.julialang.org/en/v1/stdlib/Printf/#Printf.@printf)
 using Printf
 @printf "e = %0.2f\n" e
-#> 2.718
-# or to create another string [sprintf](http://julia.readthedocs.org/en/latest/stdlib/base/#Base.@sprintf)
+#> e = 2.72
+# or to create another string [sprintf](https://docs.julialang.org/en/v1/stdlib/Printf/#Printf.@sprintf)
 e_str2 = @sprintf("%0.3f", e)
 
 # to show that the 2 strings are the same

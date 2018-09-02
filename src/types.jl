@@ -15,13 +15,13 @@ end
 
 p = Person("Julia", false, 4, 0)
 printsum(p)
-#> Person: Person("Julia",false,4.0,0)
+#> Person: Person("Julia", false, 4.0, 0)
 
 people = Person[]
 push!(people, Person("Steve", true, 42, 0))
 push!(people, Person("Jade", false, 17, 3))
 printsum(people)
-#> 2-element Array{Person,1}: [Person("Steve",true,42.0,0),Person("Jade",false,17.0,3)]
+#> 2-element Array{Person,1}: Person[Person("Steve", true, 42.0, 0), Person("Jade", false, 17.0, 3)]
 
 # types may also contains arrays and dicts
 # constructor functions can be defined to easily create objects
@@ -38,7 +38,7 @@ end
 
 fam1 = Family("blogs")
 println(fam1)
-#> Family("blogs",AbstractString[],false)
+#> Family("blogs", AbstractString[], false)
 fam2 = Family("jones", ["anna", "bob", "charlie", "dick"])
 println(fam2)
-#> Family("jones",AbstractString["anna","bob","charlie","dick"],true)
+#> Family("jones", AbstractString["anna", "bob", "charlie", "dick"], true)
