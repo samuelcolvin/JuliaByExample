@@ -1,7 +1,7 @@
 Set of unofficial examples of Julia the high-level, high-performance dynamic programming language for technical computing.
 
 Below are a series of examples of common operations in Julia. They assume you already have Julia installed and working
-(the examples are currently tested with **Julia v1.0.0**).
+(the examples are currently tested with **Julia v1.0.5**).
 
 [![Build Status](https://travis-ci.org/samuelcolvin/JuliaByExample.svg?branch=master)](https://travis-ci.org/samuelcolvin/JuliaByExample)
 
