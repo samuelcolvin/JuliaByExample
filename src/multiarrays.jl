@@ -36,11 +36,9 @@ Pkg.add("LegacyStrings")
 import LegacyStrings
 m5 = LegacyStrings.ASCIIString["Hi Im element # $(i+2*(j-1 + 3*(k-1)))" for i=1:2, j=1:3, k=1:2]
 printsum(m5)
-#> 2×3×2 Array{LegacyStrings.ASCIIString,3}: LegacyStrings.ASCIIString["Hi Im element # 1" 
-#> 	"Hi Im element # 3" "Hi Im element # 5"; "Hi Im element # 2" "Hi Im element # 4" "Hi Im element # 6"]
+#> 2×3×2 Array{LegacyStrings.ASCIIString,3}: LegacyStrings.ASCIIString["Hi Im element # 1" "Hi Im element # 3" "Hi Im element # 5"; "Hi Im element # 2" "Hi Im element # 4" "Hi Im element # 6"]
 #> 
-#> LegacyStrings.ASCIIString["Hi Im element # 7" "Hi Im element # 9" "Hi Im element # 11"; 
-#> 	"Hi Im element # 8" "Hi Im element # 10" "Hi Im element # 12"]
+#> LegacyStrings.ASCIIString["Hi Im element # 7" "Hi Im element # 9" "Hi Im element # 11"; "Hi Im element # 8" "Hi Im element # 10" "Hi Im element # 12"]
 
 # Array reductions
 # many functions in Julia have an array method

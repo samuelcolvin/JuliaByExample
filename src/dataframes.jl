@@ -5,11 +5,12 @@ showln(x) = (show(x); println())
 # A DataFrame is an in-memory database
 df = DataFrame(A = [1, 2], B = [ℯ, π], C = ["xx", "xy"])
 showln(df)
-#> 2×3 DataFrame
-#> │ Row │ A │ B       │ C  │
-#> ├─────┼───┼─────────┼────┤
-#> │ 1   │ 1 │ 2.71828 │ xx │
-#> │ 2   │ 2 │ 3.14159 │ xy │
+#> 2×3 DataFrames.DataFrame
+#> │ Row │ A     │ B       │ C      │
+#> │     │ Int64 │ Float64 │ String │
+#> ├─────┼───────┼─────────┼────────┤
+#> │ 1   │ 1     │ 2.71828 │ xx     │
+#> │ 2   │ 2     │ 3.14159 │ xy     │
 
 # The columns of a DataFrame can be indexed using numbers or names
 showln(df[!, 1])
@@ -29,16 +30,18 @@ showln(df[!, :C])
 
 # The rows of a DataFrame can be indexed only by using numbers
 showln(df[1, :])
-#> 1×3 DataFrame
-#> │ Row │ A │ B       │ C  │
-#> ├─────┼───┼─────────┼────┤
-#> │ 1   │ 1 │ 2.71828 │ xx │
+#> DataFrameRow
+#> │ Row │ A     │ B       │ C      │
+#> │     │ Int64 │ Float64 │ String │
+#> ├─────┼───────┼─────────┼────────┤
+#> │ 1   │ 1     │ 2.71828 │ xx     │
 showln(df[1:2, :])
-#> 2×3 DataFrame
-#> │ Row │ A │ B       │ C  │
-#> ├─────┼───┼─────────┼────┤
-#> │ 1   │ 1 │ 2.71828 │ xx │
-#> │ 2   │ 2 │ 3.14159 │ xy │
+#> 2×3 DataFrames.DataFrame
+#> │ Row │ A     │ B       │ C      │
+#> │     │ Int64 │ Float64 │ String │
+#> ├─────┼───────┼─────────┼────────┤
+#> │ 1   │ 1     │ 2.71828 │ xx     │
+#> │ 2   │ 2     │ 3.14159 │ xy     │
 
 # importing data into DataFrames
 # ------------------------------
@@ -63,40 +66,40 @@ diamonds = load(joinpath(dirname(pathof(RDatasets)),"..","data","ggplot2","diamo
 showln(names(iris))
 #> Symbol[:SepalLength, :SepalWidth, :PetalLength, :PetalWidth, :Species]
 showln(eltypes(iris))
-#> Type[Float64, Float64, Float64, Float64, CategoricalString{UInt8}]
+#> DataType[Float64, Float64, Float64, Float64, CategoricalString{UInt8}]
 
 # Subset the DataFrame to only include rows for one species
 showln(iris[iris[!, :Species] .== "setosa", :])
-#> 50×5 DataFrame
-#> │ Row │ SepalLength │ SepalWidth │ PetalLength │ PetalWidth │ Species │
-#> ├─────┼─────────────┼────────────┼─────────────┼────────────┼─────────┤
-#> │ 1   │ 5.1         │ 3.5        │ 1.4         │ 0.2        │ setosa  │
-#> │ 2   │ 4.9         │ 3.0        │ 1.4         │ 0.2        │ setosa  │
-#> │ 3   │ 4.7         │ 3.2        │ 1.3         │ 0.2        │ setosa  │
-#> │ 4   │ 4.6         │ 3.1        │ 1.5         │ 0.2        │ setosa  │
-#> │ 5   │ 5.0         │ 3.6        │ 1.4         │ 0.2        │ setosa  │
-#> │ 6   │ 5.4         │ 3.9        │ 1.7         │ 0.4        │ setosa  │
-#> │ 7   │ 4.6         │ 3.4        │ 1.4         │ 0.3        │ setosa  │
-#> │ 8   │ 5.0         │ 3.4        │ 1.5         │ 0.2        │ setosa  │
+#> 50×5 DataFrames.DataFrame
+#> │ Row │ SepalLength │ SepalWidth │ PetalLength │ PetalWidth │ Species      │
+#> │     │ Float64     │ Float64    │ Float64     │ Float64    │ Categorical… │
+#> ├─────┼─────────────┼────────────┼─────────────┼────────────┼──────────────┤
+#> │ 1   │ 5.1         │ 3.5        │ 1.4         │ 0.2        │ setosa       │
+#> │ 2   │ 4.9         │ 3.0        │ 1.4         │ 0.2        │ setosa       │
+#> │ 3   │ 4.7         │ 3.2        │ 1.3         │ 0.2        │ setosa       │
+#> │ 4   │ 4.6         │ 3.1        │ 1.5         │ 0.2        │ setosa       │
+#> │ 5   │ 5.0         │ 3.6        │ 1.4         │ 0.2        │ setosa       │
+#> │ 6   │ 5.4         │ 3.9        │ 1.7         │ 0.4        │ setosa       │
+#> │ 7   │ 4.6         │ 3.4        │ 1.4         │ 0.3        │ setosa       │
 #> ⋮
-#> │ 42  │ 4.5         │ 2.3        │ 1.3         │ 0.3        │ setosa  │
-#> │ 43  │ 4.4         │ 3.2        │ 1.3         │ 0.2        │ setosa  │
-#> │ 44  │ 5.0         │ 3.5        │ 1.6         │ 0.6        │ setosa  │
-#> │ 45  │ 5.1         │ 3.8        │ 1.9         │ 0.4        │ setosa  │
-#> │ 46  │ 4.8         │ 3.0        │ 1.4         │ 0.3        │ setosa  │
-#> │ 47  │ 5.1         │ 3.8        │ 1.6         │ 0.2        │ setosa  │
-#> │ 48  │ 4.6         │ 3.2        │ 1.4         │ 0.2        │ setosa  │
-#> │ 49  │ 5.3         │ 3.7        │ 1.5         │ 0.2        │ setosa  │
-#> │ 50  │ 5.0         │ 3.3        │ 1.4         │ 0.2        │ setosa  │
+#> │ 43  │ 4.4         │ 3.2        │ 1.3         │ 0.2        │ setosa       │
+#> │ 44  │ 5.0         │ 3.5        │ 1.6         │ 0.6        │ setosa       │
+#> │ 45  │ 5.1         │ 3.8        │ 1.9         │ 0.4        │ setosa       │
+#> │ 46  │ 4.8         │ 3.0        │ 1.4         │ 0.3        │ setosa       │
+#> │ 47  │ 5.1         │ 3.8        │ 1.6         │ 0.2        │ setosa       │
+#> │ 48  │ 4.6         │ 3.2        │ 1.4         │ 0.2        │ setosa       │
+#> │ 49  │ 5.3         │ 3.7        │ 1.5         │ 0.2        │ setosa       │
+#> │ 50  │ 5.0         │ 3.3        │ 1.4         │ 0.2        │ setosa       │
 
 # Count the number of rows for each species
 showln(by(iris, :Species, df -> size(df, 1)))
-#> 3×2 DataFrame
-#> │ Row │ Species    │ x1 │
-#> ├─────┼────────────┼────┤
-#> │ 1   │ setosa     │ 50 │
-#> │ 2   │ versicolor │ 50 │
-#> │ 3   │ virginica  │ 50 │
+#> 3×2 DataFrames.DataFrame
+#> │ Row │ Species      │ x1    │
+#> │     │ Categorical… │ Int64 │
+#> ├─────┼──────────────┼───────┤
+#> │ 1   │ setosa       │ 50    │
+#> │ 2   │ versicolor   │ 50    │
+#> │ 3   │ virginica    │ 50    │
 
 # Discretize entire columns at a time
 iris[!, :SepalLength] = round.(Integer, iris[!, :SepalLength])
@@ -110,27 +113,26 @@ tabulated = by(
     df -> size(df, 1)
 )
 showln(tabulated)
-#> 18×4 DataFrame
-#> │ Row │ Species    │ SepalLength │ SepalWidth │ x1 │
-#> ├─────┼────────────┼─────────────┼────────────┼────┤
-#> │ 1   │ setosa     │ 5           │ 4          │ 17 │
-#> │ 2   │ setosa     │ 5           │ 3          │ 23 │
-#> │ 3   │ setosa     │ 4           │ 3          │ 4  │
-#> │ 4   │ setosa     │ 6           │ 4          │ 5  │
-#> │ 5   │ setosa     │ 4           │ 2          │ 1  │
-#> │ 6   │ versicolor │ 7           │ 3          │ 8  │
-#> │ 7   │ versicolor │ 6           │ 3          │ 27 │
-#> │ 8   │ versicolor │ 6           │ 2          │ 9  │
-#> │ 9   │ versicolor │ 5           │ 2          │ 4  │
-#> │ 10  │ versicolor │ 5           │ 3          │ 2  │
-#> │ 11  │ virginica  │ 6           │ 3          │ 24 │
-#> │ 12  │ virginica  │ 7           │ 3          │ 14 │
-#> │ 13  │ virginica  │ 8           │ 3          │ 4  │
-#> │ 14  │ virginica  │ 5           │ 2          │ 1  │
-#> │ 15  │ virginica  │ 7           │ 2          │ 1  │
-#> │ 16  │ virginica  │ 7           │ 4          │ 1  │
-#> │ 17  │ virginica  │ 6           │ 2          │ 3  │
-#> │ 18  │ virginica  │ 8           │ 4          │ 2  │
+#> 18×4 DataFrames.DataFrame
+#> │ Row │ Species      │ SepalLength │ SepalWidth │ x1    │
+#> │     │ Categorical… │ Int64       │ Int64      │ Int64 │
+#> ├─────┼──────────────┼─────────────┼────────────┼───────┤
+#> │ 1   │ setosa       │ 5           │ 4          │ 17    │
+#> │ 2   │ setosa       │ 5           │ 3          │ 23    │
+#> │ 3   │ setosa       │ 4           │ 3          │ 4     │
+#> │ 4   │ setosa       │ 6           │ 4          │ 5     │
+#> │ 5   │ setosa       │ 4           │ 2          │ 1     │
+#> │ 6   │ versicolor   │ 7           │ 3          │ 8     │
+#> │ 7   │ versicolor   │ 6           │ 3          │ 27    │
+#> ⋮
+#> │ 11  │ virginica    │ 6           │ 3          │ 24    │
+#> │ 12  │ virginica    │ 7           │ 3          │ 14    │
+#> │ 13  │ virginica    │ 8           │ 3          │ 4     │
+#> │ 14  │ virginica    │ 5           │ 2          │ 1     │
+#> │ 15  │ virginica    │ 7           │ 2          │ 1     │
+#> │ 16  │ virginica    │ 7           │ 4          │ 1     │
+#> │ 17  │ virginica    │ 6           │ 2          │ 3     │
+#> │ 18  │ virginica    │ 8           │ 4          │ 2     │
 
 # you can setup a grouped dataframe like this
 gdf = groupby(iris,[:Species, :SepalLength, :SepalWidth])
