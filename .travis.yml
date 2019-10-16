@@ -7,7 +7,7 @@ julia:
 - 1.0
 
 install:
-- julia --project=testing/ -e 'using Pkg; Pkg.develop(PackageSpec(path=pwd())); Pkg.instantiate()'
+- julia --project=project/ -e 'using Pkg; Pkg.develop(PackageSpec(path=pwd())); Pkg.instantiate(); Pkg.build()'
 
 script:
-- julia --project=testing/ test/runtests.jl
+- julia --project=project/ test/runtests.jl

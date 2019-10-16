@@ -11,7 +11,7 @@ m1 = hcat(repeat([1,2],inner=[1],outer=[3*2]),
 		  repeat([1,2,3],inner=[2],outer=[2]),
 		  repeat([1,2,3,4],inner=[3],outer=[1]))
 printsum(m1)
-#> 12×3 Array{Int64,2}: [1 1 1; 2 1 1; 1 2 1; 2 2 2; 1 3 2; 2 3 2; 1 1 3; 2 1 3; 
+#> 12×3 Array{Int64,2}: [1 1 1; 2 1 1; 1 2 1; 2 2 2; 1 3 2; 2 3 2; 1 1 3; 2 1 3;
 #> 	1 2 3; 2 2 4; 1 3 4; 2 3 4]
 
 # for simple repetitions of arrays,
@@ -32,16 +32,15 @@ m5 = ["Hi Im # $(i+2*(j-1 + 3*(k-1)))" for i=1:2, j=1:3, k=1:2]
 # expressions are very flexible
 # you can specify the type of the array by just
 # placing it in front of the expression
-using Pkg
-Pkg.add("LegacyStrings")
+
 import LegacyStrings
 m5 = LegacyStrings.ASCIIString["Hi Im element # $(i+2*(j-1 + 3*(k-1)))" for i=1:2, j=1:3, k=1:2]
 printsum(m5)
 #> 2×3×2 Array{LegacyStrings.ASCIIString,3}: LegacyStrings.ASCIIString[
-#> 	"Hi Im element # 1" "Hi Im element # 3" "Hi Im element # 5"; 
+#> 	"Hi Im element # 1" "Hi Im element # 3" "Hi Im element # 5";
 #> 	"Hi Im element # 2" "Hi Im element # 4" "Hi Im element # 6"]
-#> 
-#> LegacyStrings.ASCIIString["Hi Im element # 7" "Hi Im element # 9" 
+#>
+#> LegacyStrings.ASCIIString["Hi Im element # 7" "Hi Im element # 9"
 #> 	"Hi Im element # 11"; "Hi Im element # 8" "Hi Im element # 10" "Hi Im element # 12"]
 
 # Array reductions
@@ -52,7 +51,7 @@ sum(m4, dims=3)		# takes the sum over the third dimension
 sum(m4, dims=(1,3))	# sum over first and third dim
 
 maximum(m4, dims=2)	# find the max elt along dim 2
-findmax(m4, dims=3)	# find the max elt and its index along dim 3 
+findmax(m4, dims=3)	# find the max elt and its index along dim 3
 					# (available only in very recent Julia versions)
 
 # Broadcasting
@@ -68,7 +67,7 @@ m4=m4[:,:,1]	# holds dim 3 fixed
 m4[:,2,:]	# that's a 2x1x2 array. not very intuititive to look at
 
 # get rid of dimensions with size 1:
-dropdims(m4[:,2,:], dims=2)	# that's better 
+dropdims(m4[:,2,:], dims=2)	# that's better
 
 # assign new values to a certain view
 m4[:,:,1] = rand(1:6,2,3)
