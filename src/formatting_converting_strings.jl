@@ -18,7 +18,7 @@ e_str2 = @sprintf("%0.3f", e)
 println("e_str1 == e_str2: $(e_str1 == e_str2)")
 #> e_str1 == e_str2: true
 
-# available number format characters are [f, e, a, g, c, s, p, d](https://github.com/JuliaLang/julia/blob/master/base/printf.jl#L15):
+# available number format characters are [f, e, a, g, c, s, p, d](https://github.com/JuliaLang/julia/blob/master/stdlib/Printf/src/Printf.jl#L84-L91):
 # (pi is a predefined constant; however, since its type is 
 # "MathConst" it has to be converted to a float to be formatted)
 @printf "fix trailing precision: %0.3f\n" float(pi)

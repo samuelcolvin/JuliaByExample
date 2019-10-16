@@ -76,13 +76,13 @@ Types are a key way of structuring data within Julia.
 The basic syntax for reading and writing files in Julia is quite similar to python.
 
 The `simple.dat` file used in this example is available
-[from github](https://github.com/samuelcolvin/JuliaByExample/blob/master/common_usage/simple.dat).
+[from github](https://github.com/samuelcolvin/JuliaByExample/blob/master/src/simple.dat).
 
 {{ code_file('io.jl')}}
 
 ### Packages and Including of Files
 
-[Packages](http://docs.julialang.org/en/latest/packages/packagelist/)
+[Packages](https://pkg.julialang.org/docs/)
 extend the functionality of Julia's standard library.
 
 {{ code_file('using_packages.jl') }}
@@ -99,22 +99,22 @@ add comment about py plot
 PyPlot needs Python and matplotlib installed [matplotlib.pyplot docs](https://matplotlib.org/api/pyplot_api.html).
 -->
 
-#### Winston
+#### Plots
 
-[Winston Package Page](https://github.com/nolta/Winston.jl)
+[Plots.jl Package Page](http://docs.juliaplots.org/latest/)
 
-Matlab-like plotting. Installed via `Pkg.add("Winston")`
+Installed via `Pkg.add("Plots"); Pkg.add("GR");`
 
-{{ code_file('winston.jl') }}
+{{ code_file('plots.jl') }}
 
-{{ src_image('winston.svg') }}
+{{ src_image('plots.svg') }}
 
 ### DataFrames
 
 The [DataFrames.jl package](https://github.com/JuliaStats/DataFrames.jl) provides tool for working with tabular data.
 
 The `iris.csv` file used in this example is available
-[from github](https://github.com/samuelcolvin/JuliaByExample/blob/master/common_usage/iris.csv).
+[from github](https://github.com/samuelcolvin/JuliaByExample/blob/master/src/iris.csv).
 
 You may also need [CSV.jl package](https://github.com/JuliaData/CSV.jl) to read data from CSV file.
 
