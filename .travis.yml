@@ -6,5 +6,8 @@ os:
 julia:
 - 1.0
 
+install:
+- julia --project=testing/ -e 'using Pkg; Pkg.develop(PackageSpec(path=pwd())); Pkg.instantiate()'
+
 script:
-- julia --project --color=yes --check-bounds=yes -e ''using Pkg; Pkg.clone(pwd()); Pkg.build("JuliaByExample"); Pkg.test("JuliaByExample")';
+- julia --project=testing/ test/runtests.jl
