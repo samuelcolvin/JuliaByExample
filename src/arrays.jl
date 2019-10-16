@@ -27,7 +27,8 @@ printsum(a4)
 # however they can be used to create arrays thus:
 a4 = collect(1:20)
 printsum(a4)
-#> 20-element Array{Int64,1}: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20]
+#> 20-element Array{Int64,1}: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 
+#>  15, 16, 17, 18, 19, 20]
 
 # arrays can also be generated from [comprehensions](https://docs.julialang.org/en/v1/manual/arrays/#Comprehensions-1):
 a5 = [2^i for i = 1:10]
@@ -41,8 +42,8 @@ printsum(a6)
 # (note this is a "jagged array" (i.e., an array of arrays), not a [multidimensional array](https://docs.julialang.org/en/v1/manual/arrays/),
 # these are not covered here)
 
-# Julia provided a number of ["Dequeue"](https://docs.julialang.org/en/v1/base/collections/#Dequeues-1) functions, the most common for appending to the end of arrays
-# is [**push!**](https://docs.julialang.org/en/v1/base/collections/#Base.push!)
+# Julia provided a number of ["Dequeue"](https://docs.julialang.org/en/v1/base/collections/#Dequeues-1) functions, the most common
+# for appending to the end of arrays is [**push!**](https://docs.julialang.org/en/v1/base/collections/#Base.push!)
 # ! at the end of a function name indicates that the first argument is updated.
 
 push!(a1, 4)

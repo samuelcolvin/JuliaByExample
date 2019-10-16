@@ -25,7 +25,8 @@ printsum(a2)
 using Printf
 a3 = Dict([i => @sprintf("%d", i) for i = 1:10])
 printsum(a3)
-#> Dict{Int64,String} with 10 entries: Dict(7=>"7",4=>"4",9=>"9",10=>"10",2=>"2",3=>"3",5=>"5",8=>"8",6=>"6",1=>"1")
+#> Dict{Int64,String} with 10 entries: Dict(7=>"7",4=>"4",9=>"9",10=>"10",
+#>  2=>"2",3=>"3",5=>"5",8=>"8",6=>"6",1=>"1")
 
 # as you would expect, Julia comes with all the normal helper functions
 # for dicts, e.g., [haskey](https://docs.julialang.org/en/v1/base/collections/#Base.haskey)
