@@ -1,9 +1,11 @@
 language: julia
+
 os:
-  - osx
-  - linux
+- osx
+- linux
+
 julia:
-  - 1.0
-# script:
-#   - if [[ -a .git/shallow ]]; then git fetch --unshallow; fi
-#   - xvfb-run julia -e 'using Pkg; Pkg.clone(pwd()); Pkg.build("JuliaByExample"); Pkg.test("JuliaByExample")';
+- 1.0
+
+script:
+- julia --project --color=yes --check-bounds=yes -e ''using Pkg; Pkg.clone(pwd()); Pkg.build("JuliaByExample"); Pkg.test("JuliaByExample")';
