@@ -7,3 +7,4 @@ pip-log.txt
 env
 .idea
 src/outfile.dat
+/project/Manifest.toml

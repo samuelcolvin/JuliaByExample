@@ -5,7 +5,7 @@ Julia By Example
 
 *&copy; Samuel Colvin 2014, 2015, 2018*
 
-Hosted at [samuelcolvin.github.io/JuliaByExample](https://samuelcolvin.github.io/JuliaByExample/).
+Hosted at [juliabyexample.helpmanual.io/](https://juliabyexample.helpmanual.io/).
 
 Unofficial collection of Julia (Julia Lang) examples.
 
@@ -19,10 +19,7 @@ I am not an expert in Julia and this is a work in progress: there are almost cer
 from the examples. If you spot a problem create an issue, if you have a fix for a problem or want to add to the
 examples please submit a pull request.
 
-To build (first setup your `env` with `deps/requirements.txt`):
+To build:
 
+    pip install -r requirements.txt
     python deps/build.py
-
-To deploy:
-
-    aws s3 sync --delete www/ s3://juliabyexample.helpmanual.io/

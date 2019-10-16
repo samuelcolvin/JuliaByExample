@@ -1,11 +1,15 @@
 language: julia
 
 os:
-- osx
 - linux
 
 julia:
 - 1.0
 
+install:
+- >
+  julia --project=project/ --color=yes --check-bounds=yes -e
+  'using Pkg; Pkg.develop(PackageSpec(path=pwd())); Pkg.instantiate(); Pkg.build()'
+
 script:
-- julia --project --color=yes --check-bounds=yes -e ''using Pkg; Pkg.clone(pwd()); Pkg.build("JuliaByExample"); Pkg.test("JuliaByExample")';
+- xvfb-run julia --project=project/ --color=yes --check-bounds=yes test/runtests.jl
