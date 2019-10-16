@@ -1,4 +1,10 @@
-Winston
+# REQUIRE
+julia 1.0
 DataFrames
-Calculus
+CSV
+RData
 RDatasets
+LegacyStrings
+Calculus
+Plots
+GR

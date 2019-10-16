@@ -1,4 +1,4 @@
-using Base.Test
+using Test
 
 function print_evalfile(fdir, fname)
     println("EVALUATING ", fname, ":\n*************")

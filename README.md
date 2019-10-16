@@ -5,11 +5,11 @@ Julia By Example
 
 *&copy; Samuel Colvin 2014, 2015, 2018*
 
-Hosted at [samuelcolvin.github.io/JuliaByExample](http://samuelcolvin.github.io/JuliaByExample/).
+Hosted at [samuelcolvin.github.io/JuliaByExample](https://samuelcolvin.github.io/JuliaByExample/).
 
 Unofficial collection of Julia (Julia Lang) examples.
 
-[Julia](http://www.julialang.org) is a high-level, high-performance dynamic programming language for technical computing.
+[Julia](https://www.julialang.org) is a high-level, high-performance dynamic programming language for technical computing.
 
 Because Julia is young there are reletively limited resources to help you get started with it. This site contains a
 series of simple examples of Julia performing common tasks like printing to stdout, reading from stdin, reading files,
