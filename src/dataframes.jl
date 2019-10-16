@@ -12,19 +12,19 @@ showln(df)
 #> │ 2   │ 2 │ 3.14159 │ xy │
 
 # The columns of a DataFrame can be indexed using numbers or names
-showln(df[1])
+showln(df[!, 1])
 #> [1, 2]
-showln(df[:A])
+showln(df[!, :A])
 #> [1, 2]
 
-showln(df[2])
+showln(df[!, 2])
 #> [2.71828, 3.14159]
-showln(df[:B])
+showln(df[!, :B])
 #> [2.71828, 3.14159]
 
-showln(df[3])
+showln(df[!, 3])
 #> ["xx", "xy"]
-showln(df[:C])
+showln(df[!, :C])
 #> ["xx", "xy"]
 
 # The rows of a DataFrame can be indexed only by using numbers
@@ -66,7 +66,7 @@ showln(eltypes(iris))
 #> Type[Float64, Float64, Float64, Float64, CategoricalString{UInt8}]
 
 # Subset the DataFrame to only include rows for one species
-showln(iris[iris[:Species] .== "setosa", :])
+showln(iris[iris[!, :Species] .== "setosa", :])
 #> 50×5 DataFrame
 #> │ Row │ SepalLength │ SepalWidth │ PetalLength │ PetalWidth │ Species │
 #> ├─────┼─────────────┼────────────┼─────────────┼────────────┼─────────┤
@@ -99,8 +99,8 @@ showln(by(iris, :Species, df -> size(df, 1)))
 #> │ 3   │ virginica  │ 50 │
 
 # Discretize entire columns at a time
-iris[:SepalLength] = round.(Integer, iris[:SepalLength])
-iris[:SepalWidth] = round.(Integer, iris[:SepalWidth])
+iris[!, :SepalLength] = round.(Integer, iris[!, :SepalLength])
+iris[!, :SepalWidth] = round.(Integer, iris[!, :SepalWidth])
 
 
 # Tabulate data according to discretized columns to see "clusters"
@@ -145,7 +145,7 @@ end
 
 # insert!(df::DataFrame,index::Int64,item::AbstractArray{T,1},name::Symbol)
 # insert random numbers at col 5:
-insert!(iris, 5, rand(nrow(iris)), :randCol)
+insertcols!(iris, 5, :randCol => rand(nrow(iris)))
 
 # remove it
-delete!(iris, :randCol)
+select!(iris, Not(:randCol))

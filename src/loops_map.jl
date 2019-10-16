@@ -59,4 +59,5 @@ println() #> 1: one, 2: two, 3: three,
 # [map](https://docs.julialang.org/en/v1/base/collections/#Base.map) works as you might expect performing the given function on each member of an array or iter
 # much like comprehensions
 a4 = map((x) -> x^2, [1, 2, 3, 7])
-print(a4) #> [1, 4, 9, 49]
+print(a4) 
+println() #> [1, 4, 9, 49]
