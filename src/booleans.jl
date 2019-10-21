@@ -1,6 +1,3 @@
-# if/else statements work much like other languages -
-# the boolean opperators are `true` and `false`
-
 if true
     println("It's true!")
 else

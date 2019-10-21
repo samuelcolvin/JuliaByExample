@@ -65,6 +65,13 @@ can be defined in a number of ways.
 
 {{ code_file('loops_map.jl') }}
 
+### Conditional Evaluation
+
+if/else statements work much like other languages -
+the boolean opperators are `true` and `false`.
+
+{{ code_file('booleans.jl') }}
+
 ### Types
 
 Types are a key way of structuring data within Julia.
