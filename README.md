@@ -11,7 +11,7 @@ Unofficial collection of Julia (Julia Lang) examples.
 
 [Julia](https://www.julialang.org) is a high-level, high-performance dynamic programming language for technical computing.
 
-Because Julia is young there are reletively limited resources to help you get started with it. This site contains a
+Because Julia is young there are relatively limited resources to help you get started with it. This site contains a
 series of simple examples of Julia performing common tasks like printing to stdout, reading from stdin, reading files,
 declaring functions, plotting etc. etc.
 
