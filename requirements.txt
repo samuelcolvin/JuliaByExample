@@ -1,5 +1,5 @@
 grablib==0.1.4
-Jinja2==2.10.3
+Jinja2==2.11.3
 markdown2==2.3.8
 MarkupSafe==0.23
 ply==3.6
